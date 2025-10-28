@@ -5,7 +5,7 @@
     "nom": "Foie Gras Maison",
     "description": "Délicieux foie gras servi avec confiture de figues et pain grillé.",
     "prix": 18.5,
-    "imageUrl": "https://picsum.photos/id/1065/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1583475020831-fb46add57f78?w=300&h=200&fit=crop"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "nom": "Magret de Canard",
     "description": "Magret de canard rôti, sauce au miel et légumes de saison.",
     "prix": 22,
-    "imageUrl": "https://picsum.photos/id/1066/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1580554530778-ca36943938b2?w=300&h=200&fit=crop"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "nom": "Sushi Mix",
     "description": "Assortiment de sushis frais : saumon, thon, crevette.",
     "prix": 15,
-    "imageUrl": "https://picsum.photos/id/1070/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1553621042-f6e147245754?w=300&h=200&fit=crop"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "nom": "Tempura Crevettes",
     "description": "Crevettes et légumes frits dans une pâte légère, servi avec sauce soja.",
     "prix": 13.5,
-    "imageUrl": "https://picsum.photos/id/1071/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1587130572869-4e44cf132ab3?w=300&h=200&fit=crop"
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "nom": "Pizza Margherita",
     "description": "Classique pizza margherita avec sauce tomate, mozzarella et basilic frais.",
     "prix": 9.5,
-    "imageUrl": "https://picsum.photos/id/1080/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=300&h=200&fit=crop"
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "nom": "Pizza Quatre Fromages",
     "description": "Mozzarella, gorgonzola, chèvre et emmental sur une pâte fine et croustillante.",
     "prix": 11,
-    "imageUrl": "https://picsum.photos/id/1081/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&h=200&fit=crop"
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "nom": "Cheeseburger",
     "description": "Burger classique avec cheddar fondu, salade et tomate.",
     "prix": 8.5,
-    "imageUrl": "https://picsum.photos/id/1090/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1550547660-d9450f859349?w=300&h=200&fit=crop"
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@
     "nom": "Burger Bacon",
     "description": "Burger juteux avec bacon croustillant, cheddar et sauce maison.",
     "prix": 9.5,
-    "imageUrl": "https://picsum.photos/id/1091/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300&h=200&fit=crop"
   },
   {
     "id": 9,
@@ -69,7 +69,7 @@
     "nom": "Poulet Tikka Masala",
     "description": "Poulet mariné aux épices indiennes, cuit dans une sauce crémeuse tomate-épicée.",
     "prix": 14,
-    "imageUrl": "https://picsum.photos/id/1100/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?w=300&h=200&fit=crop"
   },
   {
     "id": 10,
@@ -77,7 +77,7 @@
     "nom": "Naan Fromage",
     "description": "Pain naan chaud fourré au fromage fondant.",
     "prix": 4.5,
-    "imageUrl": "https://picsum.photos/id/1101/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=300&h=200&fit=crop"
   },
   {
     "id": 11,
@@ -85,7 +85,7 @@
     "nom": "Taco Carnitas",
     "description": "Taco garni de porc effiloché, sauce épicée et coriandre fraîche.",
     "prix": 3.5,
-    "imageUrl": "https://picsum.photos/id/1110/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1624300629298-e9de39c13be5?w=300&h=200&fit=crop"
   },
   {
     "id": 12,
@@ -93,7 +93,7 @@
     "nom": "Burrito Poulet",
     "description": "Burrito généreux avec poulet, riz, haricots et guacamole.",
     "prix": 7,
-    "imageUrl": "https://picsum.photos/id/1111/300/200"
+    "imageUrl": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=300&h=200&fit=crop"
   },
   {
     "restaurantId": 2,

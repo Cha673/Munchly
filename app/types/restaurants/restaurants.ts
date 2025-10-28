@@ -4,5 +4,5 @@ export type Restaurant = {
   nom: string;
   lieu: string;
   imageUrl: string;
-  //   TODO rajouter une description à ajouter dans la page détail restau + liste des plats
+  description: string;
 };

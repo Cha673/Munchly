@@ -69,6 +69,7 @@ await fetchPlats();
         <div class="p-6">
           <h1>{{ restaurant.nom }}</h1>
           <p>{{ restaurant.lieu }}</p>
+          <p>{{ restaurant.description }}</p>
         </div>
       </div>
     </div>
