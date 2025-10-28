@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nom": "Le Petit Gourmet",
+    "lieu": "Paris, France",
+    "imageUrl": "https://picsum.photos/id/1011/300/200"
+  },
+  {
+    "id": 2,
+    "nom": "Sushi Sakura",
+    "lieu": "Lyon, France",
+    "imageUrl": "https://picsum.photos/id/1025/300/200"
+  },
+  {
+    "id": 3,
+    "nom": "La Pizzeria Napoli",
+    "lieu": "Marseille, France",
+    "imageUrl": "https://picsum.photos/id/1037/300/200"
+  },
+  {
+    "id": 4,
+    "nom": "Burger Factory",
+    "lieu": "Toulouse, France",
+    "imageUrl": "https://picsum.photos/id/1042/300/200"
+  },
+  {
+    "id": 5,
+    "nom": "Le Délice Indien",
+    "lieu": "Paris, France",
+    "imageUrl": "https://picsum.photos/id/1050/300/200"
+  },
+  {
+    "id": 6,
+    "nom": "Taco Fiesta",
+    "lieu": "Lille, France",
+    "imageUrl": "https://picsum.photos/id/1060/300/200"
+  }
+]

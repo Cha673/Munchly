@@ -1,0 +1,70 @@
+{
+  "orders": [
+    {
+      "id": 1761563979276,
+      "restaurantId": 1,
+      "clientId": 6,
+      "clientName": "test_user",
+      "items": [
+        {
+          "platId": 1,
+          "plat": {
+            "id": 1,
+            "restaurantId": 1,
+            "nom": "Foie Gras Maison",
+            "description": "Délicieux foie gras servi avec confiture de figues et pain grillé.",
+            "prix": 18.5,
+            "imageUrl": "https://picsum.photos/id/1065/300/200"
+          },
+          "quantite": 1
+        }
+      ],
+      "total": 18.5,
+      "date": "2025-10-27T11:19:39.276Z"
+    },
+    {
+      "id": 1761566739376,
+      "restaurantId": 1,
+      "clientId": 6,
+      "clientName": "test_user",
+      "items": [
+        {
+          "platId": 1,
+          "plat": {
+            "id": 1,
+            "restaurantId": 1,
+            "nom": "Foie Gras Maison",
+            "description": "Délicieux foie gras servi avec confiture de figues et pain grillé.",
+            "prix": 18.5,
+            "imageUrl": "https://picsum.photos/id/1065/300/200"
+          },
+          "quantite": 1
+        }
+      ],
+      "total": 18.5,
+      "date": "2025-10-27T12:05:39.376Z"
+    },
+    {
+      "id": 1761567467648,
+      "restaurantId": 1,
+      "clientId": 6,
+      "clientName": "test_user",
+      "items": [
+        {
+          "platId": 1,
+          "plat": {
+            "id": 1,
+            "restaurantId": 1,
+            "nom": "Foie Gras Maison",
+            "description": "Délicieux foie gras servi avec confiture de figues et pain grillé.",
+            "prix": 18.5,
+            "imageUrl": "https://picsum.photos/id/1065/300/200"
+          },
+          "quantite": 3
+        }
+      ],
+      "total": 55.5,
+      "date": "2025-10-27T12:17:47.648Z"
+    }
+  ]
+}

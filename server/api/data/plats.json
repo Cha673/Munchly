@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "restaurantId": 1,
+    "nom": "Foie Gras Maison",
+    "description": "Délicieux foie gras servi avec confiture de figues et pain grillé.",
+    "prix": 18.5,
+    "imageUrl": "https://picsum.photos/id/1065/300/200"
+  },
+  {
+    "id": 2,
+    "restaurantId": 1,
+    "nom": "Magret de Canard",
+    "description": "Magret de canard rôti, sauce au miel et légumes de saison.",
+    "prix": 22,
+    "imageUrl": "https://picsum.photos/id/1066/300/200"
+  },
+  {
+    "id": 3,
+    "restaurantId": 2,
+    "nom": "Sushi Mix",
+    "description": "Assortiment de sushis frais : saumon, thon, crevette.",
+    "prix": 15,
+    "imageUrl": "https://picsum.photos/id/1070/300/200"
+  },
+  {
+    "id": 4,
+    "restaurantId": 2,
+    "nom": "Tempura Crevettes",
+    "description": "Crevettes et légumes frits dans une pâte légère, servi avec sauce soja.",
+    "prix": 13.5,
+    "imageUrl": "https://picsum.photos/id/1071/300/200"
+  },
+  {
+    "id": 5,
+    "restaurantId": 3,
+    "nom": "Pizza Margherita",
+    "description": "Classique pizza margherita avec sauce tomate, mozzarella et basilic frais.",
+    "prix": 9.5,
+    "imageUrl": "https://picsum.photos/id/1080/300/200"
+  },
+  {
+    "id": 6,
+    "restaurantId": 3,
+    "nom": "Pizza Quatre Fromages",
+    "description": "Mozzarella, gorgonzola, chèvre et emmental sur une pâte fine et croustillante.",
+    "prix": 11,
+    "imageUrl": "https://picsum.photos/id/1081/300/200"
+  },
+  {
+    "id": 7,
+    "restaurantId": 4,
+    "nom": "Cheeseburger",
+    "description": "Burger classique avec cheddar fondu, salade et tomate.",
+    "prix": 8.5,
+    "imageUrl": "https://picsum.photos/id/1090/300/200"
+  },
+  {
+    "id": 8,
+    "restaurantId": 4,
+    "nom": "Burger Bacon",
+    "description": "Burger juteux avec bacon croustillant, cheddar et sauce maison.",
+    "prix": 9.5,
+    "imageUrl": "https://picsum.photos/id/1091/300/200"
+  },
+  {
+    "id": 9,
+    "restaurantId": 5,
+    "nom": "Poulet Tikka Masala",
+    "description": "Poulet mariné aux épices indiennes, cuit dans une sauce crémeuse tomate-épicée.",
+    "prix": 14,
+    "imageUrl": "https://picsum.photos/id/1100/300/200"
+  },
+  {
+    "id": 10,
+    "restaurantId": 5,
+    "nom": "Naan Fromage",
+    "description": "Pain naan chaud fourré au fromage fondant.",
+    "prix": 4.5,
+    "imageUrl": "https://picsum.photos/id/1101/300/200"
+  },
+  {
+    "id": 11,
+    "restaurantId": 6,
+    "nom": "Taco Carnitas",
+    "description": "Taco garni de porc effiloché, sauce épicée et coriandre fraîche.",
+    "prix": 3.5,
+    "imageUrl": "https://picsum.photos/id/1110/300/200"
+  },
+  {
+    "id": 12,
+    "restaurantId": 6,
+    "nom": "Burrito Poulet",
+    "description": "Burrito généreux avec poulet, riz, haricots et guacamole.",
+    "prix": 7,
+    "imageUrl": "https://picsum.photos/id/1111/300/200"
+  },
+  {
+    "restaurantId": 2,
+    "nom": "nouveau plat",
+    "description": "nouveau plat",
+    "prix": 12.9,
+    "imageUrl": "https://test",
+    "id": 1761558508229
+  },
+  {
+    "restaurantId": 2,
+    "nom": "test plat2",
+    "description": "test description",
+    "prix": 10,
+    "imageUrl": "https://test_2",
+    "id": 1761567734382
+  }
+]

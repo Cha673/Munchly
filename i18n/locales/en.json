@@ -1,0 +1,15 @@
+{
+  "login": "Login",
+  "logout": "Logout",
+  "register": "Register",
+
+  "header_home": "Home",
+  "header_profile": "My Account",
+  "header_restaurants": "Restaurants",
+  "header_plats": "Dishes",
+
+  "header_restaurateur_dashboard": "My Restaurant",
+  "header_restaurateur_orders": "Orders",
+  "header_user_orders": "My Orders",
+  "header_user_cart": "My Cart"
+}

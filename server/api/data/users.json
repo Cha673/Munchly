@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "test_admin",
+    "email": "test_admin@example.com",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "name": "test_resto1",
+    "email": "test1_restaurateur@example.com",
+    "password": "resto123",
+    "role": "restaurateur"
+  },
+  {
+    "id": 3,
+    "name": "test_resto2",
+    "email": "test2_restaurateur@example.com",
+    "password": "resto123",
+    "role": "restaurateur"
+  },
+  {
+    "id": 4,
+    "name": "test_resto3",
+    "email": "test3_restaurateur@example.com",
+    "password": "resto123",
+    "role": "restaurateur"
+  },
+  {
+    "id": 5,
+    "name": "test_resto4",
+    "email": "test4_restaurateur@example.com",
+    "password": "resto123",
+    "role": "restaurateur"
+  },
+  {
+    "id": 6,
+    "name": "test_user",
+    "email": "test_user@example.com",
+    "password": "user123",
+    "role": "user"
+  }
+]
