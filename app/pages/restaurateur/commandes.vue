@@ -1,3 +1,8 @@
+<!-- page d'un restaurateur pour voir l'ensemble des ocmmandes faites pour des 
+ plats de son restauran
+ Fonctionnalités : 
+ - listing des commandes
+ - affichage des détails des commandes -->
 <script setup lang="ts">
 definePageMeta({
   layout: "restaurateur",
@@ -15,56 +20,15 @@ const userStore = useUserStore();
 const panierStore = usePanierStore();
 const currentUser = computed(() => userStore.currentUser);
 
-console.log("État initial:", {
-  "Utilisateur connecté": currentUser.value,
-  "Role utilisateur": currentUser.value?.role,
-  "ID utilisateur": currentUser.value?.id,
-});
-
-console.log(
-  "Détail de toutes les commandes:",
-  panierStore.commandes.map((commande) => ({
-    "ID de la commande": commande.id,
-    "Restaurant ID": commande.restaurantId,
-    Client: commande.clientName,
-    Total: commande.total,
-    Date: commande.date,
-    "Nombre d'items": commande.items.length,
-    "Détail des items": commande.items.map((item) => ({
-      "Nom du plat": item.plat.nom,
-      Prix: item.plat.prix,
-      Quantité: item.quantite,
-    })),
-  }))
-);
-
-// Vérifier que l'utilisateur est connecté et est un restaurateur
-if (!currentUser.value || currentUser.value.role !== "restaurateur") {
-  console.log("Redirection: Utilisateur non connecté ou non restaurateur");
-  navigateTo("/login");
-}
-
 const expandedOrderId = ref<number | null>(null);
 
 // Récupérer les commandes du store qui correspondent à ce restaurateur
 const orders = computed(() => {
-  console.log("Calcul des commandes du restaurateur:", {
-    "ID Restaurateur": currentUser.value?.id,
-    "Nombre total de commandes": panierStore.commandes.length,
-  });
-
   if (!currentUser.value) {
-    console.log("Pas d'utilisateur connecté, retour tableau vide");
     return [];
   }
 
   const commandesFiltrees = panierStore.commandes.filter((commande) => {
-    console.log("Vérification commande:", {
-      "ID commande": commande.id,
-      "RestaurantId commande": commande.restaurantId,
-      "RestaurantId utilisateur": currentUser.value?.id,
-      Correspond: commande.restaurantId === currentUser.value!.id,
-    });
     return commande.restaurantId === currentUser.value!.id;
   });
 
@@ -74,11 +38,6 @@ const orders = computed(() => {
 
 // Afficher/masquer les détails d'une commande
 const toggleOrderDetails = (orderId: number) => {
-  console.log("Toggle détails commande:", {
-    "ID commande cliquée": orderId,
-    "ID commande actuellement développée": expandedOrderId.value,
-    "Commande concernée": orders.value.find((o) => o.id === orderId),
-  });
   expandedOrderId.value = expandedOrderId.value === orderId ? null : orderId;
 };
 </script>

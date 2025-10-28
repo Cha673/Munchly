@@ -1,3 +1,7 @@
+<!-- Page modification du profil par l'utilisateur; 
+ Fonctionnalités: 
+ - Modification des informations personnelles (nom, email, mot de passe) -->
+
 <script setup lang="ts">
 definePageMeta({
   layout: "user",

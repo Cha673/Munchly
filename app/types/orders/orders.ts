@@ -1,3 +1,4 @@
+// Définitions des types pour les commandes
 import type { Plat } from "../plats/plats";
 
 export interface OrderItem {

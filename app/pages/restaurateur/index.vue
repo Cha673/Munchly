@@ -1,3 +1,6 @@
+<!-- Dashboard du restaurateur
+ Fonctionnalités : 
+ mène vers les différents pages de gestion des plats, commandes et compte du restaurateur -->
 <script setup lang="ts">
 import { useUserStore } from "~/stores/users/user";
 

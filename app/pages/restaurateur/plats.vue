@@ -1,3 +1,9 @@
+<!-- Page de gestion des plats pour le restaurateur
+ Fonctionnalités : 
+ - listing des plats du restaurants
+ - Suppression des plats
+ - mène vers la page d'ajout d'un plat au clique sur le bouton correspondant -->
+
 <script setup lang="ts">
 definePageMeta({
   layout: "restaurateur",
@@ -10,11 +16,6 @@ import type { Plat } from "~/types/plats/plats";
 
 const userStore = useUserStore();
 const currentUser = computed(() => userStore.currentUser);
-
-// Vérifier que l'utilisateur est connecté et est un restaurateur
-if (!currentUser.value || currentUser.value.role !== "restaurateur") {
-  navigateTo("/login");
-}
 
 // États locaux
 const plats = ref<Plat[]>([]);

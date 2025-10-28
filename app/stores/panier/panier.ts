@@ -1,3 +1,4 @@
+// Store Pinia pour la gestion du panier et des commandes
 import { defineStore } from "pinia";
 import type { Plat } from "~/types/plats/plats";
 import type { ItemPanier, Commande } from "~/types/panier/panier";
@@ -44,7 +45,6 @@ export const usePanierStore = defineStore("panier", {
     addPlat(plat: Plat) {
       // Vérifier si le panier est vide
       if (this.items.length === 0) {
-        // Si le panier est vide, ajouter le plat
         this.items.push({
           plat,
           quantite: 1,
@@ -71,10 +71,8 @@ export const usePanierStore = defineStore("panier", {
       // Si c'est le même restaurant, vérifier si le plat existe déjà
       const existingItem = this.items.find((item) => item.plat.id === plat.id);
       if (existingItem) {
-        // Si le plat existe déjà, augmenter la quantité
         existingItem.quantite++;
       } else {
-        // Sinon, ajouter un nouvel item
         this.items.push({
           plat,
           quantite: 1,
@@ -104,7 +102,6 @@ export const usePanierStore = defineStore("panier", {
         if (item.quantite > 1) {
           item.quantite--;
         } else {
-          // Si quantité = 1, retirer du panier
           this.removePlat(platId);
         }
       }

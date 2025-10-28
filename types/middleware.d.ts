@@ -1,3 +1,5 @@
+// Déclaration de types pour les middlewares de l'application
+
 import type { NavigationGuard } from "vue-router";
 
 declare module "#app" {
@@ -7,9 +9,6 @@ declare module "#app" {
 }
 
 declare module "nuxt/schema" {
-  interface RuntimeConfig {
-    // Define your runtime config schema here
-  }
   interface MiddlewareDefinition {
     auth: NavigationGuard;
   }

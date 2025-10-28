@@ -1,3 +1,4 @@
+// Définitions des types pour le panier
 import type { Plat } from "~/types/plats/plats";
 import type { Order, OrderItem } from "~/types/orders/orders";
 

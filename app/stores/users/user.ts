@@ -1,3 +1,4 @@
+// Store Pinia pour la gestion des utilisateurs
 import { defineStore } from "pinia";
 import type { User } from "~/types/utilisateurs/users";
 import usersData from "../../../server/api/data/users.json";
@@ -19,16 +20,19 @@ export const useUserStore = defineStore("user", {
   }),
 
   getters: {
+    // Utilisateur actuellement connecté
     currentUser: (state): User | null => state.user,
+    // Liste des users avec le role "restaurateur"
     getRestaurateurs: (state) =>
       state.users.filter((user) => user.role === "restaurateur"),
-    // Ajout d'un getter plus fiable pour vérifier l'authentification
+    // Ajout d'un getter pour vérifier l'authentification
     isUserAuthenticated: (state): boolean => {
       return state.isAuthenticated && state.user !== null;
     },
   },
 
   actions: {
+    // Enregistrer un nouvel utilisateur
     register(user: User) {
       const exists = this.users.some((u) => u.email === user.email);
       if (exists) throw new Error("Cet utilisateur existe déjà");
@@ -48,6 +52,7 @@ export const useUserStore = defineStore("user", {
       }
     },
 
+    // Connexion d'un utilisateur
     login(credentials: { email: string; password: string }): User {
       // Recherche de l'utilisateur
       const user = this.users.find(
@@ -78,6 +83,7 @@ export const useUserStore = defineStore("user", {
       return user;
     },
 
+    // Déconnexion de l'utilisateur
     logout() {
       this.user = null;
       this.isAuthenticated = false;
@@ -88,6 +94,7 @@ export const useUserStore = defineStore("user", {
       }
     },
 
+    // Mise à jour du profil utilisateur
     updateProfile(updatedFields: {
       name: string;
       email: string;
@@ -111,12 +118,14 @@ export const useUserStore = defineStore("user", {
       this.user = updatedUser;
     },
 
+    // Suppression d'un utilisateur par ID
     deleteUser(userId: number) {
       const index = this.users.findIndex((u) => u.id === userId);
       if (index === -1) throw new Error("Utilisateur introuvable");
       this.users.splice(index, 1);
     },
 
+    // Ajout d'un nouveau restaurateur
     addRestaurateur(newUser: Omit<User, "id">) {
       const maxId = Math.max(...this.users.map((u) => u.id));
       const userWithId: User = {

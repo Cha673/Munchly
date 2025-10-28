@@ -1,3 +1,4 @@
+// Définitions des types pour les utilisateurs
 export type Role = "admin" | "restaurateur" | "user";
 
 export type User = {

@@ -1,6 +1,10 @@
+<!-- Dashboard Administrateur
+  Fonctionnalités :
+   - Listing des restaurateurs avec possibilité de suppression
+   - AMène vers la page add_restaurateur quand on veut ajouter un restaurateur
+-->
 <script setup lang="ts">
 import { useUserStore } from "~/stores/users/user";
-import type { User } from "~/types/utilisateurs/users";
 import { ref, computed } from "vue";
 import UserCard from "~/components/UserCard.vue";
 
@@ -56,46 +60,9 @@ const handleAddRestaurateur = () => {
     <div class="restaurateurs-section">
       <div class="section-header">
         <h2>Liste des Restaurateurs</h2>
-        <button v-if="!showAddForm" class="add-btn" @click="showAddForm = true">
+        <NuxtLink to="/admin/add-restaurateur" class="add-btn">
           Ajouter un restaurateur
-        </button>
-      </div>
-
-      <!-- Formulaire d'ajout -->
-      <div v-if="showAddForm" class="add-form">
-        <h3>Nouveau Restaurateur</h3>
-        <div class="form-group">
-          <input
-            v-model="newUser.name"
-            type="text"
-            placeholder="Nom"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <input
-            v-model="newUser.email"
-            type="email"
-            placeholder="Email"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <input
-            v-model="newUser.password"
-            type="password"
-            placeholder="Mot de passe"
-            required
-          />
-        </div>
-        <div class="form-actions">
-          <button class="submit-btn" @click="handleAddRestaurateur">
-            Ajouter
-          </button>
-          <button class="cancel-btn" @click="showAddForm = false">
-            Annuler
-          </button>
-        </div>
+        </NuxtLink>
       </div>
 
       <!-- Liste des restaurateurs -->

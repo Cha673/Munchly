@@ -1,3 +1,10 @@
+<!-- Page panier de l'utilisateur 
+ Fonctionnalités : 
+ - liste les plats compris dans le panier
+ - permet de modifier les quantités des plats
+ - calcul le total des plats dans le panier
+ - permet de valider le panier et de le passer en tant que commande
+ - accéder à la liste des commandes avec un bouton -->
 <script setup lang="ts">
 definePageMeta({
   layout: "user",

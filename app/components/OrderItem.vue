@@ -1,3 +1,5 @@
+<!-- Affichage des informations d'une commande dans le listing des commandes
+     pour les utilisateurs et pour les restaurateurs -->
 <script setup lang="ts">
 defineProps<{
   id: number;

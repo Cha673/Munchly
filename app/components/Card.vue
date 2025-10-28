@@ -1,3 +1,4 @@
+<!-- Carte qui affiche les données d'un restaurant dans le listing de restaurant-->
 <script setup lang="ts">
 defineProps<{
   imageUrl: string;

@@ -1,4 +1,5 @@
-<script setup>
+<!-- Menu pour les utilisateurs connectés et non connectés -->
+<script setup lang="ts">
 import { usePanierStore } from "~/stores/panier/panier";
 import { useUserStore } from "~/stores/users/user";
 
@@ -21,16 +22,6 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
         <div class="language-switcher">
           <NuxtLink :to="$switchLocalePath('en')">English</NuxtLink>
           <NuxtLink :to="$switchLocalePath('fr')">Français</NuxtLink>
-          <!-- <NuxtLink
-            :to="$switchLocalePath('fr')"
-            :class="{ active: locale === 'fr' }"
-            >FR</NuxtLink
-          >
-          <NuxtLink
-            :to="$switchLocalePath('en')"
-            :class="{ active: locale === 'en' }"
-            >EN</NuxtLink
-          > -->
         </div>
         <div class="nav-links">
           <NuxtLink to="/">

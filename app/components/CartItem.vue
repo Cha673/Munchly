@@ -1,3 +1,4 @@
+<!-- Affichage des plats dans le panier et dans le détail d'une commande -->
 <script setup lang="ts">
 import { usePanierStore } from "~/stores/panier/panier";
 

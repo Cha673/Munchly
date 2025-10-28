@@ -1,3 +1,10 @@
+// API Route pour la création d'une nouvelle commande
+//  Fonctionnalités :
+//   - Validation des données de la commande (restaurantId, clientId, items, total)
+//   - Sauvegarde dans le fichier orders.json avec un ID unique et date
+//   - Gestion des erreurs avec retours appropriés
+//
+
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { defineEventHandler, createError } from "h3";
 

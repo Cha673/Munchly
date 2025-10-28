@@ -1,3 +1,4 @@
+<!-- Page de gestion du restaurant pour le restaurateur -->
 <script setup lang="ts">
 definePageMeta({
   layout: "restaurateur",

@@ -1,3 +1,10 @@
+// API Route complète pour la gestion des plats (CRUD)
+//  Méthodes supportées :
+//   - GET    : Récupération des plats avec filtres
+//   - POST   : Création d'un nouveau plat
+//   - PUT    : Mise à jour d'un plat existant
+//   - DELETE : Suppression d'un plat
+
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import type { Plat } from "~/types/plats/plats";

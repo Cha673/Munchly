@@ -1,3 +1,7 @@
+<!-- Page détail d'un plat
+ Fonctionnalités: 
+ - ajouter un plat au panier, seulement d'un même restaurant
+ - accéder au panier-->
 <script setup lang="ts">
 definePageMeta({
   layout: "user",

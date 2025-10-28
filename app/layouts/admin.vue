@@ -1,4 +1,5 @@
-<script setup>
+<!-- Menu pour les admin -->
+<script setup lang="ts">
 import { useUserStore } from "~/stores/users/user";
 import { useI18n } from "vue-i18n";
 

@@ -1,3 +1,4 @@
+<!-- Page d'inscription du sites -->
 <script setup lang="ts">
 definePageMeta({
   ssr: false,

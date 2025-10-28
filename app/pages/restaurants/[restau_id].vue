@@ -1,3 +1,8 @@
+<!-- Page détail d'un restaurant
+ Fonctionnalités : 
+ - affichage des données du restaurant
+ - listing des plats
+ - au clique sur un plat mène vers la page détail du plat -->
 <script setup lang="ts">
 definePageMeta({
   layout: "user",

@@ -1,3 +1,5 @@
+<!-- Page listing des restaurants, 
+ au clique sur un restaurant, on est mené vers la page détail du restaurant  -->
 <script setup lang="ts">
 definePageMeta({
   ssr: true,

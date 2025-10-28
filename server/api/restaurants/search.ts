@@ -1,3 +1,8 @@
+// API Route pour la recherche de restaurants
+//  Fonctionnalités :
+//   - Recherche de restaurants
+//   - Recherche insensible à la casse
+
 import restaurantsData from "../data/restaurants.json";
 import type { Restaurant } from "~/types/restaurants/restaurants";
 

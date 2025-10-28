@@ -1,3 +1,4 @@
+<!-- Page d'un resturateur pour ajouter un plat -->
 <script setup lang="ts">
 definePageMeta({
   layout: "restaurateur",
@@ -6,7 +7,6 @@ definePageMeta({
 
 import { ref } from "vue";
 import { useUserStore } from "~/stores/users/user";
-import type { Plat } from "~/types/plats/plats";
 
 const userStore = useUserStore();
 const currentUser = computed(() => userStore.currentUser);

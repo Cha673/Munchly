@@ -1,3 +1,6 @@
+<!-- Page de listing des commandes d'un utilisateur
+ Fonctionnalités : 
+ - listing des commandes passés par le compte utilisateur  -->
 <script setup lang="ts">
 definePageMeta({
   layout: "user",

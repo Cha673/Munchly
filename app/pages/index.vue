@@ -1,3 +1,7 @@
+<!-- Page d'accueil du site 
+ Fonctionnalités : 
+ - mène vers le listing des restaurants mais demande d'être connecté 
+ - permet de se connecter/déconnecter -->
 <script setup lang="ts">
 import Card from "~/components/Card.vue";
 import { useRestaurantsStore } from "~/stores/restaurants/restaurants";

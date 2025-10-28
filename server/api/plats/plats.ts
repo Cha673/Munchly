@@ -1,3 +1,8 @@
+// API Route pour la récupération des plats
+//  Fonctionnalités :
+//   - Récupération de tous les plats disponibles
+//   - Recherche d'un plat spécifique par son ID
+
 import platsData from "../data/plats.json";
 import type { Plat } from "~/types/plats/plats";
 

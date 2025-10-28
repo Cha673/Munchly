@@ -1,3 +1,4 @@
+<!-- Affichage d'un restaurateur dans le listing pour les admin-->
 <script setup lang="ts">
 interface UserProps {
   id: number;
