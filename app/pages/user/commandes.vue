@@ -6,6 +6,30 @@ definePageMeta({
   layout: "user",
   middleware: ["auth-user"],
 });
+
+useHead({
+  title: "Historique de mes commandes - Munchly",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Consultez l'historique de vos commandes, suivez leur statut et retrouvez le détail de chaque commande.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Historique de mes commandes - Munchly",
+  ogTitle: "Historique de mes commandes - Munchly",
+  description:
+    "Consultez l'historique de vos commandes, suivez leur statut et retrouvez le détail de chaque commande.",
+  ogDescription:
+    "Consultez l'historique de vos commandes, suivez leur statut et retrouvez le détail de chaque commande.",
+  ogImage: "/images/commandes.jpg",
+  twitterCard: "summary_large_image",
+});
+
 import { ref, computed } from "vue";
 import { usePanierStore } from "~/stores/panier/panier";
 

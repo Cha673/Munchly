@@ -5,6 +5,29 @@ definePageMeta({
   middleware: ["auth-restaurateur"],
 });
 
+useHead({
+  title: "Ajouter un plat - Espace restaurateur",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Enrichissez votre menu en ajoutant de nouveaux plats. Personnalisez les descriptions, prix et images de vos créations culinaires.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Ajouter un plat - Espace restaurateur",
+  ogTitle: "Ajouter un plat - Espace restaurateur",
+  description:
+    "Enrichissez votre menu en ajoutant de nouveaux plats. Personnalisez les descriptions, prix et images de vos créations culinaires.",
+  ogDescription:
+    "Enrichissez votre menu en ajoutant de nouveaux plats. Personnalisez les descriptions, prix et images de vos créations culinaires.",
+  ogImage: "/images/munchly-logo.jpg",
+  twitterCard: "summary_large_image",
+});
+
 import { ref } from "vue";
 import { useUserStore } from "~/stores/users/user";
 

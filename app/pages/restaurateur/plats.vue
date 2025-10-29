@@ -10,6 +10,28 @@ definePageMeta({
   middleware: ["auth-restaurateur"],
 });
 
+useHead({
+  title: "Gérer mes plats - Espace restaurateur",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Gérez vos plats, ajoutez de nouveaux plats et maintenez votre menu à jour. Espace dédié aux restaurateurs.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Gérer mes plats - Espace restaurateur",
+  ogTitle: "Gérer mes plats - Espace restaurateur",
+  description:
+    "Gérez vos plats, ajoutez de nouveaux plats et maintenez votre menu à jour. Espace dédié aux restaurateurs.",
+  ogDescription:
+    "Gérez vos plats, ajoutez de nouveaux plats et maintenez votre menu à jour. Espace dédié aux restaurateurs.",
+  twitterCard: "summary_large_image",
+});
+
 import { ref, computed, onMounted } from "vue";
 import { useUserStore } from "~/stores/users/user";
 import type { Plat } from "~/types/plats/plats";

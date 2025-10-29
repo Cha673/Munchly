@@ -6,6 +6,29 @@
  - permet de valider le panier et de le passer en tant que commande
  - accéder à la liste des commandes avec un bouton -->
 <script setup lang="ts">
+useHead({
+  title: "Mon panier - Munchly",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Consultez votre panier, modifiez les quantités et validez votre commande en quelques clics.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Mon panier - Munchly",
+  ogTitle: "Mon panier - Munchly",
+  description:
+    "Consultez votre panier, modifiez les quantités et validez votre commande en quelques clics.",
+  ogDescription:
+    "Consultez votre panier, modifiez les quantités et validez votre commande en quelques clics.",
+  ogImage: "/images/panier.jpg",
+  twitterCard: "summary_large_image",
+});
+
 definePageMeta({
   layout: "user",
   middleware: ["auth-user"],

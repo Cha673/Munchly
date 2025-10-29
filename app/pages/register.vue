@@ -1,5 +1,25 @@
 <!-- Page d'inscription du sites -->
 <script setup lang="ts">
+useHead({
+  title: "Inscription - Munchly",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Créez votre compte gratuitement et commencez à commander dans vos restaurants préférés en quelques clics.",
+    },
+    { name: "robots", content: "noindex, nofollow" },
+  ],
+});
+
+useSeoMeta({
+  title: "Inscription - Munchly",
+  ogTitle: "Inscription - Munchly",
+  description:
+    "Créez votre compte gratuitement et commencez à commander dans vos restaurants préférés en quelques clics.",
+  ogDescription:
+    "Créez votre compte gratuitement et commencez à commander dans vos restaurants préférés en quelques clics.",
+});
 definePageMeta({
   ssr: false,
   middlewares: "auth",

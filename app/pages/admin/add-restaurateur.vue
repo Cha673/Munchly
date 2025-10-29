@@ -9,6 +9,28 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth-admin"],
 });
+useHead({
+  title: "Ajouter un restaurateur - Administration Munchly",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Créez un nouveau compte restaurateur et configurez ses accès à la plateforme Munchly.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Ajouter un restaurateur - Administration Munchly",
+  ogTitle: "Ajouter un restaurateur - Administration Munchly",
+  description:
+    "Créez un nouveau compte restaurateur et configurez ses accès à la plateforme Munchly.",
+  ogDescription:
+    "Créez un nouveau compte restaurateur et configurez ses accès à la plateforme Munchly.",
+  ogImage: "/images/add-restaurateur.jpg",
+  twitterCard: "summary_large_image",
+});
 
 const userStore = useUserStore();
 const router = useRouter();

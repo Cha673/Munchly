@@ -31,6 +31,32 @@ const fetchPlat = async () => {
   loading.value = false;
 };
 
+watchEffect(() => {
+  if (plat.value) {
+    if (plat.value) {
+      useHead({
+        title: `${plat.value.nom} - Menu et commande en ligne`,
+        meta: [
+          {
+            name: "description",
+            content: `Découvrez le menu complet de ${plat.value.nom}. ${plat.value.description}. Commandez en ligne pour une livraison rapide.`,
+          },
+          { name: "robots", content: "noindex, nofollow" },
+        ],
+      });
+
+      useSeoMeta({
+        title: `${plat.value.nom} - Menu et commande en ligne`,
+        ogTitle: `${plat.value.nom} - Menu et commande en ligne`,
+        description: `Découvrez le menu complet de ${plat.value.nom}. ${plat.value.description}. Commandez en ligne pour une livraison rapide.`,
+        ogDescription: `Découvrez le menu complet de ${plat.value.nom}. ${plat.value.description}. Commandez en ligne pour une livraison rapide.`,
+        ogImage: plat.value.imageUrl,
+        twitterCard: "summary_large_image",
+      });
+    }
+  }
+});
+
 await fetchPlat();
 
 const addToCart = () => {

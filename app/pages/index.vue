@@ -3,6 +3,27 @@
  - mène vers le listing des restaurants mais demande d'être connecté 
  - permet de se connecter/déconnecter -->
 <script setup lang="ts">
+useHead({
+  title: "Commandez vos repas en ligne - Munchly",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Découvrez les meilleurs restaurants près de chez vous.Commandez en ligne et faites-vous livrer vos plats préférés rapidement.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Commandez vos repas en ligne - Munchly",
+  ogTitle: "Commandez vos repas en ligne - Munchly",
+  description:
+    "Découvrez les meilleurs restaurants près de chez vous. Commandez en ligne et faites-vous livrer vos plats préférés rapidement.",
+  ogDescription:
+    "Découvrez les meilleurs restaurants près de chez vous. Commandez en ligne et faites-vous livrer vos plats préférés rapidement.",
+  ogImage: "https://votre-domaine.com/images/og-home.jpg",
+  twitterCard: "summary_large_image",
+});
 definePageMeta({
   layout: "home",
 });

@@ -1,3 +1,16 @@
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #374151;
+}
+
+.logo-img {
+  height: 230px;
+  width: auto;
+  object-fit: contain;
+}
+
 /* Style global de la navigation */
 .nav-container {
   background-color: white;
@@ -124,6 +137,9 @@ main {
 
 /* Responsive design */
 @media (max-width: 768px) {
+  .logo-img {
+    height: 160px;
+  }
   .nav-container {
     padding: 0.5rem;
   }

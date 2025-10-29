@@ -27,7 +27,11 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
       <nav>
         <!-- Logo et éléments toujours visibles -->
         <NuxtLink to="/" class="logo">
-          <span>{{ t("header_home") }}</span>
+          <img
+            src="/images/logo/munchly-logo.png"
+            alt="Munchly Admin"
+            class="logo-img"
+          />
         </NuxtLink>
 
         <!-- Conteneur pour langue et burger -->
@@ -103,3 +107,6 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
     </main>
   </div>
 </template>
+<style>
+@import "@/assets/css/layouts/navigation.css";
+</style>

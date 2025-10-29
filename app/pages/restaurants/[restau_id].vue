@@ -9,7 +9,6 @@ definePageMeta({
   middleware: ["auth-user"],
   validate: (route) => !isNaN(parseInt(route.params.restau_id as string)),
 });
-
 import { ref, computed, watchEffect } from "vue";
 import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
 import type { Plat } from "~/types/plats/plats";
@@ -28,8 +27,28 @@ const plats = ref<Plat[]>([]);
 const search = ref("");
 const loading = ref(false);
 
-// Rediriger si le restaurant n'existe pas
 watchEffect(() => {
+  if (restaurant.value) {
+    useHead({
+      title: `${restaurant.value.nom} - Menu et commande en ligne`,
+      meta: [
+        {
+          name: "description",
+          content: `Découvrez le menu complet de ${restaurant.value.nom}. ${restaurant.value.description}. Commandez en ligne pour une livraison rapide.`,
+        },
+        { name: "robots", content: "noindex, nofollow" },
+      ],
+    });
+
+    useSeoMeta({
+      title: `${restaurant.value.nom} - Menu et commande en ligne`,
+      ogTitle: `${restaurant.value.nom} - Menu et commande en ligne`,
+      description: `Découvrez le menu complet de ${restaurant.value.nom}. ${restaurant.value.description}. Commandez en ligne pour une livraison rapide.`,
+      ogDescription: `Découvrez le menu complet de ${restaurant.value.nom}. ${restaurant.value.description}. Commandez en ligne pour une livraison rapide.`,
+      ogImage: restaurant.value.imageUrl,
+      twitterCard: "summary_large_image",
+    });
+  }
   if (!loading.value && !restaurant.value) {
     navigateTo("/restaurants");
   }

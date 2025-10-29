@@ -8,7 +8,10 @@ definePageMeta({
   layout: "restaurateur",
   middleware: ["auth-restaurateur"],
 });
-
+useHead({
+  title: "Espace restaurateur",
+  meta: [{ name: "robots", content: "noindex, nofollow" }],
+});
 const userStore = useUserStore();
 const user = computed(() => userStore.currentUser);
 </script>

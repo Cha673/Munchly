@@ -1,6 +1,26 @@
 <!-- Page listing des restaurants, 
  au clique sur un restaurant, on est mené vers la page détail du restaurant  -->
 <script setup lang="ts">
+useHead({
+  title: "Restaurants près de chez vous - Munchly",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Parcourez notre sélection de restaurants et découvrez une large gamme de cuisines. Livraison rapide garantie.",
+    },
+    { name: "robots", content: "noindex, nofollow" },
+  ],
+});
+
+useSeoMeta({
+  title: "Restaurants près de chez vous - Munchly",
+  ogTitle: "Restaurants près de chez vous - Munchly",
+  description:
+    "Parcourez notre sélection de restaurants et découvrez une large gamme de cuisines. Livraison rapide garantie.",
+  ogDescription:
+    "Parcourez notre sélection de restaurants et découvrez une large gamme de cuisines. Livraison rapide garantie.",
+});
 definePageMeta({
   ssr: true,
   layout: "user",

@@ -13,6 +13,29 @@ definePageMeta({
   middleware: ["auth-admin"],
 });
 
+useHead({
+  title: "Dashboard Administration - Munchly",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Gérez les restaurateurs de la plateforme, ajoutez de nouveaux comptes et administrez l'ensemble du système.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Dashboard Administration - Munchly",
+  ogTitle: "Dashboard Administration - Munchly",
+  description:
+    "Gérez les restaurateurs de la plateforme, ajoutez de nouveaux comptes et administrez l'ensemble du système.",
+  ogDescription:
+    "Gérez les restaurateurs de la plateforme, ajoutez de nouveaux comptes et administrez l'ensemble du système.",
+  ogImage: "/images/admin-dashboard.jpg",
+  twitterCard: "summary_large_image",
+});
+
 const userStore = useUserStore();
 const restaurateurs = computed(() => userStore.getRestaurateurs);
 

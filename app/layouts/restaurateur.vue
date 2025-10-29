@@ -25,7 +25,11 @@ const closeMenu = () => {
       <nav>
         <!-- Logo et éléments toujours visibles -->
         <NuxtLink to="/restaurateur" class="logo">
-          {{ t("header_home") }}
+          <img
+            src="/images/logo/munchly-logo.png"
+            alt="Munchly Restaurateur"
+            class="logo-img"
+          />
         </NuxtLink>
 
         <!-- Conteneur pour langue et burger -->
@@ -80,3 +84,7 @@ const closeMenu = () => {
     </main>
   </div>
 </template>
+
+<style>
+@import "@/assets/css/layouts/navigation.css";
+</style>

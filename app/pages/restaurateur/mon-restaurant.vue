@@ -4,6 +4,28 @@ definePageMeta({
   layout: "restaurateur",
   middleware: ["auth-restaurateur"],
 });
+useHead({
+  title: "Mon profil restaurateur - Munchly",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Gérez votre profil restaurateur, mettez à jour vos informations et paramètres de compte.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Mon profil restaurateur - Munchly",
+  ogTitle: "Mon profil restaurateur - Munchly",
+  description:
+    "Gérez votre profil restaurateur, mettez à jour vos informations et paramètres de compte.",
+  ogDescription:
+    "Gérez votre profil restaurateur, mettez à jour vos informations et paramètres de compte.",
+  ogImage: "/images/profil-resto.jpg",
+  twitterCard: "summary_large_image",
+});
 import { ref, computed } from "vue";
 import { useUserStore } from "~/stores/users/user";
 

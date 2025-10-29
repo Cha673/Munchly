@@ -1,5 +1,26 @@
 <!-- Page de connexion du site -->
 <script setup lang="ts">
+useHead({
+  title: "Connexion - Munchly",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
+    },
+    { name: "robots", content: "noindex, nofollow" },
+  ],
+});
+
+useSeoMeta({
+  title: "Connexion - Munchly",
+  ogTitle: "Connexion - Munchly",
+  description:
+    "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
+  ogDescription:
+    "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
+});
+
 definePageMeta({
   ssr: false,
 });

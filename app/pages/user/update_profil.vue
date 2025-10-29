@@ -8,6 +8,29 @@ definePageMeta({
   middleware: ["auth-user"],
 });
 
+useHead({
+  title: "Modifier mon profil - Munchly",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Mettez à jour vos informations personnelles, modifiez votre email et gérez votre mot de passe en toute sécurité.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Modifier mon profil - Munchly",
+  ogTitle: "Modifier mon profil - Munchly",
+  description:
+    "Mettez à jour vos informations personnelles, modifiez votre email et gérez votre mot de passe en toute sécurité.",
+  ogDescription:
+    "Mettez à jour vos informations personnelles, modifiez votre email et gérez votre mot de passe en toute sécurité.",
+  ogImage: "/images/munchly-logo.jpg",
+  twitterCard: "summary_large_image",
+});
+
 import { ref } from "vue";
 import { useUserStore } from "~/stores/users/user";
 

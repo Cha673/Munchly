@@ -9,6 +9,28 @@ definePageMeta({
   middleware: ["auth-restaurateur"],
 });
 
+useHead({
+  title: "Gestion des commandes - Espace restaurateur",
+  meta: [
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      name: "description",
+      content:
+        "Gérez les commandes de votre restaurant, consultez les détails et suivez leur traitement en temps réel.",
+    },
+  ],
+});
+
+useSeoMeta({
+  title: "Gestion des commandes - Espace restaurateur",
+  ogTitle: "Gestion des commandes - Espace restaurateur",
+  description:
+    "Gérez les commandes de votre restaurant, consultez les détails et suivez leur traitement en temps réel.",
+  ogDescription:
+    "Gérez les commandes de votre restaurant, consultez les détails et suivez leur traitement en temps réel.",
+  ogImage: "/images/commandes-resto.jpg",
+  twitterCard: "summary_large_image",
+});
 import { ref, computed } from "vue";
 import { useUserStore } from "~/stores/users/user";
 import { usePanierStore } from "~/stores/panier/panier";
