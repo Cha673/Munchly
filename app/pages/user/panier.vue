@@ -70,128 +70,70 @@ const validerCommande = () => {
 
 <style scoped>
 .panier-page {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
 }
 
 h1 {
   font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #333;
+  margin-bottom: 2.5rem;
+  color: #374151;
+  font-weight: 600;
+  position: relative;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #4b5563;
+  border-radius: 2px;
 }
 
 .panier-vide {
   text-align: center;
-  padding: 4rem 0;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .panier-vide p {
   font-size: 1.2rem;
-  color: #999;
+  color: #4b5563;
   margin-bottom: 2rem;
 }
 
 .btn {
   display: inline-block;
   padding: 1rem 2rem;
-  background: #667eea;
+  background-color: #4b5563;
   color: white;
   text-decoration: none;
   border-radius: 8px;
   font-size: 1.1rem;
-  transition: background 0.3s;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .btn:hover {
-  background: #764ba2;
+  background-color: #374151;
+  transform: translateY(-1px);
 }
 
 .panier-items {
   background: white;
   border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.panier-item {
-  display: grid;
-  grid-template-columns: 2fr 150px 100px 40px;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #eee;
-}
-
-.panier-item:last-child {
-  border-bottom: none;
-}
-
-.item-info h3 {
-  margin: 0 0 0.5rem 0;
-  color: #333;
-  font-size: 1.2rem;
-}
-
-.item-prix {
-  color: #666;
-  margin: 0;
-}
-
-.item-quantite {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-qty {
-  width: 32px;
-  height: 32px;
-  border: 2px solid #667eea;
-  background: white;
-  color: #667eea;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-}
-
-.btn-qty:hover {
-  background: #667eea;
-  color: white;
-}
-
-.qty {
-  font-size: 1.1rem;
-  font-weight: bold;
-  min-width: 30px;
-  text-align: center;
-}
-
-.item-total {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #27ae60;
-  text-align: right;
-}
-
-.btn-remove {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: background 0.3s;
-}
-
-.btn-remove:hover {
-  background: #c0392b;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .panier-footer {
@@ -199,7 +141,8 @@ h1 {
   background: white;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .total {
@@ -208,66 +151,123 @@ h1 {
   align-items: center;
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #eee;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #e5e7eb;
+  color: #374151;
 }
 
 .total-prix {
-  font-weight: bold;
-  color: #27ae60;
+  font-weight: 600;
+  color: #4b5563;
   font-size: 2rem;
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .btn-clear {
   flex: 1;
   padding: 1rem 2rem;
-  background: #e74c3c;
-  color: white;
-  border: none;
+  background: white;
+  color: #ef4444;
+  border: 2px solid #ef4444;
   border-radius: 8px;
   font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.2s ease;
 }
 
 .btn-clear:hover {
-  background: #c0392b;
+  background: #ef4444;
+  color: white;
+  transform: translateY(-1px);
 }
 
 .btn-valider {
   flex: 2;
   padding: 1rem 2rem;
-  background: #27ae60;
+  background: #4b5563;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.2s ease;
 }
 
 .btn-valider:hover {
-  background: #229954;
+  background: #374151;
+  transform: translateY(-1px);
+}
+
+.historique-section {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.btn-historique {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: white;
+  color: #4b5563;
+  text-decoration: none;
+  border: 2px solid #4b5563;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-historique:hover {
+  background: #4b5563;
+  color: white;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 768px) {
-  .panier-item {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .panier-page {
+    padding: 1.5rem 1rem;
   }
 
-  .item-quantite,
-  .item-total {
-    justify-self: start;
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .panier-items,
+  .panier-footer {
+    padding: 1.5rem;
+  }
+
+  .total {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .total-prix {
+    font-size: 1.75rem;
   }
 
   .actions {
     flex-direction: column;
+  }
+
+  .btn-clear,
+  .btn-valider {
+    width: 100%;
+  }
+
+  .historique-section {
+    margin-top: 2rem;
+  }
+
+  .btn-historique {
+    width: auto;
+    text-align: center;
   }
 }
 </style>

@@ -34,57 +34,94 @@ const emit = defineEmits<{
 <style scoped>
 .order-item {
   background: white;
-  border-radius: 8px;
-  padding: 1rem;
+  border-radius: 12px;
+  padding: 1.5rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #2196f3;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #4b5563;
+  transition: all 0.3s ease;
+}
+
+.order-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.1),
+    0 4px 6px -1px rgba(0, 0, 0, 0.06);
 }
 
 .order-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 .order-info h3 {
-  margin: 0 0 0.5rem;
-  color: #333;
+  margin: 0 0 0.75rem;
+  color: #374151;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .client-name {
-  margin: 0;
-  color: #666;
-  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+  color: #4b5563;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .order-date {
   margin: 0;
-  color: #999;
-  font-size: 0.8rem;
+  color: #6b7280;
+  font-size: 0.9rem;
 }
 
 .order-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .total {
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: #4b5563;
+  font-size: 1.25rem;
 }
 
 .details-button {
-  background: #e0e0e0;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  background: white;
+  border: 2px solid #4b5563;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
-  color: #333;
+  color: #4b5563;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 
 .details-button:hover {
-  background: #d5d5d5;
+  background: #4b5563;
+  color: white;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .order-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .order-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .details-button {
+    width: 100%;
+    text-align: center;
+  }
 }
 </style>

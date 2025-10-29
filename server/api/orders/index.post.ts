@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
 
     // Vérifier les champs requis
     if (!body.restaurantId || !body.clientId || !body.items || !body.total) {
-      return createError({
+      throw createError({
         statusCode: 400,
         message: "Données de commande incomplètes",
       });
@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
     return newOrder;
   } catch (error) {
     console.error("Erreur lors de la création de la commande:", error);
-    return createError({
+    throw createError({
       statusCode: 500,
       message: "Erreur lors de la création de la commande",
     });

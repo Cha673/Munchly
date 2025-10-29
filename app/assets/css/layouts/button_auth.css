@@ -1,0 +1,114 @@
+/* Conteneur pour les boutons d'authentification et le sélecteur de langue */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+/* Style commun pour tous les boutons d'authentification */
+.login-btn,
+.register-btn,
+.logout-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-width: 90px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Style spécifique pour le bouton de connexion */
+.login-btn {
+  background-color: transparent;
+  border: 1.5px solid #e5e7eb;
+  color: #374151;
+}
+
+.login-btn:hover {
+  background-color: #4b5563;
+  border-color: #4b5563;
+  color: white;
+}
+
+/* Style spécifique pour le bouton d'inscription */
+.register-btn {
+  background-color: #4b5563;
+  color: white;
+}
+
+.register-btn:hover {
+  background-color: #e5e7eb;
+  border-color: #e5e7eb;
+  color: #4b5563;
+}
+
+/* Style spécifique pour le bouton de déconnexion */
+.logout-btn {
+  background-color: #ff5a5f;
+  color: white;
+  border: 0;
+}
+
+.logout-btn:hover {
+  background-color: #374151;
+}
+
+/* Style du sélecteur de langue */
+.language-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+  border-radius: 6px;
+  padding: 0.25rem;
+  height: 36px;
+  min-width: 45px;
+}
+
+.language-switcher a {
+  padding: 0.25rem 0.75rem;
+  color: #4b5563;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.language-switcher a:hover {
+  background-color: #e5e7eb;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .nav-actions {
+    margin-left: 0;
+    width: auto;
+  }
+
+  .login-btn,
+  .register-btn,
+  .logout-btn {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Pour éviter les problèmes de mise en page sur très petits écrans */
+@media (max-width: 400px) {
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .login-btn,
+  .register-btn,
+  .logout-btn {
+    min-width: 80px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}

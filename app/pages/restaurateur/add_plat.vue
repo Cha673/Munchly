@@ -132,92 +132,156 @@ const addPlat = async () => {
 
 <style scoped>
 .add-plat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
   padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 0 auto;
+  background-color: #f9fafb;
 }
 
 .header {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
-.error-message {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+.header h1 {
+  color: #374151;
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  position: relative;
 }
 
 .plat-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  background-color: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #ef4444;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border: 1px solid #fee2e2;
+  font-size: 0.95rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
+  font-size: 0.875rem;
   font-weight: 500;
-  color: #333;
+  color: #4b5563;
 }
 
 .form-group input,
 .form-group textarea {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4b5563;
+  box-shadow: 0 0 0 3px rgb(75 85 99 / 0.1);
 }
 
 .form-group textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #9ca3af;
 }
 
 .form-buttons {
   display: flex;
-  justify-content: flex-end;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
+.submit-button,
 .cancel-button {
+  flex: 1;
   padding: 0.75rem 1.5rem;
-  background: #e0e0e0;
-  color: #333;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-
-.cancel-button:hover {
-  background: #d5d5d5;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: center;
+  transition: all 0.2s ease;
 }
 
 .submit-button {
-  padding: 0.75rem 1.5rem;
-  background: #4caf50;
+  background-color: #4b5563;
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .submit-button:hover {
-  background: #43a047;
+  background-color: #374151;
+  transform: translateY(-1px);
 }
 
 .submit-button:disabled {
-  background: #a5d6a7;
+  background-color: #9ca3af;
   cursor: not-allowed;
+  transform: none;
+}
+
+.cancel-button {
+  background: white;
+  color: #4b5563;
+  border: 2px solid #4b5563;
+  text-decoration: none;
+}
+
+.cancel-button:hover {
+  background-color: #4b5563;
+  color: white;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .add-plat-container {
+    padding: 1rem;
+  }
+
+  .plat-form {
+    padding: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-buttons {
+    flex-direction: column-reverse;
+  }
+
+  .submit-button,
+  .cancel-button {
+    width: 100%;
+  }
 }
 </style>

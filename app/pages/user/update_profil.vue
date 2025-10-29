@@ -42,33 +42,41 @@ const updateProfile = () => {
 </script>
 
 <template>
-  <div>
-    <h1>Mettre à jour mon profil</h1>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h1>Mettre à jour mon profil</h1>
 
-    <div>
-      <label>Nom</label>
-      <input v-model="name" type="text" />
+      <div class="form-group">
+        <div class="input-group">
+          <label>Nom</label>
+          <input v-model="name" type="text" placeholder="Votre nom" />
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input v-model="email" type="email" placeholder="votre@email.com" />
+        </div>
+
+        <div class="input-group">
+          <label>Mot de passe</label>
+          <input v-model="password" type="password" placeholder="••••••••" />
+        </div>
+
+        <button @click="updateProfile">Enregistrer</button>
+      </div>
+
+      <p v-if="error" class="error-message">{{ error }}</p>
+      <p v-if="success" class="success-message">{{ success }}</p>
+
+      <p class="auth-link">
+        <NuxtLink to="/user/commandes">
+          Voir l'historique de mes commandes
+        </NuxtLink>
+      </p>
     </div>
-
-    <div>
-      <label>Email</label>
-      <input v-model="email" type="email" />
-    </div>
-
-    <div>
-      <label>Mot de passe</label>
-      <input v-model="password" type="password" />
-    </div>
-
-    <button @click="updateProfile">Enregistrer</button>
-
-    <p v-if="error" style="color: red">{{ error }}</p>
-    <p v-if="success" style="color: green">{{ success }}</p>
-  </div>
-
-  <div class="actions-supplementaires">
-    <NuxtLink to="/user/commandes" class="btn-historique">
-      Voir l'historique de mes commandes
-    </NuxtLink>
   </div>
 </template>
+
+<style>
+@import "@/assets/css/pages/auth.css";
+</style>

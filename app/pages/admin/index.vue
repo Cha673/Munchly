@@ -51,58 +51,69 @@ const handleAddRestaurateur = () => {
 </script>
 
 <template>
-  <div class="admin-dashboard">
-    <div class="header">
-      <h1>Dashboard Administrateur</h1>
-      <button class="logout-btn" @click="handleLogout">Se déconnecter</button>
-    </div>
-
-    <div class="restaurateurs-section">
-      <div class="section-header">
-        <h2>Liste des Restaurateurs</h2>
-        <NuxtLink to="/admin/add-restaurateur" class="add-btn">
-          Ajouter un restaurateur
-        </NuxtLink>
+  <div class="auth-container">
+    <div class="dashboard">
+      <div class="dashboard-header">
+        <h1>Dashboard Administrateur</h1>
       </div>
 
-      <!-- Liste des restaurateurs -->
-      <div class="users-list">
-        <UserCard
-          v-for="user in restaurateurs"
-          :key="user.id"
-          :id="user.id"
-          :nom="user.name"
-          :email="user.email"
-          :role="user.role"
-          @delete="handleDeleteUser"
-        />
+      <div class="dashboard-content">
+        <div class="section-header">
+          <h2>Liste des Restaurateurs</h2>
+          <NuxtLink to="/admin/add-restaurateur" class="add-button">
+            Ajouter un restaurateur
+          </NuxtLink>
+        </div>
+
+        <!-- Liste des restaurateurs -->
+        <div class="users-list">
+          <UserCard
+            v-for="user in restaurateurs"
+            :key="user.id"
+            :id="user.id"
+            :nom="user.name"
+            :email="user.email"
+            :role="user.role"
+            @delete="handleDeleteUser"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.admin-dashboard {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+<style>
+@import "@/assets/css/pages/auth.css";
+
+/* Styles supplémentaires spécifiques au dashboard */
+.auth-box.dashboard {
+  max-width: 1000px;
 }
 
-.header {
+.dashboard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 50rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.logout-btn {
-  background-color: #ff5a5f;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
+.dashboard-header h1 {
+  margin: 0;
+  text-align: left;
+}
+
+.dashboard-content {
+  margin-top: 1rem;
 }
 
 .section-header {
@@ -112,76 +123,60 @@ const handleAddRestaurateur = () => {
   margin-bottom: 1.5rem;
 }
 
-.add-btn {
-  background-color: #4a90e2;
+.section-header h2 {
+  color: #374151;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.add-button {
+  background-color: #4b5563;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-form {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group input {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
+  max-width: 11rem;
+  border: 0;
+  text-align: center;
 }
 
-.form-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.submit-btn {
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.cancel-btn {
-  background-color: #666;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+.add-button:hover {
+  background-color: #374151;
 }
 
 .users-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
-  .header {
+  .dashboard-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    align-items: stretch;
   }
 
   .section-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+  }
+
+  .add-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .auth-box.dashboard {
+    padding: 1.5rem;
   }
 }
 </style>

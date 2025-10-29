@@ -1,0 +1,120 @@
+/* Styles communs pour les pages d'authentification */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(
+    100vh - 80px
+  ); /* Hauteur totale moins la hauteur du header */
+  padding: 2rem;
+  background-color: #f9fafb;
+}
+
+.auth-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.auth-box h1 {
+  text-align: center;
+  color: #374151;
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.input-group input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #4b5563;
+  box-shadow: 0 0 0 3px rgb(75 85 99 / 0.1);
+}
+
+.input-group input::placeholder {
+  color: #9ca3af;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background-color: #4b5563;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-box button:hover {
+  background-color: #374151;
+}
+
+.error-message {
+  margin-top: 1rem;
+  color: #ef4444;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.auth-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.auth-link a {
+  color: #4b5563;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.auth-link a:hover {
+  color: #374151;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .auth-box {
+    padding: 2rem;
+  }
+
+  .auth-box h1 {
+    font-size: 1.5rem;
+  }
+}

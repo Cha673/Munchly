@@ -109,66 +109,145 @@ const deletePlat = async (platId: number) => {
 
 <style scoped>
 .plats-container {
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #374151;
+  font-weight: 600;
+  position: relative;
+  margin: 0;
+}
+
+.header h1::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #4b5563;
+  border-radius: 2px;
 }
 
 .add-button {
-  background: #4caf50;
+  background: #4b5563;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.add-button:hover {
+  background: #374151;
+  transform: translateY(-1px);
 }
 
 .plats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .delete-button {
-  background: #f44336;
-  color: white;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  margin-top: 0.5rem;
+  background: white;
+  color: #ef4444;
+  border: 2px solid #ef4444;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
   cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  background: #ef4444;
+  color: white;
+  transform: translateY(-1px);
 }
 
 .error-message {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  background-color: #fef2f2;
+  color: #ef4444;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #fee2e2;
+  font-size: 1rem;
 }
 
 .loading {
   text-align: center;
-  padding: 2rem;
-  color: #666;
+  padding: 3rem;
+  color: #4b5563;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
 }
 
 .no-plats {
   grid-column: 1 / -1;
   text-align: center;
-  padding: 2rem;
-  color: #666;
-  background: #f5f5f5;
-  border-radius: 4px;
+  padding: 3rem;
+  color: #4b5563;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .plats-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .header h1::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .add-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .plats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 </style>

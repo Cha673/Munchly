@@ -68,44 +68,62 @@ const toggleOrderDetails = (orderId: number) => {
 
 <style scoped>
 .commandes-historique {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2.5rem;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
 }
 
 h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 2rem;
-  text-align: center;
+  font-size: 2.5rem;
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #4b5563;
+  border-radius: 2px;
 }
 
 .no-commandes {
   text-align: center;
   padding: 3rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .no-commandes p {
-  margin-bottom: 1.5rem;
-  color: #666;
+  margin-bottom: 2rem;
+  color: #4b5563;
   font-size: 1.1rem;
 }
 
 .btn {
   display: inline-block;
-  padding: 12px 24px;
-  background-color: #4a90e2;
+  padding: 1rem 2rem;
+  background-color: #4b5563;
   color: white;
   text-decoration: none;
-  border-radius: 6px;
-  transition: background-color 0.3s;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .btn:hover {
-  background-color: #357abd;
+  background-color: #374151;
+  transform: translateY(-1px);
 }
 
 .commandes-list {
@@ -115,28 +133,51 @@ h1 {
 }
 
 .order-details {
-  background: #f5f5f5;
-  padding: 1.5rem;
-  margin: -0.5rem 0 1rem;
-  border-radius: 0 0 8px 8px;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
 }
 
 .order-details h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 1.5rem;
+  color: #374151;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e5e7eb;
+  text-align: center;
 }
 
 .items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Responsive design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .commandes-historique {
-    padding: 10px;
+    padding: 1.5rem 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .no-commandes {
+    padding: 2rem 1rem;
+  }
+
+  .order-details {
+    padding: 1.5rem;
+  }
+
+  .items-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

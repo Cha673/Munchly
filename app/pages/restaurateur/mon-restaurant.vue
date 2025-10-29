@@ -85,30 +85,30 @@ const updateProfile = async () => {
 </script>
 
 <template>
-  <div class="profile-container">
-    <div class="profile-card">
-      <div class="card-header">
-        <h1>Mon Profil Restaurateur</h1>
-        <button v-if="!isEditing" @click="startEditing" class="edit-btn">
-          Modifier le profil
-        </button>
-      </div>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h1>Mon Profil Restaurateur</h1>
 
       <!-- Mode lecture -->
-      <div v-if="!isEditing" class="profile-info">
-        <div class="info-group">
-          <label>Nom</label>
-          <p>{{ currentUser?.name }}</p>
-        </div>
-        <div class="info-group">
-          <label>Email</label>
-          <p>{{ currentUser?.email }}</p>
+      <div v-if="!isEditing">
+        <div class="form-group">
+          <div class="input-group">
+            <label>Nom</label>
+            <div class="info-display">{{ currentUser?.name }}</div>
+          </div>
+
+          <div class="input-group">
+            <label>Email</label>
+            <div class="info-display">{{ currentUser?.email }}</div>
+          </div>
+
+          <button @click="startEditing">Modifier le profil</button>
         </div>
       </div>
 
       <!-- Mode édition -->
-      <form v-else class="edit-form" @submit.prevent="updateProfile">
-        <div class="form-group">
+      <div v-else class="form-group">
+        <div class="input-group">
           <label>Nom</label>
           <input
             v-model="formData.name"
@@ -118,7 +118,7 @@ const updateProfile = async () => {
           />
         </div>
 
-        <div class="form-group">
+        <div class="input-group">
           <label>Email</label>
           <input
             v-model="formData.email"
@@ -128,7 +128,7 @@ const updateProfile = async () => {
           />
         </div>
 
-        <div class="form-group">
+        <div class="input-group">
           <label>Nouveau mot de passe (optionnel)</label>
           <input
             v-model="formData.password"
@@ -137,7 +137,7 @@ const updateProfile = async () => {
           />
         </div>
 
-        <div class="form-group" v-if="formData.password">
+        <div class="input-group" v-if="formData.password">
           <label>Confirmer le mot de passe</label>
           <input
             v-model="formData.confirmPassword"
@@ -146,176 +146,29 @@ const updateProfile = async () => {
           />
         </div>
 
-        <div class="form-actions">
-          <button type="submit" class="save-btn">Enregistrer</button>
-          <button type="button" class="cancel-btn" @click="cancelEditing">
-            Annuler
-          </button>
-        </div>
-      </form>
+        <button @click.prevent="updateProfile">Enregistrer</button>
+        <p class="auth-link">
+          <a href="#" @click.prevent="cancelEditing">Annuler</a>
+        </p>
+      </div>
 
       <!-- Messages -->
-      <div v-if="error" class="error-message">{{ error }}</div>
-      <div v-if="success" class="success-message">{{ success }}</div>
+      <p v-if="error" class="error-message">{{ error }}</p>
+      <p v-if="success" class="success-message">{{ success }}</p>
     </div>
   </div>
 </template>
 
-<style scoped>
-.profile-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
+<style>
+@import "@/assets/css/pages/auth.css";
 
-.profile-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.card-header h1 {
-  margin: 0;
-  color: #333;
-  font-size: 1.8rem;
-}
-
-.profile-info {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.info-group {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 1rem;
-}
-
-.info-group label {
-  color: #666;
-  font-size: 0.9rem;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.info-group p {
-  margin: 0;
-  color: #333;
-  font-size: 1.1rem;
-}
-
-.edit-form {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.form-group {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.form-group label {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.form-group input {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
+/* Style supplémentaire pour l'affichage en mode lecture */
+.info-display {
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: 6px;
-  font-size: 1rem;
-  width: 100%;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
-}
-
-.form-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.edit-btn,
-.save-btn,
-.cancel-btn {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.edit-btn {
-  background-color: #4a90e2;
-  color: white;
-}
-
-.save-btn {
-  background-color: #4caf50;
-  color: white;
-}
-
-.cancel-btn {
-  background-color: #666;
-  color: white;
-}
-
-.edit-btn:hover,
-.save-btn:hover {
-  filter: brightness(110%);
-}
-
-.cancel-btn:hover {
-  background-color: #555;
-}
-
-.error-message {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background-color: #ffebee;
-  color: #c62828;
-  border-radius: 6px;
-}
-
-.success-message {
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border-radius: 6px;
-}
-
-@media (max-width: 768px) {
-  .profile-card {
-    padding: 1.5rem;
-  }
-
-  .card-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .edit-btn,
-  .save-btn,
-  .cancel-btn {
-    width: 100%;
-  }
+  font-size: 0.95rem;
+  color: #374151;
 }
 </style>

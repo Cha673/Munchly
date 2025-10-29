@@ -16,6 +16,7 @@ const closeMenu = () => {
   isMenuOpen.value = false;
 };
 
+// Fonction pour basculer entre les langues
 // La langue actuelle pour l'affichage
 const currentLanguage = computed(() => locale.value.toUpperCase());
 </script>
@@ -26,7 +27,7 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
       <nav>
         <!-- Logo et éléments toujours visibles -->
         <NuxtLink to="/" class="logo">
-          {{ t("header_home") }}
+          <span>{{ t("header_home") }}</span>
         </NuxtLink>
 
         <!-- Conteneur pour langue et burger -->
@@ -55,18 +56,14 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
           <!-- Menu principal -->
           <div class="nav-menu" :class="{ active: isMenuOpen }">
             <div class="menu-links">
-              <NuxtLink to="/restaurants" @click="closeMenu">
-                {{ t("header_restaurants") }}
-              </NuxtLink>
-
               <!-- Liens pour utilisateurs connectés -->
               <template v-if="isLoggedIn">
-                <NuxtLink to="/user/update_profil" @click="closeMenu">
-                  {{ t("header_profile") }}
-                </NuxtLink>
-                <NuxtLink to="/user/commandes" @click="closeMenu">
-                  {{ t("header_user_orders") }}
-                </NuxtLink>
+                <NuxtLink to="/user/update_profil" @click="closeMenu">{{
+                  t("header_profile")
+                }}</NuxtLink>
+                <NuxtLink to="/user/commandes" @click="closeMenu">{{
+                  t("header_user_orders")
+                }}</NuxtLink>
                 <NuxtLink to="/user/panier" @click="closeMenu">
                   {{ t("header_user_cart") }}
                   <span v-if="panierStore.totalItems > 0"
@@ -77,34 +74,21 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
             </div>
 
             <!-- Boutons d'authentification dans le menu -->
-            <div class="nav-actions auth-buttons">
+            <div class="nav-actions">
               <template v-if="isLoggedIn">
                 <a
                   href="#"
-                  @click.prevent="
-                    () => {
-                      userStore.logout();
-                      navigateTo('/login');
-                    }
-                  "
-                  class="nav-btn logout-btn"
+                  @click.prevent="userStore.logout"
+                  class="logout-btn"
                 >
                   {{ t("logout") }}
                 </a>
               </template>
               <template v-else>
-                <NuxtLink
-                  to="/login"
-                  class="nav-btn login-btn"
-                  @click="closeMenu"
-                >
+                <NuxtLink to="/login" class="login-btn">
                   {{ t("login") }}
                 </NuxtLink>
-                <NuxtLink
-                  to="/register"
-                  class="nav-btn register-btn"
-                  @click="closeMenu"
-                >
+                <NuxtLink to="/register" class="register-btn">
                   {{ t("register") }}
                 </NuxtLink>
               </template>

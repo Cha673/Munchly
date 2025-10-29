@@ -64,33 +64,39 @@ const handleRegister = async () => {
 </script>
 
 <template>
-  <div>
-    <h1>Créer un compte</h1>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h1>Créer un compte</h1>
 
-    <div>
-      <label>Nom complet</label>
-      <input v-model="name" type="text" placeholder="John Doe" />
+      <div class="form-group">
+        <div class="input-group">
+          <label>Nom complet</label>
+          <input v-model="name" type="text" placeholder="John Doe" />
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input v-model="email" type="email" placeholder="exemple@mail.com" />
+        </div>
+
+        <div class="input-group">
+          <label>Mot de passe</label>
+          <input v-model="password" type="password" placeholder="••••••••" />
+        </div>
+
+        <button @click="handleRegister">S'inscrire</button>
+      </div>
+
+      <p v-if="error" class="error-message">{{ error }}</p>
+
+      <p class="auth-link">
+        Déjà un compte ?
+        <NuxtLink to="/login">Se connecter</NuxtLink>
+      </p>
     </div>
-
-    <div>
-      <label>Email</label>
-      <input v-model="email" type="email" placeholder="exemple@mail.com" />
-    </div>
-
-    <div>
-      <label>Mot de passe</label>
-      <input v-model="password" type="password" placeholder="••••••••" />
-    </div>
-
-    <button @click="handleRegister">S'inscrire</button>
-
-    <p v-if="error">{{ error }}</p>
-
-    <p>
-      Déjà un compte ?
-      <NuxtLink to="/">Se connecter</NuxtLink>
-    </p>
   </div>
 </template>
 
-<!-- <style scoped></style> -->
+<style>
+@import "@/assets/css/pages/auth.css";
+</style>

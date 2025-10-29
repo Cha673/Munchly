@@ -54,52 +54,34 @@ const handleLogin = () => {
 </script>
 
 <template>
-  <div class="connexion">
-    <h1>Connexion</h1>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h1>Connexion</h1>
 
-    <div class="formulaire">
-      <div class="item">
-        <label>Email</label>
-        <input v-model="email" type="email" placeholder="exemple@mail.com" />
+      <div class="form-group">
+        <div class="input-group">
+          <label>Email</label>
+          <input v-model="email" type="email" placeholder="exemple@mail.com" />
+        </div>
+
+        <div class="input-group">
+          <label>Mot de passe</label>
+          <input v-model="password" type="password" placeholder="••••••••" />
+        </div>
+
+        <button @click="handleLogin">Se connecter</button>
       </div>
 
-      <div class="item">
-        <label>Mot de passe</label>
-        <input v-model="password" type="password" placeholder="••••••••" />
-      </div>
+      <p v-if="error" class="error-message">{{ error }}</p>
 
-      <button @click="handleLogin">Se connecter</button>
+      <p class="auth-link">
+        Pas encore de compte ?
+        <NuxtLink to="/register">S'inscrire</NuxtLink>
+      </p>
     </div>
-    <p v-if="error">{{ error }}</p>
-
-    <p>
-      Pas encore de compte ?
-      <NuxtLink to="/register">S’inscrire</NuxtLink>
-    </p>
   </div>
 </template>
 
 <style>
-.connexion {
-  display: flex;
-  max-width: 1440px;
-  width: 100%;
-  padding: 0 2rem;
-  flex-direction: column;
-}
-.formulaire {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
+@import "@/assets/css/pages/auth.css";
 </style>

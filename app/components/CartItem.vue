@@ -56,11 +56,19 @@ const panierStore = usePanierStore();
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1.5rem;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.panier-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.1),
+    0 4px 6px -1px rgba(0, 0, 0, 0.06);
 }
 
 .item-info {
@@ -69,83 +77,115 @@ const panierStore = usePanierStore();
 
 .item-info h3 {
   margin: 0;
-  font-size: 1.1rem;
-  color: #333;
+  font-size: 1.2rem;
+  color: #374151;
+  font-weight: 600;
 }
 
 .item-prix {
-  margin: 0.25rem 0 0;
-  color: #666;
-  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+  color: #4b5563;
+  font-size: 1rem;
 }
 
 .item-quantite {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin: 0 1rem;
+  gap: 0.75rem;
+  margin: 0 2rem;
 }
 
 .btn-qty {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  border: 2px solid #4b5563;
+  border-radius: 8px;
   background: white;
-  color: #333;
-  font-size: 1.2rem;
+  color: #4b5563;
+  font-size: 1.25rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .btn-qty:hover {
-  background: #f5f5f5;
+  background: #4b5563;
+  color: white;
+  transform: translateY(-1px);
 }
 
 .qty {
-  min-width: 30px;
+  min-width: 36px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #374151;
 }
 
 .item-total {
-  font-weight: bold;
-  color: #4a90e2;
-  margin: 0 1rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin: 0 2rem;
+  font-size: 1.2rem;
 }
 
 .btn-remove {
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: none;
-  color: #ff4444;
-  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  border: 2px solid #ef4444;
+  border-radius: 50%;
+  background: white;
+  color: #ef4444;
+  font-size: 1.1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .btn-remove:hover {
-  color: #cc0000;
+  background: #ef4444;
+  color: white;
+  transform: translateY(-1px);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .panier-item {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    padding: 1.25rem;
   }
 
   .item-info,
   .item-quantite,
   .item-total {
     margin: 0;
+  }
+
+  .item-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .item-prix {
+    font-size: 0.95rem;
+  }
+
+  .item-quantite {
+    justify-content: center;
+  }
+
+  .btn-qty {
+    width: 32px;
+    height: 32px;
+  }
+
+  .item-total {
+    font-size: 1.1rem;
   }
 
   .btn-remove {

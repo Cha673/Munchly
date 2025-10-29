@@ -55,69 +55,106 @@ const handleError = () => {
 
 <style scoped>
 .error-container {
-  min-height: 37.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
-  padding: 1rem;
+  min-height: calc(100vh - 80px);
+  padding: 2rem;
+  background-color: #f9fafb;
 }
 
 .error-content {
   background: white;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06);
   text-align: center;
-  max-width: 400px;
+  max-width: 480px;
   width: 100%;
 }
 
 .error-icon {
-  color: #764ba2;
-  margin-bottom: 1.5rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.error-icon:hover {
+  transform: scale(1.1);
 }
 
 .error-title {
-  color: #333;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  color: #374151;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
+  position: relative;
+}
+
+.error-title::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #4b5563;
+  border-radius: 2px;
 }
 
 .error-message {
-  color: #666;
-  margin-bottom: 2rem;
-  line-height: 1.5;
+  color: #4b5563;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
 }
 
 .error-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #4b5563;
   color: white;
   border: none;
-  padding: 0.8rem 2rem;
+  padding: 1rem 2.5rem;
   border-radius: 8px;
   font-weight: 500;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
 }
 
 .error-button:hover {
+  background-color: #374151;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
 }
 
-@media (max-width: 480px) {
-  .error-content {
+@media (max-width: 640px) {
+  .error-container {
     padding: 1.5rem;
   }
 
+  .error-content {
+    padding: 2rem;
+  }
+
+  .error-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
   .error-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
   }
 
   .error-message {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .error-button {
+    width: 100%;
+    padding: 0.875rem 2rem;
   }
 }
 </style>

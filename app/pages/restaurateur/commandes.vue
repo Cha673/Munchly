@@ -12,7 +12,6 @@ definePageMeta({
 import { ref, computed } from "vue";
 import { useUserStore } from "~/stores/users/user";
 import { usePanierStore } from "~/stores/panier/panier";
-import type { Order } from "~/types/orders/orders";
 import OrderItem from "~/components/OrderItem.vue";
 import CartItem from "~/components/CartItem.vue";
 
@@ -84,65 +83,114 @@ const toggleOrderDetails = (orderId: number) => {
 
 <style scoped>
 .commandes-container {
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
 }
 
 .header {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .header h1 {
+  font-size: 2.5rem;
+  color: #374151;
+  font-weight: 600;
+  position: relative;
   margin: 0;
-  color: #333;
+}
+
+.header h1::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #4b5563;
+  border-radius: 2px;
 }
 
 .error-message {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  background-color: #fef2f2;
+  color: #ef4444;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #fee2e2;
 }
 
 .loading {
   text-align: center;
-  padding: 2rem;
-  color: #666;
+  padding: 3rem;
+  color: #4b5563;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .orders-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .order-details {
-  background: #f5f5f5;
-  padding: 1.5rem;
-  margin: -0.5rem 0 1rem;
-  border-radius: 0 0 8px 8px;
+  background: white;
+  padding: 2rem;
+  margin: -0.5rem 0 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .order-details h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 1.5rem;
+  color: #374151;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e5e7eb;
+  text-align: center;
 }
 
 .items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .no-orders {
   text-align: center;
-  padding: 2rem;
-  color: #666;
-  background: #f5f5f5;
-  border-radius: 4px;
+  padding: 3rem;
+  color: #4b5563;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .commandes-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .order-details {
+    padding: 1.5rem;
+  }
+
+  .items-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

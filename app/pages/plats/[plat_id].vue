@@ -65,15 +65,20 @@ const addToCart = () => {
     <div v-if="loading" class="loading">Chargement du plat...</div>
 
     <div v-else-if="plat" class="plat-card">
-      <h1>{{ plat.nom }}</h1>
-      <p class="description">{{ plat.description }}</p>
-      <p class="prix">Prix : {{ plat.prix }} €</p>
+      <div class="plat-image">
+        <img :src="plat.imageUrl" :alt="plat.nom" />
+      </div>
+      <div class="plat-content">
+        <h1>{{ plat.nom }}</h1>
+        <p class="description">{{ plat.description }}</p>
+        <p class="prix">Prix : {{ plat.prix }} €</p>
 
-      <div class="actions">
-        <button @click="addToCart" class="btn-cart">Ajouter au panier</button>
-        <NuxtLink to="/user/panier" class="btn-view-cart">
-          Voir le panier ({{ panierStore.totalItems }})
-        </NuxtLink>
+        <div class="actions">
+          <button @click="addToCart" class="btn-cart">Ajouter au panier</button>
+          <NuxtLink to="/user/panier" class="btn-view-cart">
+            Voir le panier ({{ panierStore.totalItems }})
+          </NuxtLink>
+        </div>
       </div>
     </div>
 
@@ -86,94 +91,204 @@ const addToCart = () => {
 
 <style scoped>
 .plat-detail {
-  max-width: 800px;
-  margin: 2rem auto;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
   padding: 2rem;
 }
 
 .loading {
   text-align: center;
-  font-size: 1.2rem;
-  color: #666;
+  color: #4b5563;
+  font-size: 1.1rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .plat-card {
   background: white;
   border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.plat-image {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  background-color: #f3f4f6;
+}
+
+.plat-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.plat-image:hover img {
+  transform: scale(1.05);
+}
+
+.plat-content {
+  padding: 2.5rem;
 }
 
 .plat-card h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #374151;
+  font-weight: 600;
+  position: relative;
+}
+
+.plat-card h1::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #4b5563;
+  border-radius: 2px;
 }
 
 .description {
   font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  color: #4b5563;
+  margin: 1.5rem 0;
+  line-height: 1.8;
 }
 
 .prix {
-  font-size: 1.5rem;
-  color: #27ae60;
-  font-weight: bold;
-  margin: 1rem 0;
+  font-size: 1.75rem;
+  color: #4b5563;
+  font-weight: 600;
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+  border-top: 2px solid #e5e7eb;
+  border-bottom: 2px solid #e5e7eb;
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .btn-cart {
   padding: 1rem 2rem;
-  background: #667eea;
+  background-color: #4b5563;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.2s ease;
   flex: 1;
 }
 
 .btn-cart:hover {
-  background: #764ba2;
+  background-color: #374151;
+  transform: translateY(-1px);
 }
 
 .btn-view-cart {
   padding: 1rem 2rem;
-  background: #27ae60;
-  color: white;
+  background-color: white;
+  color: #4b5563;
   text-decoration: none;
+  border: 2px solid #4b5563;
   border-radius: 8px;
   font-size: 1.1rem;
+  font-weight: 500;
   text-align: center;
-  transition: background 0.3s;
+  transition: all 0.2s ease;
 }
 
 .btn-view-cart:hover {
-  background: #229954;
+  background-color: #4b5563;
+  color: white;
+  transform: translateY(-1px);
 }
 
 .not-found {
   text-align: center;
-  padding: 4rem 0;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .not-found h2 {
-  color: #999;
-  margin-bottom: 1rem;
+  color: #4b5563;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .not-found a {
-  color: #667eea;
+  color: #4b5563;
   text-decoration: none;
   font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #4b5563;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.not-found a:hover {
+  background-color: #4b5563;
+  color: white;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .plat-detail {
+    padding: 0;
+  }
+
+  .plat-image {
+    height: 300px;
+  }
+
+  .plat-content {
+    padding: 1.5rem;
+  }
+
+  .plat-card h1 {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .prix {
+    font-size: 1.5rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn-cart,
+  .btn-view-cart {
+    width: 100%;
+  }
 }
 </style>

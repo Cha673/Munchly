@@ -61,48 +61,282 @@ await fetchPlats();
 </script>
 
 <template>
-  <div>
+  <div class="restaurant-detail">
     <!-- En-tête du restaurant -->
-    <div v-if="restaurant" class="mb-8">
-      <div>
+    <div v-if="restaurant" class="restaurant-header">
+      <div class="hero-image">
         <img :src="restaurant.imageUrl" :alt="restaurant.nom" />
-        <div class="p-6">
-          <h1>{{ restaurant.nom }}</h1>
-          <p>{{ restaurant.lieu }}</p>
-          <p>{{ restaurant.description }}</p>
-        </div>
+        <div class="overlay"></div>
+      </div>
+      <div class="restaurant-info">
+        <h1>{{ restaurant.nom }}</h1>
+        <p class="location">{{ restaurant.lieu }}</p>
+        <p class="description">{{ restaurant.description }}</p>
       </div>
     </div>
 
-    <!-- Moteur de recherche -->
-    <div class="mb-4">
-      <input v-model="search" placeholder="Rechercher un plat..." />
-      <button @click="searchPlats">Rechercher</button>
-    </div>
+    <!-- Section des plats -->
+    <div class="menu-section">
+      <div class="search-container">
+        <div class="search-box">
+          <input
+            v-model="search"
+            placeholder="Rechercher un plat..."
+            @keyup.enter="searchPlats"
+          />
+          <button @click="searchPlats" class="search-button">Rechercher</button>
+        </div>
+      </div>
 
-    <!-- Liste des plats -->
-    <div>
-      <h2>Carte des plats</h2>
+      <h2>Notre Carte</h2>
 
-      <p v-if="loading">Chargement des plats...</p>
+      <div v-if="loading" class="loading-message">Chargement des plats...</div>
 
       <div v-else>
-        <NuxtLink
-          v-for="plat in displayedPlats"
-          :key="plat.id"
-          :to="`/plats/${plat.id}`"
-        >
-          <Card
-            :imageUrl="plat.imageUrl"
-            :nom="plat.nom"
-            :subtitle="plat.description + ' - ' + plat.prix + '€'"
-          />
-        </NuxtLink>
+        <div class="plats-grid">
+          <NuxtLink
+            v-for="plat in displayedPlats"
+            :key="plat.id"
+            :to="`/plats/${plat.id}`"
+            class="plat-link"
+          >
+            <Card
+              :imageUrl="plat.imageUrl"
+              :nom="plat.nom"
+              :subtitle="plat.description + ' - ' + plat.prix + '€'"
+            />
+          </NuxtLink>
+        </div>
 
-        <p v-if="displayedPlats.length === 0">
+        <p v-if="displayedPlats.length === 0" class="no-results">
           Aucun plat disponible pour le moment
         </p>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.restaurant-detail {
+  background-color: #f9fafb;
+  min-height: calc(100vh - 80px);
+}
+
+.restaurant-header {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.hero-image {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-image .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.7)
+  );
+}
+
+.restaurant-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.restaurant-info h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-info .location {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.restaurant-info .description {
+  font-size: 1rem;
+  opacity: 0.8;
+  max-width: 800px;
+}
+
+.menu-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.menu-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #374151;
+  font-weight: 600;
+  margin: 3rem 0;
+  position: relative;
+}
+
+.menu-section h2::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #4b5563;
+  border-radius: 2px;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.search-box {
+  display: flex;
+  gap: 1rem;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.search-box input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #4b5563;
+  box-shadow: 0 0 0 3px rgb(75 85 99 / 0.1);
+}
+
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
+.search-button {
+  background-color: #4b5563;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background-color: #374151;
+}
+
+.plats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 250px));
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+.plat-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.loading-message {
+  text-align: center;
+  color: #4b5563;
+  font-size: 1.1rem;
+  padding: 2rem;
+}
+
+.no-results {
+  text-align: center;
+  color: #4b5563;
+  font-size: 1.1rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .hero-image {
+    height: 300px;
+  }
+
+  .restaurant-info h1 {
+    font-size: 2rem;
+  }
+
+  .plats-grid {
+    grid-template-columns: repeat(2, minmax(0, 300px));
+    gap: 1.5rem;
+  }
+
+  .search-box {
+    flex-direction: column;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    height: 250px;
+  }
+
+  .restaurant-info {
+    padding: 1.5rem;
+  }
+
+  .restaurant-info h1 {
+    font-size: 1.75rem;
+  }
+
+  .menu-section {
+    padding: 0 1.5rem 3rem;
+  }
+
+  .menu-section h2 {
+    font-size: 1.75rem;
+    margin: 2rem 0;
+  }
+
+  .plats-grid {
+    grid-template-columns: minmax(0, 400px);
+  }
+}
+</style>
