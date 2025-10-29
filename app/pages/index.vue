@@ -1,35 +1,34 @@
 <!-- Page d'accueil du site 
- Fonctionnalités : 
- - mène vers le listing des restaurants mais demande d'être connecté 
- - permet de se connecter/déconnecter -->
+Fonctionnalités : 
+- mène vers le listing des restaurants mais demande d'être connecté 
+- permet de se connecter/déconnecter -->
 <script setup lang="ts">
+import Card from "~/components/Card.vue";
+import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 useHead({
-  title: "Commandez vos repas en ligne - Munchly",
+  title: t("meta.homepage_title"),
   meta: [
     {
       name: "description",
-      content:
-        "Découvrez les meilleurs restaurants près de chez vous.Commandez en ligne et faites-vous livrer vos plats préférés rapidement.",
+      content: t("meta.homepage_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Commandez vos repas en ligne - Munchly",
-  ogTitle: "Commandez vos repas en ligne - Munchly",
-  description:
-    "Découvrez les meilleurs restaurants près de chez vous. Commandez en ligne et faites-vous livrer vos plats préférés rapidement.",
-  ogDescription:
-    "Découvrez les meilleurs restaurants près de chez vous. Commandez en ligne et faites-vous livrer vos plats préférés rapidement.",
+  title: t("meta.homepage_title"),
+  ogTitle: t("meta.homepage_title"),
+  description: t("meta.homepage_description"),
+  ogDescription: t("meta.homepage_description"),
   ogImage: "https://votre-domaine.com/images/og-home.jpg",
   twitterCard: "summary_large_image",
 });
 definePageMeta({
   layout: "home",
 });
-
-import Card from "~/components/Card.vue";
-import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
 
 interface Restaurant {
   id: number;
@@ -46,15 +45,14 @@ const restaurants = computed(() => restaurantsStore.getFeaturedRestaurants);
     <!-- Bannière -->
     <div class="banner">
       <div class="banner-content">
-        <h1>Découvrez les meilleurs restaurants</h1>
-        <p>Des plats délicieux livrés directement chez vous</p>
-        <NuxtLink to="/login" class="cta-button"> Se connecter </NuxtLink>
+        <h1>{{ t("website_name") }}</h1>
+        <NuxtLink to="/login" class="cta-button"> {{ t("login") }} </NuxtLink>
       </div>
     </div>
 
     <!-- Section Restaurants -->
     <section class="featured-restaurants">
-      <h2>Restaurants populaires</h2>
+      <h2>{{ t("popular_resto") }}</h2>
       <div class="restaurants-grid">
         <Card
           v-for="restaurant in restaurants"
@@ -66,7 +64,7 @@ const restaurants = computed(() => restaurantsStore.getFeaturedRestaurants);
       </div>
       <div class="view-all">
         <NuxtLink to="/login" class="view-all-button">
-          Se connecter pour voir tous les restaurants
+          {{ t("login") }}
         </NuxtLink>
       </div>
     </section>

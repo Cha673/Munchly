@@ -4,38 +4,39 @@
  - listing des commandes
  - affichage des détails des commandes -->
 <script setup lang="ts">
+import { ref, computed } from "vue";
+import { useUserStore } from "~/stores/users/user";
+import { usePanierStore } from "~/stores/panier/panier";
+import OrderItem from "~/components/OrderItem.vue";
+import CartItem from "~/components/CartItem.vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 definePageMeta({
   layout: "restaurateur",
   middleware: ["auth-restaurateur"],
 });
 
 useHead({
-  title: "Gestion des commandes - Espace restaurateur",
+  title: t("orders.restaurateur_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Gérez les commandes de votre restaurant, consultez les détails et suivez leur traitement en temps réel.",
+      content: t("orders.restaurateur_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Gestion des commandes - Espace restaurateur",
-  ogTitle: "Gestion des commandes - Espace restaurateur",
-  description:
-    "Gérez les commandes de votre restaurant, consultez les détails et suivez leur traitement en temps réel.",
-  ogDescription:
-    "Gérez les commandes de votre restaurant, consultez les détails et suivez leur traitement en temps réel.",
+  title: t("orders.restaurateur_title"),
+  ogTitle: t("orders.restaurateur_title"),
+  description: t("orders.restaurateur_description"),
+  ogDescription: t("orders.restaurateur_description"),
   ogImage: "/images/commandes-resto.jpg",
   twitterCard: "summary_large_image",
 });
-import { ref, computed } from "vue";
-import { useUserStore } from "~/stores/users/user";
-import { usePanierStore } from "~/stores/panier/panier";
-import OrderItem from "~/components/OrderItem.vue";
-import CartItem from "~/components/CartItem.vue";
 
 const userStore = useUserStore();
 const panierStore = usePanierStore();
@@ -66,7 +67,7 @@ const toggleOrderDetails = (orderId: number) => {
 <template>
   <div class="commandes-container">
     <div class="header">
-      <h1>Mes Commandes</h1>
+      <h1>{{ t("orders.my_orders") }}</h1>
     </div>
 
     <!-- Liste des commandes -->
@@ -83,7 +84,7 @@ const toggleOrderDetails = (orderId: number) => {
 
       <!-- Détails de la commande -->
       <div v-if="expandedOrderId" class="order-details">
-        <h3>Détails de la commande #{{ expandedOrderId }}</h3>
+        <h3>{{ t("orders.order_details") }} #{{ expandedOrderId }}</h3>
         <div class="items-grid">
           <CartItem
             v-for="item in orders.find((o) => o.id === expandedOrderId)
@@ -97,7 +98,7 @@ const toggleOrderDetails = (orderId: number) => {
       </div>
 
       <div v-if="!orders.length" class="no-orders">
-        Aucune commande disponible
+        {{ t("orders.no_orders") }}
       </div>
     </div>
   </div>

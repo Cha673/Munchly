@@ -4,30 +4,30 @@
 <script setup lang="ts">
 import { useUserStore } from "~/stores/users/user";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 definePageMeta({
   layout: "admin",
   middleware: ["auth-admin"],
 });
 useHead({
-  title: "Ajouter un restaurateur - Administration Munchly",
+  title: t("meta.addrestaurant_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Créez un nouveau compte restaurateur et configurez ses accès à la plateforme Munchly.",
+      content: t("meta.addrestaurant_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Ajouter un restaurateur - Administration Munchly",
-  ogTitle: "Ajouter un restaurateur - Administration Munchly",
-  description:
-    "Créez un nouveau compte restaurateur et configurez ses accès à la plateforme Munchly.",
-  ogDescription:
-    "Créez un nouveau compte restaurateur et configurez ses accès à la plateforme Munchly.",
+  title: t("meta.addrestaurant_title"),
+  ogTitle: t("meta.addrestaurant_title"),
+  description: t("meta.addrestaurant_description"),
+  ogDescription: t("meta.addrestaurant_description"),
   ogImage: "/images/add-restaurateur.jpg",
   twitterCard: "summary_large_image",
 });
@@ -57,33 +57,33 @@ const handleAddRestaurateur = async () => {
 <template>
   <div class="auth-container">
     <div class="auth-box">
-      <h1>Ajouter un Restaurateur</h1>
+      <h1>{{ t("admin.add_resto") }}</h1>
 
       <div class="form-group">
         <div class="input-group">
-          <label for="name">Nom</label>
+          <label for="name">{{ t("auth.nom_label") }}</label>
           <input
             id="name"
             v-model="newUser.name"
             type="text"
-            placeholder="Nom du restaurateur"
+            placeholder="{{ t('admin.name_resto') }}"
             required
           />
         </div>
 
         <div class="input-group">
-          <label for="email">Email</label>
+          <label for="email">{{ t("auth.email_label") }}</label>
           <input
             id="email"
             v-model="newUser.email"
             type="email"
-            placeholder="Email du restaurateur"
+            placeholder="{{ t('admin.mail_resto') }}"
             required
           />
         </div>
 
         <div class="input-group">
-          <label for="password">Mot de passe</label>
+          <label for="password">{{ t("auth.password_label") }}</label>
           <input
             id="password"
             v-model="newUser.password"
@@ -94,12 +94,12 @@ const handleAddRestaurateur = async () => {
         </div>
 
         <button type="submit" @click.prevent="handleAddRestaurateur">
-          Ajouter le restaurateur
+          {{ t("admin.add_resto") }}
         </button>
       </div>
 
       <p class="auth-link">
-        <NuxtLink to="/admin">Retour au dashboard</NuxtLink>
+        <NuxtLink to="/admin">{{ t("auth.back_dashboard") }}</NuxtLink>
       </p>
     </div>
   </div>

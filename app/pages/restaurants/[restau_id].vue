@@ -13,6 +13,9 @@ import { ref, computed, watchEffect } from "vue";
 import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
 import type { Plat } from "~/types/plats/plats";
 import Card from "~/components/Card.vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const route = useRoute();
 const restaurantId = Number(route.params.restau_id);
@@ -30,21 +33,30 @@ const loading = ref(false);
 watchEffect(() => {
   if (restaurant.value) {
     useHead({
-      title: `${restaurant.value.nom} - Menu et commande en ligne`,
+      title: t("restaurants.details.title", { name: restaurant.value.nom }),
       meta: [
         {
           name: "description",
-          content: `Découvrez le menu complet de ${restaurant.value.nom}. ${restaurant.value.description}. Commandez en ligne pour une livraison rapide.`,
+          content: t("restaurants.details.description", {
+            name: restaurant.value.nom,
+            description: restaurant.value.description,
+          }),
         },
         { name: "robots", content: "noindex, nofollow" },
       ],
     });
 
     useSeoMeta({
-      title: `${restaurant.value.nom} - Menu et commande en ligne`,
-      ogTitle: `${restaurant.value.nom} - Menu et commande en ligne`,
-      description: `Découvrez le menu complet de ${restaurant.value.nom}. ${restaurant.value.description}. Commandez en ligne pour une livraison rapide.`,
-      ogDescription: `Découvrez le menu complet de ${restaurant.value.nom}. ${restaurant.value.description}. Commandez en ligne pour une livraison rapide.`,
+      title: t("restaurants.details.title", { name: restaurant.value.nom }),
+      ogTitle: t("restaurants.details.title", { name: restaurant.value.nom }),
+      description: t("restaurants.details.description", {
+        name: restaurant.value.nom,
+        description: restaurant.value.description,
+      }),
+      ogDescription: t("restaurants.details.description", {
+        name: restaurant.value.nom,
+        description: restaurant.value.description,
+      }),
       ogImage: restaurant.value.imageUrl,
       twitterCard: "summary_large_image",
     });
@@ -100,16 +112,20 @@ await fetchPlats();
         <div class="search-box">
           <input
             v-model="search"
-            placeholder="Rechercher un plat..."
+            :placeholder="t('restaurants.dishes_search_placeholder')"
             @keyup.enter="searchPlats"
           />
-          <button @click="searchPlats" class="search-button">Rechercher</button>
+          <button @click="searchPlats" class="search-button">
+            {{ t("restaurants.search_button") }}
+          </button>
         </div>
       </div>
 
-      <h2>Notre Carte</h2>
+      <h2>{{ t("restaurants.menu_title") }}</h2>
 
-      <div v-if="loading" class="loading-message">Chargement des plats...</div>
+      <div v-if="loading" class="loading-message">
+        {{ t("restaurants.loading_dishes") }}
+      </div>
 
       <div v-else>
         <div class="plats-grid">
@@ -128,7 +144,7 @@ await fetchPlats();
         </div>
 
         <p v-if="displayedPlats.length === 0" class="no-results">
-          Aucun plat disponible pour le moment
+          {{ t("restaurants.no_dishes") }}
         </p>
       </div>
     </div>

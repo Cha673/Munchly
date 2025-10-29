@@ -1,35 +1,35 @@
 <!-- Page d'un resturateur pour ajouter un plat -->
 <script setup lang="ts">
+import { ref } from "vue";
+import { useUserStore } from "~/stores/users/user";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 definePageMeta({
   layout: "restaurateur",
   middleware: ["auth-restaurateur"],
 });
 
 useHead({
-  title: "Ajouter un plat - Espace restaurateur",
+  title: t("meta.adddish_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Enrichissez votre menu en ajoutant de nouveaux plats. Personnalisez les descriptions, prix et images de vos créations culinaires.",
+      content: t("adddish_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Ajouter un plat - Espace restaurateur",
-  ogTitle: "Ajouter un plat - Espace restaurateur",
-  description:
-    "Enrichissez votre menu en ajoutant de nouveaux plats. Personnalisez les descriptions, prix et images de vos créations culinaires.",
-  ogDescription:
-    "Enrichissez votre menu en ajoutant de nouveaux plats. Personnalisez les descriptions, prix et images de vos créations culinaires.",
+  title: t("meta.adddish_title"),
+  ogTitle: t("meta.adddish_title"),
+  description: t("adddish_description"),
+  ogDescription: t("adddish_description"),
   ogImage: "/images/munchly-logo.jpg",
   twitterCard: "summary_large_image",
 });
-
-import { ref } from "vue";
-import { useUserStore } from "~/stores/users/user";
 
 const userStore = useUserStore();
 const currentUser = computed(() => userStore.currentUser);
@@ -93,7 +93,7 @@ const addPlat = async () => {
 <template>
   <div class="add-plat-container">
     <div class="header">
-      <h1>Ajouter un nouveau plat</h1>
+      <h1>{{ t("dishes.add_dish") }}</h1>
     </div>
 
     <div v-if="error" class="error-message">
@@ -103,7 +103,7 @@ const addPlat = async () => {
     <!-- Formulaire d'ajout de plat -->
     <form @submit.prevent="addPlat" class="plat-form">
       <div class="form-group">
-        <label>Nom du plat</label>
+        <label>{{ t("dishes.name_dish") }}</label>
         <input
           v-model="newPlat.nom"
           required
@@ -112,16 +112,16 @@ const addPlat = async () => {
       </div>
 
       <div class="form-group">
-        <label>Description</label>
+        <label>{{ t("dishes.description_dish") }}</label>
         <textarea
           v-model="newPlat.description"
           required
-          placeholder="Décrivez les ingrédients et la préparation"
+          :placeholder="t('dishes.description_dish_two')"
         ></textarea>
       </div>
 
       <div class="form-group">
-        <label>Prix (€)</label>
+        <label>{{ t("dishes.price") }} (€)</label>
         <input
           v-model="newPlat.prix"
           type="number"
@@ -132,7 +132,7 @@ const addPlat = async () => {
       </div>
 
       <div class="form-group">
-        <label>URL de l'image</label>
+        <label>{{ t("url") }}</label>
         <input
           v-model="newPlat.imageUrl"
           type="url"
@@ -143,10 +143,10 @@ const addPlat = async () => {
 
       <div class="form-buttons">
         <NuxtLink to="/restaurateur/plats" class="cancel-button">
-          Annuler
+          {{ t("common.cancel") }}
         </NuxtLink>
         <button type="submit" class="submit-button" :disabled="loading">
-          {{ loading ? "Ajout en cours..." : "Ajouter le plat" }}
+          {{ loading ? t("common.loading") : t("dishes.add_dish") }}
         </button>
       </div>
     </form>

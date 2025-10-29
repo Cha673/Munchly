@@ -1,32 +1,32 @@
 <!-- Page de connexion du site -->
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
+import { useUserStore } from "~/stores/users/user";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 useHead({
-  title: "Connexion - Munchly",
+  title: t("meta.login_title"),
   meta: [
     {
       name: "description",
-      content:
-        "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
+      content: t("meta.login_description"),
     },
     { name: "robots", content: "noindex, nofollow" },
   ],
 });
 
 useSeoMeta({
-  title: "Connexion - Munchly",
-  ogTitle: "Connexion - Munchly",
-  description:
-    "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
-  ogDescription:
-    "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
+  title: t("meta.login_title"),
+  ogTitle: t("meta.login_title"),
+  description: t("meta.login_description"),
+  ogDescription: t("meta.login_description"),
 });
 
 definePageMeta({
   ssr: false,
 });
 
-import { onMounted, ref } from "vue";
-import { useUserStore } from "~/stores/users/user";
 const userStore = useUserStore();
 
 // Vérifier si l'utilisateur est connecté au chargement de la page
@@ -77,27 +77,31 @@ const handleLogin = () => {
 <template>
   <div class="auth-container">
     <div class="auth-box">
-      <h1>Connexion</h1>
+      <h1>{{ t("login") }}</h1>
 
       <div class="form-group">
         <div class="input-group">
-          <label>Email</label>
-          <input v-model="email" type="email" placeholder="exemple@mail.com" />
+          <label>{{ t("auth.email_label") }}</label>
+          <input
+            v-model="email"
+            type="email"
+            placeholder="{{ t('auth.email_placeholder') }}"
+          />
         </div>
 
         <div class="input-group">
-          <label>Mot de passe</label>
+          <label>{{ t("auth.password_label") }}</label>
           <input v-model="password" type="password" placeholder="••••••••" />
         </div>
 
-        <button @click="handleLogin">Se connecter</button>
+        <button @click="handleLogin">{{ t("login") }}</button>
       </div>
 
       <p v-if="error" class="error-message">{{ error }}</p>
 
       <p class="auth-link">
-        Pas encore de compte ?
-        <NuxtLink to="/register">S'inscrire</NuxtLink>
+        {{ t("auth.no_account") }}
+        <NuxtLink to="/register">{{ t("auth.register") }}</NuxtLink>
       </p>
     </div>
   </div>

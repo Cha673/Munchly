@@ -6,25 +6,26 @@
  - permet de valider le panier et de le passer en tant que commande
  - accéder à la liste des commandes avec un bouton -->
 <script setup lang="ts">
+import { usePanierStore } from "~/stores/panier/panier";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 useHead({
-  title: "Mon panier - Munchly",
+  title: t("users.card_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Consultez votre panier, modifiez les quantités et validez votre commande en quelques clics.",
+      content: t("users.card_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Mon panier - Munchly",
-  ogTitle: "Mon panier - Munchly",
-  description:
-    "Consultez votre panier, modifiez les quantités et validez votre commande en quelques clics.",
-  ogDescription:
-    "Consultez votre panier, modifiez les quantités et validez votre commande en quelques clics.",
+  title: t("users.card_title"),
+  ogTitle: t("users.card_title"),
+  description: t("users.card_description"),
+  ogDescription: t("users.card_description"),
   ogImage: "/images/panier.jpg",
   twitterCard: "summary_large_image",
 });
@@ -33,8 +34,6 @@ definePageMeta({
   layout: "user",
   middleware: ["auth-user"],
 });
-
-import { usePanierStore } from "~/stores/panier/panier";
 
 const panierStore = usePanierStore();
 
@@ -45,13 +44,13 @@ const validerCommande = () => {
 
 <template>
   <div class="panier-page">
-    <h1>Mon Panier</h1>
+    <h1>{{ t("users.card") }}</h1>
 
     <div v-if="panierStore.isPanierVide" class="panier-vide">
-      <p>Votre panier est vide</p>
-      <NuxtLink to="/restaurants" class="btn"
-        >Découvrir nos restaurants</NuxtLink
-      >
+      <p>{{ t("users.no_card") }}</p>
+      <NuxtLink to="/restaurants" class="btn">{{
+        t("users.list_resto")
+      }}</NuxtLink>
     </div>
 
     <div v-else>
@@ -74,10 +73,10 @@ const validerCommande = () => {
 
         <div class="actions">
           <button @click="panierStore.clearPanier()" class="btn-clear">
-            Vider le panier
+            {{ t("users.delete_card") }}
           </button>
           <button @click="validerCommande" class="btn-valider">
-            Valider la commande
+            {{ t("users.validate_command") }}
           </button>
         </div>
       </div>
@@ -85,7 +84,7 @@ const validerCommande = () => {
 
     <div class="historique-section">
       <NuxtLink to="/user/commandes" class="btn-historique">
-        Voir l'historique de mes commandes
+        {{ t("users.historique_command") }}
       </NuxtLink>
     </div>
   </div>

@@ -3,36 +3,35 @@
  - Modification des informations personnelles (nom, email, mot de passe) -->
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { useUserStore } from "~/stores/users/user";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 definePageMeta({
   layout: "user",
   middleware: ["auth-user"],
 });
 
 useHead({
-  title: "Modifier mon profil - Munchly",
+  title: t("meta.page_update_profile"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Mettez à jour vos informations personnelles, modifiez votre email et gérez votre mot de passe en toute sécurité.",
+      content: t("meta.page_update_profile_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Modifier mon profil - Munchly",
-  ogTitle: "Modifier mon profil - Munchly",
-  description:
-    "Mettez à jour vos informations personnelles, modifiez votre email et gérez votre mot de passe en toute sécurité.",
-  ogDescription:
-    "Mettez à jour vos informations personnelles, modifiez votre email et gérez votre mot de passe en toute sécurité.",
+  title: t("meta.page_update_profile"),
+  ogTitle: t("meta.page_update_profile"),
+  description: t("meta.page_update_profile_description"),
+  ogDescription: t("meta.page_update_profile_description"),
   ogImage: "/images/munchly-logo.jpg",
   twitterCard: "summary_large_image",
 });
-
-import { ref } from "vue";
-import { useUserStore } from "~/stores/users/user";
 
 const userStore = useUserStore();
 
@@ -67,25 +66,37 @@ const updateProfile = () => {
 <template>
   <div class="auth-container">
     <div class="auth-box">
-      <h1>Mettre à jour mon profil</h1>
+      <h1>{{ t("users.update_profil") }}</h1>
 
       <div class="form-group">
         <div class="input-group">
-          <label>Nom</label>
-          <input v-model="name" type="text" placeholder="Votre nom" />
+          <label>{{ t("auth.nom_label") }}</label>
+          <input
+            v-model="name"
+            type="text"
+            placeholder="
+            t('auth.nom_label')
+          "
+          />
         </div>
 
         <div class="input-group">
-          <label>Email</label>
-          <input v-model="email" type="email" placeholder="votre@email.com" />
+          <label>{{ t("auth.email_label") }}</label>
+          <input
+            v-model="email"
+            type="email"
+            placeholder="
+            t('auth.email')
+          "
+          />
         </div>
 
         <div class="input-group">
-          <label>Mot de passe</label>
+          <label>{{ t("auth.password_label") }}</label>
           <input v-model="password" type="password" placeholder="••••••••" />
         </div>
 
-        <button @click="updateProfile">Enregistrer</button>
+        <button @click="updateProfile">{{ t("common.save") }}</button>
       </div>
 
       <p v-if="error" class="error-message">{{ error }}</p>
@@ -93,7 +104,7 @@ const updateProfile = () => {
 
       <p class="auth-link">
         <NuxtLink to="/user/commandes">
-          Voir l'historique de mes commandes
+          {{ t("users.historique_commandes") }}
         </NuxtLink>
       </p>
     </div>

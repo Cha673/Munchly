@@ -1,33 +1,33 @@
 <!-- Page de gestion du restaurant pour le restaurateur -->
 <script setup lang="ts">
+import { ref, computed } from "vue";
+import { useUserStore } from "~/stores/users/user";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 definePageMeta({
   layout: "restaurateur",
   middleware: ["auth-restaurateur"],
 });
 useHead({
-  title: "Mon profil restaurateur - Munchly",
+  title: t("meta.profil_resto_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Gérez votre profil restaurateur, mettez à jour vos informations et paramètres de compte.",
+      content: t("meta.profil_resto_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Mon profil restaurateur - Munchly",
-  ogTitle: "Mon profil restaurateur - Munchly",
-  description:
-    "Gérez votre profil restaurateur, mettez à jour vos informations et paramètres de compte.",
-  ogDescription:
-    "Gérez votre profil restaurateur, mettez à jour vos informations et paramètres de compte.",
+  title: t("meta.profil_resto_title"),
+  ogTitle: t("meta.profil_resto_title"),
+  description: t("meta.profil_resto_description"),
+  ogDescription: t("meta.profil_resto_description"),
   ogImage: "/images/profil-resto.jpg",
   twitterCard: "summary_large_image",
 });
-import { ref, computed } from "vue";
-import { useUserStore } from "~/stores/users/user";
 
 const userStore = useUserStore();
 const currentUser = computed(() => userStore.currentUser);
@@ -109,29 +109,29 @@ const updateProfile = async () => {
 <template>
   <div class="auth-container">
     <div class="auth-box">
-      <h1>Mon Profil Restaurateur</h1>
+      <h1>{{ t("restaurants.profil") }}</h1>
 
       <!-- Mode lecture -->
       <div v-if="!isEditing">
         <div class="form-group">
           <div class="input-group">
-            <label>Nom</label>
+            <label>{{ t("auth.nom_label") }}</label>
             <div class="info-display">{{ currentUser?.name }}</div>
           </div>
 
           <div class="input-group">
-            <label>Email</label>
+            <label>{{ t("auth.email_label") }}</label>
             <div class="info-display">{{ currentUser?.email }}</div>
           </div>
 
-          <button @click="startEditing">Modifier le profil</button>
+          <button @click="startEditing">{{ t("auth.update_profil") }}</button>
         </div>
       </div>
 
       <!-- Mode édition -->
       <div v-else class="form-group">
         <div class="input-group">
-          <label>Nom</label>
+          <label>{{ t("auth.nom_label") }}</label>
           <input
             v-model="formData.name"
             type="text"
@@ -141,7 +141,7 @@ const updateProfile = async () => {
         </div>
 
         <div class="input-group">
-          <label>Email</label>
+          <label>{{ t("auth.email_label") }}</label>
           <input
             v-model="formData.email"
             type="email"
@@ -151,26 +151,28 @@ const updateProfile = async () => {
         </div>
 
         <div class="input-group">
-          <label>Nouveau mot de passe (optionnel)</label>
+          <label>{{ t("auth.update_password") }}</label>
           <input
             v-model="formData.password"
             type="password"
-            placeholder="Laissez vide pour ne pas changer"
+            placeholder="{{ t('auth.password_placeholder') }}"
           />
         </div>
 
         <div class="input-group" v-if="formData.password">
-          <label>Confirmer le mot de passe</label>
+          <label>{{ t("auth.confirm_password") }}</label>
           <input
             v-model="formData.confirmPassword"
             type="password"
-            placeholder="Confirmez le nouveau mot de passe"
+            placeholder="{{ t('auth.confirm_password') }}"
           />
         </div>
 
-        <button @click.prevent="updateProfile">Enregistrer</button>
+        <button @click.prevent="updateProfile">{{ t("common.save") }}</button>
         <p class="auth-link">
-          <a href="#" @click.prevent="cancelEditing">Annuler</a>
+          <a href="#" @click.prevent="cancelEditing">{{
+            t("common.cancel")
+          }}</a>
         </p>
       </div>
 

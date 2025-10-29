@@ -1,32 +1,32 @@
 <!-- Page d'inscription du sites -->
 <script setup lang="ts">
+import { useUserStore } from "~/stores/users/user";
+import type { User } from "~/types/utilisateurs/users";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 useHead({
-  title: "Inscription - Munchly",
+  title: t("meta.inscription_title"),
   meta: [
     {
       name: "description",
-      content:
-        "Créez votre compte gratuitement et commencez à commander dans vos restaurants préférés en quelques clics.",
+      content: t("meta.inscription_description"),
     },
     { name: "robots", content: "noindex, nofollow" },
   ],
 });
 
 useSeoMeta({
-  title: "Inscription - Munchly",
-  ogTitle: "Inscription - Munchly",
-  description:
-    "Créez votre compte gratuitement et commencez à commander dans vos restaurants préférés en quelques clics.",
-  ogDescription:
-    "Créez votre compte gratuitement et commencez à commander dans vos restaurants préférés en quelques clics.",
+  title: t("meta.inscription_title"),
+  ogTitle: t("meta.inscription_title"),
+  description: t("meta.inscription_description"),
+  ogDescription: t("meta.inscription_description"),
 });
 definePageMeta({
   ssr: false,
   middlewares: "auth",
 });
 
-import { useUserStore } from "~/stores/users/user";
-import type { User } from "~/types/utilisateurs/users";
 const userStore = useUserStore();
 
 const name = ref("");
@@ -43,17 +43,6 @@ const handleRegister = async () => {
       error.value = "Tous les champs sont obligatoires";
       return;
     }
-
-    // if (password.value.length < 6) {
-    //   error.value = "Le mot de passe doit contenir au moins 6 caractères";
-    //   return;
-    // }
-
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email.value)) {
-    //   error.value = "Format d'email invalide";
-    //   return;
-    // }
 
     // Création du nouvel utilisateur
     const newUser: User = {
@@ -86,25 +75,29 @@ const handleRegister = async () => {
 <template>
   <div class="auth-container">
     <div class="auth-box">
-      <h1>Créer un compte</h1>
+      <h1>{{ t("auth.create_account") }}</h1>
 
       <div class="form-group">
         <div class="input-group">
-          <label>Nom complet</label>
+          <label>{{ t("auth.nom_label") }}</label>
           <input v-model="name" type="text" placeholder="John Doe" />
         </div>
 
         <div class="input-group">
-          <label>Email</label>
-          <input v-model="email" type="email" placeholder="exemple@mail.com" />
+          <label>{{ t("auth.email_label") }}</label>
+          <input
+            v-model="email"
+            type="email"
+            placeholder=" t('auth.email_placeholder')"
+          />
         </div>
 
         <div class="input-group">
-          <label>Mot de passe</label>
+          <label>{{ t("auth.password_label") }}</label>
           <input v-model="password" type="password" placeholder="••••••••" />
         </div>
 
-        <button @click="handleRegister">S'inscrire</button>
+        <button @click="handleRegister">{{ t("auth.create_account") }}</button>
       </div>
 
       <p v-if="error" class="error-message">{{ error }}</p>

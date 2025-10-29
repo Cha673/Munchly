@@ -14,6 +14,10 @@ import { useRoute } from "#app";
 import type { Plat } from "~/types/plats/plats";
 import { usePanierStore } from "~/stores/panier/panier";
 import { navigateTo } from "#app";
+import { useI18n } from "vue-i18n";
+import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
+
+const { t } = useI18n();
 
 const route = useRoute();
 const panierStore = usePanierStore();
@@ -35,21 +39,21 @@ watchEffect(() => {
   if (plat.value) {
     if (plat.value) {
       useHead({
-        title: `${plat.value.nom} - Menu et commande en ligne`,
+        title: `${plat.value.nom} - {{ t("restaurants.details.title") }}`,
         meta: [
           {
             name: "description",
-            content: `Découvrez le menu complet de ${plat.value.nom}. ${plat.value.description}. Commandez en ligne pour une livraison rapide.`,
+            content: `{{t("restaurants.details.description")}} ${plat.value.nom}. ${plat.value.description}. {{t("restaurants.details.description2")}}`,
           },
           { name: "robots", content: "noindex, nofollow" },
         ],
       });
 
       useSeoMeta({
-        title: `${plat.value.nom} - Menu et commande en ligne`,
-        ogTitle: `${plat.value.nom} - Menu et commande en ligne`,
-        description: `Découvrez le menu complet de ${plat.value.nom}. ${plat.value.description}. Commandez en ligne pour une livraison rapide.`,
-        ogDescription: `Découvrez le menu complet de ${plat.value.nom}. ${plat.value.description}. Commandez en ligne pour une livraison rapide.`,
+        title: `${plat.value.nom} - {{ t("restaurants.details.title") }}`,
+        ogTitle: `${plat.value.nom} - {{ t("restaurants.details.title") }}`,
+        description: `{{t("restaurants.details.description")}} ${plat.value.nom}. ${plat.value.description}. {{t("restaurants.details.description2")}}`,
+        ogDescription: `{{t("restaurants.details.description")}} ${plat.value.nom}. ${plat.value.description}. {{t("restaurants.details.description2")}}`,
         ogImage: plat.value.imageUrl,
         twitterCard: "summary_large_image",
       });
@@ -88,7 +92,7 @@ const addToCart = () => {
 
 <template>
   <div class="plat-detail">
-    <div v-if="loading" class="loading">Chargement du plat...</div>
+    <div v-if="loading" class="loading">{{ t("dishes.loading") }}</div>
 
     <div v-else-if="plat" class="plat-card">
       <div class="plat-image">
@@ -100,17 +104,19 @@ const addToCart = () => {
         <p class="prix">Prix : {{ plat.prix }} €</p>
 
         <div class="actions">
-          <button @click="addToCart" class="btn-cart">Ajouter au panier</button>
+          <button @click="addToCart" class="btn-cart">
+            {{ t("dishes.add_to_cart") }}
+          </button>
           <NuxtLink to="/user/panier" class="btn-view-cart">
-            Voir le panier ({{ panierStore.totalItems }})
+            {{ t("dishes.view_cart") }} ({{ panierStore.totalItems }})
           </NuxtLink>
         </div>
       </div>
     </div>
 
     <div v-else class="not-found">
-      <h2>Plat introuvable</h2>
-      <NuxtLink to="/plats">Retour aux plats</NuxtLink>
+      <h2>{{ t("restaurants.no_dish") }}</h2>
+      <NuxtLink to="/plats">{{ t("restaurants.back_dishes") }}</NuxtLink>
     </div>
   </div>
 </template>

@@ -11,20 +11,22 @@ defineProps<{
 const emit = defineEmits<{
   toggleDetails: [id: number];
 }>();
+
+const { t } = useI18n();
 </script>
 
 <template>
   <div class="order-item">
     <div class="order-header">
       <div class="order-info">
-        <h3>Commande #{{ id }}</h3>
-        <p class="client-name">Client: {{ clientName }}</p>
+        <h3>{{ t("header_restaurateur_orders") }} #{{ id }}</h3>
+        <p class="client-name">{{ t("common.client") }}: {{ clientName }}</p>
         <p class="order-date">{{ date }}</p>
       </div>
       <div class="order-actions">
         <span class="total">{{ total.toFixed(2) }}€</span>
         <button class="details-button" @click="emit('toggleDetails', id)">
-          Voir détails
+          {{ t("common.view_details") }}
         </button>
       </div>
     </div>

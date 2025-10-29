@@ -5,36 +5,35 @@
  - mène vers la page d'ajout d'un plat au clique sur le bouton correspondant -->
 
 <script setup lang="ts">
+import { ref, computed, onMounted } from "vue";
+import { useUserStore } from "~/stores/users/user";
+import type { Plat } from "~/types/plats/plats";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 definePageMeta({
   layout: "restaurateur",
   middleware: ["auth-restaurateur"],
 });
 
 useHead({
-  title: "Gérer mes plats - Espace restaurateur",
+  title: t("meta.dish_resto_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Gérez vos plats, ajoutez de nouveaux plats et maintenez votre menu à jour. Espace dédié aux restaurateurs.",
+      content: t("meta.dish_resto_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Gérer mes plats - Espace restaurateur",
-  ogTitle: "Gérer mes plats - Espace restaurateur",
-  description:
-    "Gérez vos plats, ajoutez de nouveaux plats et maintenez votre menu à jour. Espace dédié aux restaurateurs.",
-  ogDescription:
-    "Gérez vos plats, ajoutez de nouveaux plats et maintenez votre menu à jour. Espace dédié aux restaurateurs.",
+  title: t("meta.dish_resto_title"),
+  ogTitle: t("meta.dish_resto_title"),
+  description: t("meta.dish_resto_description"),
+  ogDescription: t("meta.dish_resto_description"),
   twitterCard: "summary_large_image",
 });
-
-import { ref, computed, onMounted } from "vue";
-import { useUserStore } from "~/stores/users/user";
-import type { Plat } from "~/types/plats/plats";
 
 const userStore = useUserStore();
 const currentUser = computed(() => userStore.currentUser);
@@ -91,9 +90,9 @@ const deletePlat = async (platId: number) => {
 <template>
   <div class="plats-container">
     <div class="header">
-      <h1>Mes Plats</h1>
+      <h1>{{ t("restaurants.list_dishes") }}</h1>
       <NuxtLink to="/restaurateur/add_plat" class="add-button">
-        Ajouter un plat
+        {{ t("restaurants.add_dish") }}
       </NuxtLink>
     </div>
 
@@ -103,7 +102,7 @@ const deletePlat = async (platId: number) => {
     </div>
 
     <!-- État de chargement -->
-    <div v-if="loading" class="loading">Chargement...</div>
+    <div v-if="loading" class="loading">{{ t("common.loading") }}</div>
 
     <!-- Liste des plats -->
     <div v-else class="plats-grid">
@@ -117,13 +116,13 @@ const deletePlat = async (platId: number) => {
         <template #description>
           <p>{{ plat.description }}</p>
           <button @click="deletePlat(plat.id)" class="delete-button">
-            Supprimer
+            {{ t("common.delete") }}
           </button>
         </template>
       </Card>
 
       <div v-if="plats.length === 0" class="no-plats">
-        Aucun plat disponible
+        {{ t("restaurants.no_dishes") }}
       </div>
     </div>
   </div>

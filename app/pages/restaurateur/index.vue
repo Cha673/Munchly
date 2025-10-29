@@ -3,13 +3,15 @@
  mène vers les différents pages de gestion des plats, commandes et compte du restaurateur -->
 <script setup lang="ts">
 import { useUserStore } from "~/stores/users/user";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
 definePageMeta({
   layout: "restaurateur",
   middleware: ["auth-restaurateur"],
 });
 useHead({
-  title: "Espace restaurateur",
+  title: t("meta.homeresto_title"),
   meta: [{ name: "robots", content: "noindex, nofollow" }],
 });
 const userStore = useUserStore();
@@ -19,27 +21,27 @@ const user = computed(() => userStore.currentUser);
 <template>
   <div class="dashboard-container">
     <div class="welcome-section">
-      <h1>Bienvenue, {{ user?.name }}</h1>
-      <p>Gérez votre restaurant depuis votre tableau de bord</p>
+      <h1>{{ t("meta.home_title") }}, {{ user?.name }}</h1>
+      <p>{{ t("meta.orders_restaurateur_description") }}</p>
     </div>
 
     <div class="quick-actions">
       <div class="action-card" @click="navigateTo('/restaurateur/plats')">
-        <h3>Mes Plats</h3>
-        <p>Gérer vos plats</p>
+        <h3>{{ t("header_plats") }}</h3>
+        <p>{{ t("restaurants.control_dish") }}</p>
       </div>
 
       <div class="action-card" @click="navigateTo('/restaurateur/commandes')">
-        <h3>Commandes</h3>
-        <p>Voir les commandes en cours</p>
+        <h3>{{ t("header_restaurateur_orders") }}</h3>
+        <p>{{ t("header_user_orders_current") }}</p>
       </div>
 
       <div
         class="action-card"
         @click="navigateTo('/restaurateur/mon-restaurant')"
       >
-        <h3>Mon Restaurant</h3>
-        <p>Modifier les informations</p>
+        <h3>{{ t("header_restaurateur_dashboard") }}</h3>
+        <p>{{ t("update_informations") }}</p>
       </div>
     </div>
   </div>

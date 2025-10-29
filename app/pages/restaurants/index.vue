@@ -1,34 +1,33 @@
 <!-- Page listing des restaurants, 
  au clique sur un restaurant, on est mené vers la page détail du restaurant  -->
 <script setup lang="ts">
+import Card from "~/components/Card.vue";
+import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 useHead({
-  title: "Restaurants près de chez vous - Munchly",
+  title: t("restaurants.list_title"),
   meta: [
     {
       name: "description",
-      content:
-        "Parcourez notre sélection de restaurants et découvrez une large gamme de cuisines. Livraison rapide garantie.",
+      content: t("restaurants.list_description"),
     },
     { name: "robots", content: "noindex, nofollow" },
   ],
 });
 
 useSeoMeta({
-  title: "Restaurants près de chez vous - Munchly",
-  ogTitle: "Restaurants près de chez vous - Munchly",
-  description:
-    "Parcourez notre sélection de restaurants et découvrez une large gamme de cuisines. Livraison rapide garantie.",
-  ogDescription:
-    "Parcourez notre sélection de restaurants et découvrez une large gamme de cuisines. Livraison rapide garantie.",
+  title: t("restaurants.list_title"),
+  ogTitle: t("restaurants.list_title"),
+  description: t("restaurants.list_description"),
+  ogDescription: t("restaurants.list_description"),
 });
 definePageMeta({
   ssr: true,
   layout: "user",
   middleware: ["auth-user"],
 });
-
-import Card from "~/components/Card.vue";
-import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
 
 const restaurantsStore = useRestaurantsStore();
 const search = ref<string>("");
@@ -48,23 +47,25 @@ const searchRestaurants = () => {
 <template>
   <div class="restaurants-page">
     <div class="page-header">
-      <h1>Nos Restaurants</h1>
+      <h1>{{ t("restaurants.page_title") }}</h1>
       <div class="search-container">
         <div class="search-box">
           <input
             v-model="search"
-            placeholder="Rechercher un restaurant..."
+            :placeholder="t('restaurants.search_placeholder')"
             @keyup.enter="searchRestaurants"
           />
           <button @click="searchRestaurants" class="search-button">
-            Rechercher
+            {{ t("restaurants.search_button") }}
           </button>
         </div>
       </div>
     </div>
 
     <div class="content-section">
-      <p v-if="loading" class="loading-message">Chargement...</p>
+      <p v-if="loading" class="loading-message">
+        {{ t("restaurants.loading") }}
+      </p>
 
       <div v-if="!loading">
         <!-- Résultats de recherche -->
@@ -86,7 +87,7 @@ const searchRestaurants = () => {
 
         <!-- Aucun résultat -->
         <p v-else-if="search && !results.length" class="no-results">
-          Aucun restaurant ne correspond à votre recherche
+          {{ t("restaurants.no_results") }}
         </p>
 
         <!-- Liste complète -->

@@ -2,36 +2,35 @@
  Fonctionnalités : 
  - listing des commandes passés par le compte utilisateur  -->
 <script setup lang="ts">
+import { ref, computed } from "vue";
+import { usePanierStore } from "~/stores/panier/panier";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
 definePageMeta({
   layout: "user",
   middleware: ["auth-user"],
 });
 
 useHead({
-  title: "Historique de mes commandes - Munchly",
+  title: t("meta.command_user_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Consultez l'historique de vos commandes, suivez leur statut et retrouvez le détail de chaque commande.",
+      content: t("meta.command_user_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Historique de mes commandes - Munchly",
-  ogTitle: "Historique de mes commandes - Munchly",
-  description:
-    "Consultez l'historique de vos commandes, suivez leur statut et retrouvez le détail de chaque commande.",
-  ogDescription:
-    "Consultez l'historique de vos commandes, suivez leur statut et retrouvez le détail de chaque commande.",
+  title: t("meta.command_user_title"),
+  ogTitle: t("meta.command_user_title"),
+  description: t("meta.command_user_description"),
+  ogDescription: t("meta.command_user_description"),
   ogImage: "/images/commandes.jpg",
   twitterCard: "summary_large_image",
 });
-
-import { ref, computed } from "vue";
-import { usePanierStore } from "~/stores/panier/panier";
 
 const panierStore = usePanierStore();
 const expandedOrderId = ref<number | null>(null);
@@ -51,13 +50,13 @@ const toggleOrderDetails = (orderId: number) => {
 
 <template>
   <div class="commandes-historique">
-    <h1>Historique des commandes</h1>
+    <h1>{{ t("users.historique_commandes") }}</h1>
 
     <!-- Si aucune commande -->
     <div v-if="!panierStore.commandes.length" class="no-commandes">
-      <p>Vous n'avez pas encore passé de commande</p>
+      <p>{{ t("users.no_command") }}</p>
       <NuxtLink to="/restaurants" class="btn">
-        Découvrir nos restaurants
+        {{ t("users.list_resto") }}
       </NuxtLink>
     </div>
 

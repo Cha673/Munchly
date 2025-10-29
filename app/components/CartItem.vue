@@ -2,6 +2,8 @@
 <script setup lang="ts">
 import { usePanierStore } from "~/stores/panier/panier";
 
+const { t } = useI18n();
+
 interface Props {
   plat: {
     id: number;
@@ -36,7 +38,7 @@ const panierStore = usePanierStore();
       </button>
     </div>
     <div v-else class="item-quantite">
-      <span class="qty">Quantité: {{ quantite }}</span>
+      <span class="qty">{{ t("dishes.quantity") }}: {{ quantite }}</span>
     </div>
 
     <div class="item-total">{{ (plat.prix * quantite).toFixed(2) }} €</div>

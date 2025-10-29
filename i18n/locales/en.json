@@ -1,15 +1,166 @@
 {
-  "login": "Login",
-  "logout": "Logout",
-  "register": "Register",
+  "login": "Log in",
+  "logout": "Log out",
+  "register": "Sign up",
+  "url": "Image URL",
 
   "header_home": "Home",
-  "header_profile": "My Account",
+  "header_profile": "My account",
   "header_restaurants": "Restaurants",
   "header_plats": "Dishes",
 
-  "header_restaurateur_dashboard": "My Restaurant",
+  "header_restaurateur_dashboard": "My restaurant",
   "header_restaurateur_orders": "Orders",
-  "header_user_orders": "My Orders",
-  "header_user_cart": "My Cart"
+  "header_user_orders": "My orders",
+  "header_user_orders_current": "View current orders",
+  "header_user_cart": "Cart",
+  "update_informations": "Update information",
+  "website_name": "Munchly",
+  "popular_resto": "Popular restaurants",
+
+  "auth": {
+    "nom_label": "Name",
+    "email_label": "Email",
+    "email_placeholder": "example@mail.com",
+    "password_label": "Password",
+    "login_title": "Login - Munchly",
+    "login_description": "Log in to your account to order your favorite meals and track your orders.",
+    "login_button": "Log in",
+    "login_heading": "Login",
+    "no_account": "Don't have an account yet?",
+    "register_link": "Sign up",
+    "logout_message": "You have been logged out",
+    "error_message": "Incorrect credentials",
+    "back_dashboard": "Back to dashboard",
+    "update_profil": "Update profile",
+    "update_password": "New password (optional)",
+    "password_placeholder": "Leave blank to keep unchanged",
+    "confirm_password": "Confirm password",
+    "create_account": "Create an account"
+  },
+  "admin": {
+    "add_resto": "Add a restaurant owner",
+    "name_resto": "Restaurant owner name",
+    "mail_resto": "Restaurant owner email",
+    "bo_resto": "Admin Dashboard",
+    "restaurateurs_list": "Restaurant owners list"
+  },
+
+  "orders": {
+    "management_title": "Order management",
+    "restaurateur_title": "Order management - Restaurant owner area",
+    "management_description": "Manage your restaurant orders, view details and track their processing in real time.",
+    "filtered": "Filtered orders",
+    "list": "Orders list",
+    "details": "Order details",
+    "my_orders": "My Orders",
+    "order_details": "Order details",
+    "no_orders": "No orders available",
+    "loading": "Loading orders..."
+  },
+
+  "cart": {
+    "title": "My cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Place order"
+  },
+
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Operation successful",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View"
+  },
+
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "min_length": "This field must contain at least {min} characters",
+    "max_length": "This field must not exceed {max} characters"
+  },
+
+  "restaurants": {
+    "list_title": "Restaurants near you - Munchly",
+    "list_description": "Browse our selection of restaurants and discover a wide range of cuisines. Fast delivery guaranteed.",
+    "page_title": "Our Restaurants",
+    "search_placeholder": "Search for a restaurant...",
+    "search_button": "Search",
+    "loading": "Loading...",
+    "no_results": "No restaurant matches your search",
+    "menu_title": "Our Menu",
+    "loading_dishes": "Loading dishes...",
+    "no_dishes": "No dishes available at the moment",
+    "back_dishes": "Back to dishes",
+    "dishes_search_placeholder": "Search for a dish...",
+    "details": {
+      "title": "Menu and online ordering",
+      "description": "Discover the complete menu of",
+      "description2": "Order online for fast delivery."
+    },
+    "control_dish": "Manage your dishes",
+    "profil": "My Restaurant Owner Profile",
+    "list_dishes": "My Dishes",
+    "add_dish": "Add a dish"
+  },
+
+  "dishes": {
+    "detail_title": "{name} - Dish details",
+    "detail_description": "Discover {name}, a delicious dish from {restaurant}. {description}",
+    "price": "Price:",
+    "add_to_cart": "Add to cart",
+    "view_cart": "View cart",
+    "quantity": "Quantity",
+    "back_to_menu": "Back to menu",
+    "ingredients": "Ingredients",
+    "allergies": "Allergens",
+    "preparation_time": "Preparation time",
+    "calories": "Calories",
+    "no_description": "No description available",
+    "loading": "Loading dish...",
+    "add_dish": "Add a new dish",
+    "name_dish": "Dish name",
+    "description_dish": "Dish description",
+    "description_dish_two": "Describe the ingredients and preparation"
+  },
+
+  "meta": {
+    "addrestaurant_title": "Add a restaurant owner - Munchly Administration",
+    "addrestaurant_description": "Create a new restaurant owner account and configure their access to the Munchly platform.",
+    "adddish_title": "Add a dish - Restaurant owner area",
+    "adddish_description": "Enrich your menu by adding new dishes. Customize descriptions, prices and images of your culinary creations.",
+    "home_title": "Welcome",
+    "homeresto_title": "Restaurant Owner Area - Munchly",
+    "orders_restaurateur_description": "Manage your restaurant from your dashboard",
+    "profil_resto_title": "My restaurant - Restaurant owner area",
+    "profil_resto_description": "Manage your restaurant owner profile, update your information and account settings.",
+    "dish_resto_title": "Manage my dishes - Restaurant owner area",
+    "dish_resto_description": "Manage your dishes, add new dishes and keep your menu up to date. Dedicated area for restaurant owners.",
+    "command_user_title": "My order history - Munchly",
+    "command_user_description": "View your order history, track their status and find the details of each order.",
+    "page_update_profile": "Update my profile - Munchly",
+    "page_update_profile_description": "Update your personal information, change your email and manage your password securely",
+    "homepage_title": "Order your meals online - Munchly",
+    "homepage_description": "Discover the best restaurants near you. Order online and have your favorite dishes delivered quickly.",
+    "inscription_title": "Sign up - Munchly",
+    "inscription_description": "Create your free account and start ordering from your favorite restaurants in just a few clicks."
+  },
+
+  "users": {
+    "historique_commandes": "Order history",
+    "no_command": "You haven't placed any orders yet",
+    "list_resto": "Discover our restaurants",
+    "card_title": "My cart - Munchly",
+    "card_description": "View your cart, adjust quantities and confirm your order in just a few clicks.",
+    "card": "My Cart",
+    "no_card": "Your cart is empty",
+    "delete_card": "Empty cart",
+    "validate_command": "Confirm order",
+    "historique_command": "View my order history",
+    "update_profil": "Update my profile"
+  }
 }

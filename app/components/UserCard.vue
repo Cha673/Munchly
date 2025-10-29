@@ -16,6 +16,8 @@ const emit = defineEmits<{
 const handleDelete = () => {
   emit("delete", props.id);
 };
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -26,7 +28,9 @@ const handleDelete = () => {
       <span class="role-badge">{{ role }}</span>
     </div>
     <div class="user-actions">
-      <button class="delete-btn" @click="handleDelete">Supprimer</button>
+      <button class="delete-btn" @click="handleDelete">
+        {{ t("common.delete") }}
+      </button>
     </div>
   </div>
 </template>

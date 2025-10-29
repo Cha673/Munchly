@@ -7,6 +7,9 @@
 import { useUserStore } from "~/stores/users/user";
 import { ref, computed } from "vue";
 import UserCard from "~/components/UserCard.vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 definePageMeta({
   layout: "admin",
@@ -14,24 +17,21 @@ definePageMeta({
 });
 
 useHead({
-  title: "Dashboard Administration - Munchly",
+  title: t("meta.dashboard_title"),
   meta: [
     { name: "robots", content: "noindex, nofollow" },
     {
       name: "description",
-      content:
-        "Gérez les restaurateurs de la plateforme, ajoutez de nouveaux comptes et administrez l'ensemble du système.",
+      content: t("meta.dashboard_description"),
     },
   ],
 });
 
 useSeoMeta({
-  title: "Dashboard Administration - Munchly",
-  ogTitle: "Dashboard Administration - Munchly",
-  description:
-    "Gérez les restaurateurs de la plateforme, ajoutez de nouveaux comptes et administrez l'ensemble du système.",
-  ogDescription:
-    "Gérez les restaurateurs de la plateforme, ajoutez de nouveaux comptes et administrez l'ensemble du système.",
+  title: t("meta.dashboard_title"),
+  ogTitle: t("meta.dashboard_title"),
+  description: t("meta.dashboard_description"),
+  ogDescription: t("meta.dashboard_description"),
   ogImage: "/images/admin-dashboard.jpg",
   twitterCard: "summary_large_image",
 });
@@ -77,14 +77,14 @@ const handleAddRestaurateur = () => {
   <div class="auth-container">
     <div class="dashboard">
       <div class="dashboard-header">
-        <h1>Dashboard Administrateur</h1>
+        <h1>{{ t("admin.bo_resto") }}</h1>
       </div>
 
       <div class="dashboard-content">
         <div class="section-header">
-          <h2>Liste des Restaurateurs</h2>
+          <h2>{{ t("admin.restaurateurs_list") }}</h2>
           <NuxtLink to="/admin/add-restaurateur" class="add-button">
-            Ajouter un restaurateur
+            {{ t("admin.add_resto") }}
           </NuxtLink>
         </div>
 

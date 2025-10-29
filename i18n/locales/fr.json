@@ -2,6 +2,7 @@
   "login": "Se connecter",
   "logout": "Déconnexion",
   "register": "S'inscrire",
+  "url": "URL de l'image",
 
   "header_home": "Accueil",
   "header_profile": "Mon compte",
@@ -11,5 +12,155 @@
   "header_restaurateur_dashboard": "Mon restaurant",
   "header_restaurateur_orders": "Commandes",
   "header_user_orders": "Mes commandes",
-  "header_user_cart": "Panier"
+  "header_user_orders_current": "Voir les commandes en cours",
+  "header_user_cart": "Panier",
+  "update_informations": "Modifier les informations",
+  "website_name": "Munchly",
+  "popular_resto": "Restaurants populaires",
+
+  "auth": {
+    "nom_label": "Nom",
+    "email_label": "Email",
+    "email_placeholder": "exemple@mail.com",
+    "password_label": "Mot de passe",
+    "login_title": "Connexion - Munchly",
+    "login_description": "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
+    "login_button": "Se connecter",
+    "login_heading": "Connexion",
+    "no_account": "Pas encore de compte ?",
+    "register_link": "S'inscrire",
+    "logout_message": "Vous avez été déconnecté",
+    "error_message": "Identifiants incorrects",
+    "back_dashboard": "Retour au tableau de bord",
+    "update_profil": "Modifier le profil",
+    "update_password": "Nouveau mot de passe (optionnel)",
+    "password_placeholder": "Laissez vide pour ne pas changer",
+    "confirm_password": "Confirmer le mot de passe",
+    "create_account": "Créer un compte"
+  },
+  "admin": {
+    "add_resto": "Ajouter un restaurateur",
+    "name_resto": "Nom du restaurateur",
+    "mail_resto": "Email du restaurateur",
+    "bo_resto": "Dashboard Administrateur",
+    "restaurateurs_list": "Liste des restaurateurs"
+  },
+
+  "orders": {
+    "management_title": "Gestion des commandes",
+    "restaurateur_title": "Gestion des commandes - Espace restaurateur",
+    "management_description": "Gérez les commandes de votre restaurant, consultez les détails et suivez leur traitement en temps réel.",
+    "filtered": "Commandes filtrées",
+    "list": "Liste des commandes",
+    "details": "Détails des commandes",
+    "my_orders": "Mes Commandes",
+    "order_details": "Détails de la commande",
+    "no_orders": "Aucune commande disponible",
+    "loading": "Chargement des commandes..."
+  },
+
+  "cart": {
+    "title": "Mon panier",
+    "empty": "Votre panier est vide",
+    "total": "Total",
+    "checkout": "Commander"
+  },
+
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "success": "Opération réussie",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir"
+  },
+
+  "validation": {
+    "required": "Ce champ est requis",
+    "email": "Veuillez entrer une adresse email valide",
+    "min_length": "Ce champ doit contenir au moins {min} caractères",
+    "max_length": "Ce champ ne doit pas dépasser {max} caractères"
+  },
+
+  "restaurants": {
+    "list_title": "Restaurants près de chez vous - Munchly",
+    "list_description": "Parcourez notre sélection de restaurants et découvrez une large gamme de cuisines. Livraison rapide garantie.",
+    "page_title": "Nos Restaurants",
+    "search_placeholder": "Rechercher un restaurant...",
+    "search_button": "Rechercher",
+    "loading": "Chargement...",
+    "no_results": "Aucun restaurant ne correspond à votre recherche",
+    "menu_title": "Notre Carte",
+    "loading_dishes": "Chargement des plats...",
+    "no_dishes": "Aucun plat disponible pour le moment",
+    "back_dishes": "Retour aux plats",
+    "dishes_search_placeholder": "Rechercher un plat...",
+    "details": {
+      "title": "Menu et commande en ligne",
+      "description": "Découvrez le menu complet de",
+      "description2": "Commandez en ligne pour une livraison rapide."
+    },
+    "control_dish": "Gérer vos plats",
+    "profil": "Mon Profil Restaurateur",
+    "list_dishes": "Mes Plats",
+    "add_dish": "Ajouter un plat"
+  },
+
+  "dishes": {
+    "detail_title": "{name} - Détail du plat",
+    "detail_description": "Découvrez {name}, un délicieux plat de {restaurant}. {description}",
+    "price": "Prix :",
+    "add_to_cart": "Ajouter au panier",
+    "view_cart": "Voir le panier",
+    "quantity": "Quantité",
+    "back_to_menu": "Retour au menu",
+    "ingredients": "Ingrédients",
+    "allergies": "Allergènes",
+    "preparation_time": "Temps de préparation",
+    "calories": "Calories",
+    "no_description": "Aucune description disponible",
+    "loading": "Chargement du plat...",
+    "add_dish": "Ajouter un nouveau plat",
+    "name_dish": "Nom du plat",
+    "description_dish": "Description du plat",
+    "description_dish_two": "Decrivez les ingredients et la preparation"
+  },
+
+  "meta": {
+    "addrestaurant_title": "Ajouter un restaurateur - Administration Munchly",
+    "addrestaurant_description": "Créez un nouveau compte restaurateur et configurez ses accès à la plateforme Munchly.",
+    "adddish_title": "Ajouter un plat - Espace restaurateur",
+    "adddish_description": "Enrichissez votre menu en ajoutant de nouveaux plats. Personnalisez les descriptions, prix et images de vos créations culinaires.",
+    "home_title": "Bienvenue",
+    "homeresto_title": "Espace Restaurateur - Munchly",
+    "orders_restaurateur_description": "Gérez votre restaurant depuis votre tableau de bord",
+    "profil_resto_title": "Mon restaurant - Espace restaurateur",
+    "profil_resto_description": "Gérez votre profil restaurateur, mettez à jour vos informations et paramètres de compte.",
+    "dish_resto_title": "Gérer mes plats - Espace restaurateur",
+    "dish_resto_description": "Gérez vos plats, ajoutez de nouveaux plats et maintenez votre menu à jour. Espace dédié aux restaurateurs.",
+    "command_user_title": "Historique de mes commandes - Munchly",
+    "command_user_description": "Consultez l'historique de vos commandes, suivez leur statut et retrouvez le détail de chaque commande.",
+    "page_update_profile": "Modifier mon profil - Munchly",
+    "page_update_profile_description": "Mettez à jour vos informations personnelles, modifiez votre email et gérez votre mot de passe en toute sécurité",
+    "homepage_title": "Commandez vos repas en ligne - Munchly",
+    "homepage_description": "Découvrez les meilleurs restaurants près de chez vous. Commandez en ligne et faites-vous livrer vos plats préférés rapidement.",
+    "inscription_title": "Inscription - Munchly",
+    "inscription_description": "Créez votre compte gratuitement et commencez à commander dans vos restaurants préférés en quelques clics."
+  },
+
+  "users": {
+    "historique_commandes": "Historique des commandes",
+    "no_command": "Vous n'avez pas encore passé de commande",
+    "list_resto": "Découvrir nos restaurants",
+    "card_title": "Mon panier - Munchly",
+    "card_description": "Consultez votre panier, modifiez les quantités et validez votre commande en quelques clics.",
+    "card": " Mon Panier",
+    "no_card": "Votre panier est vide",
+    "delete_card": "Vider le panier",
+    "validate_command": "Valider la commande",
+    "historique_command": "Voir l'historique de mes commandes",
+    "update_profil": "Mettre à jour mon profil"
+  }
 }
