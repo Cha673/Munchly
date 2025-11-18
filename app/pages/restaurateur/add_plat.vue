@@ -5,6 +5,7 @@ import { useUserStore } from "~/stores/users/user";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 definePageMeta({
   layout: "restaurateur",
@@ -36,7 +37,7 @@ const currentUser = computed(() => userStore.currentUser);
 
 // Vérifier que l'utilisateur est connecté et est un restaurateur
 if (!currentUser.value || currentUser.value.role !== "restaurateur") {
-  navigateTo("/login");
+  navigateTo($localePath("/login"));
 }
 
 const loading = ref(false);
@@ -80,7 +81,7 @@ const addPlat = async () => {
     });
 
     // Rediriger vers la liste des plats après l'ajout
-    navigateTo("/restaurateur/plats");
+    navigateTo($localePath("/restaurateur/plats"));
   } catch (err) {
     console.error("Erreur lors de l'ajout du plat:", err);
     error.value = "Erreur lors de l'ajout du plat";
@@ -142,7 +143,10 @@ const addPlat = async () => {
       </div>
 
       <div class="form-buttons">
-        <NuxtLink to="/restaurateur/plats" class="cancel-button">
+        <NuxtLink
+          :to="$localePath('/restaurateur/plats')"
+          class="cancel-button"
+        >
           {{ t("common.cancel") }}
         </NuxtLink>
         <button type="submit" class="submit-button" :disabled="loading">

@@ -10,6 +10,7 @@ import UserCard from "~/components/UserCard.vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 definePageMeta({
   layout: "admin",
@@ -41,7 +42,7 @@ const restaurateurs = computed(() => userStore.getRestaurateurs);
 
 const handleLogout = async () => {
   userStore.logout();
-  await navigateTo("/login");
+  await navigateTo($localePath("/login"));
 };
 
 const handleDeleteUser = (userId: number) => {
@@ -83,7 +84,10 @@ const handleAddRestaurateur = () => {
       <div class="dashboard-content">
         <div class="section-header">
           <h2>{{ t("admin.restaurateurs_list") }}</h2>
-          <NuxtLink to="/admin/add-restaurateur" class="add-button">
+          <NuxtLink
+            :to="$localePath('/admin/add-restaurateur')"
+            class="add-button"
+          >
             {{ t("admin.add_resto") }}
           </NuxtLink>
         </div>

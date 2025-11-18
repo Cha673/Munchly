@@ -16,6 +16,7 @@ import Card from "~/components/Card.vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 const route = useRoute();
 const restaurantId = Number(route.params.restau_id);
@@ -62,7 +63,7 @@ watchEffect(() => {
     });
   }
   if (!loading.value && !restaurant.value) {
-    navigateTo("/restaurants");
+    navigateTo($localePath("/restaurants"));
   }
 });
 
@@ -132,7 +133,7 @@ await fetchPlats();
           <NuxtLink
             v-for="plat in displayedPlats"
             :key="plat.id"
-            :to="`/plats/${plat.id}`"
+            :to="$localePath(`/plats/${plat.id}`)"
             class="plat-link"
           >
             <Card

@@ -10,6 +10,7 @@ import { useUserStore } from "~/stores/users/user";
 import type { Plat } from "~/types/plats/plats";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 definePageMeta({
   layout: "restaurateur",
@@ -91,7 +92,7 @@ const deletePlat = async (platId: number) => {
   <div class="plats-container">
     <div class="header">
       <h1>{{ t("restaurants.list_dishes") }}</h1>
-      <NuxtLink to="/restaurateur/add_plat" class="add-button">
+      <NuxtLink :to="$localePath('/restaurateur/add_plat')" class="add-button">
         {{ t("restaurants.add_dish") }}
       </NuxtLink>
     </div>

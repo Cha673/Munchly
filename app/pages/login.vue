@@ -4,6 +4,7 @@ import { onMounted, ref } from "vue";
 import { useUserStore } from "~/stores/users/user";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 useHead({
   title: t("meta.login_title"),
@@ -56,16 +57,16 @@ const handleLogin = () => {
     // Rediriger selon le rôle
     switch (user.role) {
       case "admin":
-        navigateTo("/admin");
+        navigateTo($localePath("/admin"));
         break;
       case "restaurateur":
-        navigateTo("/restaurateur");
+        navigateTo($localePath("/restaurateur"));
         break;
       case "user":
-        navigateTo("/restaurants");
+        navigateTo($localePath("/restaurants"));
         break;
       default:
-        navigateTo("/");
+        navigateTo($localePath("/"));
     }
   } catch (err: any) {
     error.value = err.message;
@@ -85,7 +86,7 @@ const handleLogin = () => {
           <input
             v-model="email"
             type="email"
-            placeholder="{{ t('auth.email_placeholder') }}"
+            :placeholder="t('auth.email_placeholder')"
           />
         </div>
 
@@ -101,7 +102,9 @@ const handleLogin = () => {
 
       <p class="auth-link">
         {{ t("auth.no_account") }}
-        <NuxtLink to="/register">{{ t("auth.register") }}</NuxtLink>
+        <NuxtLink :to="$localePath('/register')">{{
+          t("auth.register_link")
+        }}</NuxtLink>
       </p>
     </div>
   </div>

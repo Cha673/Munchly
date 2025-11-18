@@ -7,10 +7,11 @@ import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 const userStore = useUserStore();
 const isMenuOpen = ref(false);
+const { $localePath } = useNuxtApp();
 
 const handleLogout = async () => {
   userStore.logout();
-  await navigateTo("/login");
+  await navigateTo($localePath("/login"));
 };
 
 // Ferme le menu quand on clique sur un lien
@@ -24,7 +25,7 @@ const closeMenu = () => {
     <div class="nav-container">
       <nav>
         <!-- Logo et éléments toujours visibles -->
-        <NuxtLink to="/restaurateur" class="logo">
+        <NuxtLink :to="$localePath('/restaurateur')" class="logo">
           <img
             src="/images/logo/munchly-logo.png"
             alt="Munchly Restaurateur"
@@ -57,13 +58,22 @@ const closeMenu = () => {
           <!-- Menu principal -->
           <div class="nav-menu" :class="{ active: isMenuOpen }">
             <div class="menu-links">
-              <NuxtLink to="/restaurateur/mon-restaurant" @click="closeMenu">
+              <NuxtLink
+                :to="$localePath('/restaurateur/mon-restaurant')"
+                @click="closeMenu"
+              >
                 {{ t("header_restaurateur_dashboard") }}
               </NuxtLink>
-              <NuxtLink to="/restaurateur/plats" @click="closeMenu">
+              <NuxtLink
+                :to="$localePath('/restaurateur/plats')"
+                @click="closeMenu"
+              >
                 {{ t("header_plats") }}
               </NuxtLink>
-              <NuxtLink to="/restaurateur/commandes" @click="closeMenu">
+              <NuxtLink
+                :to="$localePath('/restaurateur/commandes')"
+                @click="closeMenu"
+              >
                 {{ t("header_restaurateur_orders") }}
               </NuxtLink>
             </div>

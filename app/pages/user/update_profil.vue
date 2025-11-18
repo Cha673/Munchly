@@ -7,6 +7,7 @@ import { ref } from "vue";
 import { useUserStore } from "~/stores/users/user";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 definePageMeta({
   layout: "user",
@@ -103,7 +104,7 @@ const updateProfile = () => {
       <p v-if="success" class="success-message">{{ success }}</p>
 
       <p class="auth-link">
-        <NuxtLink to="/user/commandes">
+        <NuxtLink :to="$localePath('/user/commandes')">
           {{ t("users.historique_commandes") }}
         </NuxtLink>
       </p>

@@ -4,6 +4,7 @@ import { useUserStore } from "~/stores/users/user";
 import type { User } from "~/types/utilisateurs/users";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 useHead({
   title: t("meta.inscription_title"),
@@ -59,10 +60,10 @@ const handleRegister = async () => {
     // Redirection selon le rôle
     switch (role.value) {
       case "user":
-        await navigateTo("/commandes");
+        await navigateTo($localePath("/commandes"));
         break;
       default:
-        await navigateTo("/");
+        await navigateTo($localePath("/"));
     }
   } catch (err: any) {
     error.value = err.message;
@@ -88,7 +89,7 @@ const handleRegister = async () => {
           <input
             v-model="email"
             type="email"
-            placeholder=" t('auth.email_placeholder')"
+            :placeholder="t('auth.email_placeholder')"
           />
         </div>
 
@@ -104,7 +105,7 @@ const handleRegister = async () => {
 
       <p class="auth-link">
         Déjà un compte ?
-        <NuxtLink to="/login">Se connecter</NuxtLink>
+        <NuxtLink :to="$localePath('/login')">Se connecter</NuxtLink>
       </p>
     </div>
   </div>

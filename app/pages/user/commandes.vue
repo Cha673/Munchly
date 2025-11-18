@@ -6,6 +6,7 @@ import { ref, computed } from "vue";
 import { usePanierStore } from "~/stores/panier/panier";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 definePageMeta({
   layout: "user",
@@ -55,7 +56,7 @@ const toggleOrderDetails = (orderId: number) => {
     <!-- Si aucune commande -->
     <div v-if="!panierStore.commandes.length" class="no-commandes">
       <p>{{ t("users.no_command") }}</p>
-      <NuxtLink to="/restaurants" class="btn">
+      <NuxtLink :to="$localePath('/restaurants')" class="btn">
         {{ t("users.list_resto") }}
       </NuxtLink>
     </div>

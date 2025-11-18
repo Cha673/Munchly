@@ -26,7 +26,7 @@ const { t } = useI18n();
       <div class="order-actions">
         <span class="total">{{ total.toFixed(2) }}€</span>
         <button class="details-button" @click="emit('toggleDetails', id)">
-          {{ t("common.view_details") }}
+          {{ t("orders.voir_plus") }}
         </button>
       </div>
     </div>

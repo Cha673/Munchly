@@ -18,6 +18,7 @@ import { useI18n } from "vue-i18n";
 import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
 
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 const route = useRoute();
 const panierStore = usePanierStore();
@@ -80,7 +81,7 @@ const addToCart = () => {
 
       if (confirmer) {
         // Rediriger vers le panier
-        navigateTo("/user/panier");
+        navigateTo($localePath("/user/panier"));
       }
     }
   } else {
@@ -107,7 +108,7 @@ const addToCart = () => {
           <button @click="addToCart" class="btn-cart">
             {{ t("dishes.add_to_cart") }}
           </button>
-          <NuxtLink to="/user/panier" class="btn-view-cart">
+          <NuxtLink :to="$localePath('/user/panier')" class="btn-view-cart">
             {{ t("dishes.view_cart") }} ({{ panierStore.totalItems }})
           </NuxtLink>
         </div>
@@ -116,7 +117,9 @@ const addToCart = () => {
 
     <div v-else class="not-found">
       <h2>{{ t("restaurants.no_dish") }}</h2>
-      <NuxtLink to="/plats">{{ t("restaurants.back_dishes") }}</NuxtLink>
+      <NuxtLink :to="$localePath('/plats')">{{
+        t("restaurants.back_dishes")
+      }}</NuxtLink>
     </div>
   </div>
 </template>

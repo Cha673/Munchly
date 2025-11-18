@@ -9,6 +9,7 @@
 import { usePanierStore } from "~/stores/panier/panier";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 useHead({
   title: t("users.card_title"),
@@ -48,7 +49,7 @@ const validerCommande = () => {
 
     <div v-if="panierStore.isPanierVide" class="panier-vide">
       <p>{{ t("users.no_card") }}</p>
-      <NuxtLink to="/restaurants" class="btn">{{
+      <NuxtLink :to="$localePath('/restaurants')" class="btn">{{
         t("users.list_resto")
       }}</NuxtLink>
     </div>
@@ -83,7 +84,7 @@ const validerCommande = () => {
     </div>
 
     <div class="historique-section">
-      <NuxtLink to="/user/commandes" class="btn-historique">
+      <NuxtLink :to="$localePath('/user/commandes')" class="btn-historique">
         {{ t("users.historique_command") }}
       </NuxtLink>
     </div>

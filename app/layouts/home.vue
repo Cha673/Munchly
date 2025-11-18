@@ -7,6 +7,7 @@ import { useUserStore } from "~/stores/users/user";
 const userStore = useUserStore();
 const panierStore = usePanierStore();
 const { t, locale } = useI18n();
+const { $localePath } = useNuxtApp();
 
 const isLoggedIn = computed(() => userStore.currentUser !== null);
 const isMenuOpen = ref(false);
@@ -26,7 +27,7 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
     <div class="nav-container">
       <nav>
         <!-- Logo et éléments toujours visibles -->
-        <NuxtLink to="/" class="logo">
+        <NuxtLink :to="$localePath('/')" class="logo">
           <img
             src="/images/logo/munchly-logo.png"
             alt="Munchly Admin"
@@ -62,13 +63,17 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
             <div class="menu-links">
               <!-- Liens pour utilisateurs connectés -->
               <template v-if="isLoggedIn">
-                <NuxtLink to="/user/update_profil" @click="closeMenu">{{
-                  t("header_profile")
-                }}</NuxtLink>
-                <NuxtLink to="/user/commandes" @click="closeMenu">{{
-                  t("header_user_orders")
-                }}</NuxtLink>
-                <NuxtLink to="/user/panier" @click="closeMenu">
+                <NuxtLink
+                  :to="$localePath('/user/update_profil')"
+                  @click="closeMenu"
+                  >{{ t("header_profile") }}</NuxtLink
+                >
+                <NuxtLink
+                  :to="$localePath('/user/commandes')"
+                  @click="closeMenu"
+                  >{{ t("header_user_orders") }}</NuxtLink
+                >
+                <NuxtLink :to="$localePath('/user/panier')" @click="closeMenu">
                   {{ t("header_user_cart") }}
                   <span v-if="panierStore.totalItems > 0"
                     >({{ panierStore.totalItems }})</span
@@ -89,10 +94,10 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
                 </a>
               </template>
               <template v-else>
-                <NuxtLink to="/login" class="login-btn">
+                <NuxtLink :to="$localePath('/login')" class="login-btn">
                   {{ t("login") }}
                 </NuxtLink>
-                <NuxtLink to="/register" class="register-btn">
+                <NuxtLink :to="$localePath('/register')" class="register-btn">
                   {{ t("register") }}
                 </NuxtLink>
               </template>

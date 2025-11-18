@@ -4,11 +4,12 @@ import { defineNuxtRouteMiddleware, navigateTo } from "#app";
 
 export default defineNuxtRouteMiddleware((to, from) => {
   const userStore = useUserStore();
+  const { $localePath } = useNuxtApp();
 
   if (
     !userStore.isUserAuthenticated ||
     userStore.currentUser?.role !== "user"
   ) {
-    return navigateTo("/");
+    return navigateTo($localePath("/"));
   }
 });

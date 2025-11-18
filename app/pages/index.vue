@@ -7,6 +7,7 @@ import Card from "~/components/Card.vue";
 import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 useHead({
   title: t("meta.homepage_title"),
@@ -46,7 +47,9 @@ const restaurants = computed(() => restaurantsStore.getFeaturedRestaurants);
     <div class="banner">
       <div class="banner-content">
         <h1>{{ t("website_name") }}</h1>
-        <NuxtLink to="/login" class="cta-button"> {{ t("login") }} </NuxtLink>
+        <NuxtLink :to="$localePath('/login')" class="cta-button">
+          {{ t("login") }}
+        </NuxtLink>
       </div>
     </div>
 
@@ -63,7 +66,7 @@ const restaurants = computed(() => restaurantsStore.getFeaturedRestaurants);
         />
       </div>
       <div class="view-all">
-        <NuxtLink to="/login" class="view-all-button">
+        <NuxtLink :to="$localePath('/login')" class="view-all-button">
           {{ t("login") }}
         </NuxtLink>
       </div>

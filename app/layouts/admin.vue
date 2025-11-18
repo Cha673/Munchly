@@ -7,10 +7,11 @@ import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 const userStore = useUserStore();
 const isMenuOpen = ref(false);
+const { $localePath } = useNuxtApp();
 
 const handleLogout = async () => {
   userStore.logout();
-  await navigateTo("/login");
+  await navigateTo($localePath("/login"));
 };
 
 // Ferme le menu quand on clique sur un lien
@@ -24,7 +25,7 @@ const closeMenu = () => {
     <div class="nav-container">
       <nav>
         <!-- Logo et éléments toujours visibles -->
-        <NuxtLink to="/admin" class="logo">
+        <NuxtLink :to="$localePath('/admin')" class="logo">
           <img
             src="/images/logo/munchly-logo.png"
             alt="Munchly Admin"

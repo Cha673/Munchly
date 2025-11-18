@@ -7,6 +7,7 @@ import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+const { $localePath } = useNuxtApp();
 
 definePageMeta({
   layout: "admin",
@@ -47,7 +48,7 @@ const handleAddRestaurateur = async () => {
       ...newUser.value,
       role: "restaurateur",
     });
-    await navigateTo("/admin");
+    await navigateTo($localePath("/admin"));
   } catch (error: any) {
     alert(error.message);
   }
@@ -99,7 +100,9 @@ const handleAddRestaurateur = async () => {
       </div>
 
       <p class="auth-link">
-        <NuxtLink to="/admin">{{ t("auth.back_dashboard") }}</NuxtLink>
+        <NuxtLink :to="$localePath('/admin')">{{
+          t("auth.back_dashboard")
+        }}</NuxtLink>
       </p>
     </div>
   </div>

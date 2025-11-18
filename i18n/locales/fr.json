@@ -21,7 +21,7 @@
   "auth": {
     "nom_label": "Nom",
     "email_label": "Email",
-    "email_placeholder": "exemple@mail.com",
+    "email_placeholder": "exemple_at.mail.com",
     "password_label": "Mot de passe",
     "login_title": "Connexion - Munchly",
     "login_description": "Connectez-vous à votre compte pour commander vos repas préférés et suivre vos commandes.",
@@ -56,7 +56,8 @@
     "my_orders": "Mes Commandes",
     "order_details": "Détails de la commande",
     "no_orders": "Aucune commande disponible",
-    "loading": "Chargement des commandes..."
+    "loading": "Chargement des commandes...",
+    "voir_plus": "Voir les détails"
   },
 
   "cart": {
@@ -74,7 +75,8 @@
     "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Modifier",
-    "view": "Voir"
+    "view": "Voir",
+    "client": "Nom du client"
   },
 
   "validation": {

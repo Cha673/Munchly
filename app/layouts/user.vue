@@ -7,6 +7,12 @@ import { useUserStore } from "~/stores/users/user";
 const userStore = useUserStore();
 const panierStore = usePanierStore();
 const { t, locale } = useI18n();
+const { $localePath } = useNuxtApp();
+
+const logoutAndNavigate = () => {
+  userStore.logout();
+  navigateTo($localePath("/login"));
+};
 
 const isLoggedIn = computed(() => userStore.currentUser !== null);
 const isMenuOpen = ref(false);
@@ -25,7 +31,7 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
     <div class="nav-container">
       <nav>
         <!-- Logo et éléments toujours visibles -->
-        <NuxtLink to="/" class="logo">
+        <NuxtLink :to="$localePath('/')" class="logo">
           <img
             src="/images/logo/munchly-logo.png"
             alt="Munchly"
@@ -59,19 +65,25 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
           <!-- Menu principal -->
           <div class="nav-menu" :class="{ active: isMenuOpen }">
             <div class="menu-links">
-              <NuxtLink to="/restaurants" @click="closeMenu">
+              <NuxtLink :to="$localePath('/restaurants')" @click="closeMenu">
                 {{ t("header_restaurants") }}
               </NuxtLink>
 
               <!-- Liens pour utilisateurs connectés -->
               <template v-if="isLoggedIn">
-                <NuxtLink to="/user/update_profil" @click="closeMenu">
+                <NuxtLink
+                  :to="$localePath('/user/update_profil')"
+                  @click="closeMenu"
+                >
                   {{ t("header_profile") }}
                 </NuxtLink>
-                <NuxtLink to="/user/commandes" @click="closeMenu">
+                <NuxtLink
+                  :to="$localePath('/user/commandes')"
+                  @click="closeMenu"
+                >
                   {{ t("header_user_orders") }}
                 </NuxtLink>
-                <NuxtLink to="/user/panier" @click="closeMenu">
+                <NuxtLink :to="$localePath('/user/panier')" @click="closeMenu">
                   {{ t("header_user_cart") }}
                   <span v-if="panierStore.totalItems > 0"
                     >({{ panierStore.totalItems }})</span
@@ -85,12 +97,7 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
               <template v-if="isLoggedIn">
                 <a
                   href="#"
-                  @click.prevent="
-                    () => {
-                      userStore.logout();
-                      navigateTo('/login');
-                    }
-                  "
+                  @click.prevent="logoutAndNavigate"
                   class="nav-btn logout-btn"
                 >
                   {{ t("logout") }}
@@ -98,14 +105,14 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
               </template>
               <template v-else>
                 <NuxtLink
-                  to="/login"
+                  :to="$localePath('/login')"
                   class="nav-btn login-btn"
                   @click="closeMenu"
                 >
                   {{ t("login") }}
                 </NuxtLink>
                 <NuxtLink
-                  to="/register"
+                  :to="$localePath('/register')"
                   class="nav-btn register-btn"
                   @click="closeMenu"
                 >
