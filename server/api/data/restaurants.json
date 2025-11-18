@@ -4,41 +4,41 @@
     "nom": "Le Petit Gourmet",
     "lieu": "Paris, France",
     "description": "Une cuisine française raffinée dans un cadre élégant. Notre chef propose des plats traditionnels revisités avec une touche de modernité.",
-    "imageUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=300&h=200&fit=crop"
+    "imageUrl": "/images/restaurants/resto_gourmet.jpg"
   },
   {
     "id": 2,
     "nom": "Sushi Sakura",
     "lieu": "Lyon, France",
     "description": "Authentique restaurant japonais où nos chefs sushi préparent avec passion des mets frais et délicats devant vos yeux.",
-    "imageUrl": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=300&h=200&fit=crop"
+    "imageUrl": "/images/restaurants/resto_sakura.jpg"
   },
   {
     "id": 3,
     "nom": "La Pizzeria Napoli",
     "lieu": "Marseille, France",
     "description": "Véritable pizzeria napolitaine avec four à bois. Nos pizzaiolos perpétuent la tradition italienne avec des ingrédients importés d'Italie.",
-    "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&h=200&fit=crop"
+    "imageUrl": "/images/restaurants/resto_napoli.jpg"
   },
   {
     "id": 4,
     "nom": "Burger Factory",
     "lieu": "Toulouse, France",
     "description": "Burgers artisanaux préparés avec des produits locaux. Pain fait maison, viande de boucher et légumes du marché.",
-    "imageUrl": "https://images.unsplash.com/photo-1586816001966-79b736744398?w=300&h=200&fit=crop"
+    "imageUrl": "/images/restaurants/resto_burger.jpg"
   },
   {
     "id": 5,
     "nom": "Le Délice Indien",
     "lieu": "Paris, France",
     "description": "Une explosion de saveurs indiennes authentiques. Nos currys et tandooris sont préparés avec des épices soigneusement sélectionnées.",
-    "imageUrl": "https://images.unsplash.com/photo-1517244683847-7456b63c5969?w=300&h=200&fit=crop"
+    "imageUrl": "/images/restaurants/resto_indien.jpg"
   },
   {
     "id": 6,
     "nom": "Taco Fiesta",
     "lieu": "Lille, France",
     "description": "Street food mexicaine authentique dans une ambiance festive. Tacos, burritos et quesadillas préparés selon les recettes traditionnelles.",
-    "imageUrl": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=300&h=200&fit=crop"
+    "imageUrl": "/images/restaurants/resto_taco.jpg"
   }
 ]

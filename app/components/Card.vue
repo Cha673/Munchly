@@ -9,7 +9,14 @@ defineProps<{
 
 <template>
   <div class="resto-card">
-    <img :src="imageUrl" :alt="nom" class="resto-image" />
+    <NuxtImg
+      :src="imageUrl"
+      :alt="nom"
+      class="resto-image"
+      width="192"
+      height="192"
+      format="webp"
+    />
     <div class="resto-info">
       <h2>{{ nom }}</h2>
       <p>{{ subtitle }}</p>

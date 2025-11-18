@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     "./app/assets/css/layouts/navigation.css",
     "./app/assets/css/layouts/button_auth.css",
   ],
-  modules: ["@pinia/nuxt", "@nuxtjs/i18n"],
+  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "@vite-pwa/nuxt", "@nuxt/image"],
   i18n: {
     locales: [
       {
@@ -22,5 +22,46 @@ export default defineNuxtConfig({
     defaultLocale: "fr",
     strategy: "prefix_except_default",
     detectBrowserLanguage: false,
+  },
+  pwa: {
+    registerType: "autoUpdate",
+    manifest: {
+      name: "Munchly",
+      short_name: "Munchly",
+      description: "Application Munchly - commandes de plats en ligne",
+      lang: "fr",
+      start_url: "/",
+      scope: "/",
+      display: "standalone",
+      background_color: "#ffffff",
+      theme_color: "#ff6b6b",
+      icons: [
+        {
+          src: "/images/logo/munchly-logo.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "/images/logo/munchly-logo.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
+    },
+    workbox: {
+      navigateFallback: "/index.html",
+    },
+  },
+  image: {
+    provider: "ipx",
+    quality: 80,
+    format: ["webp"],
+    screens: {
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      "2xl": 1536,
+    },
   },
 });

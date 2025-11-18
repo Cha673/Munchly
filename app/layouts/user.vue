@@ -32,11 +32,25 @@ const currentLanguage = computed(() => locale.value.toUpperCase());
       <nav>
         <!-- Logo et éléments toujours visibles -->
         <NuxtLink :to="$localePath('/')" class="logo">
-          <img
-            src="/images/logo/munchly-logo.png"
-            alt="Munchly"
-            class="logo-img"
-          />
+          <ClientOnly>
+            <NuxtImg
+              src="/images/logo/munchly-logo.png"
+              alt="Munchly Logo"
+              class="logo-img"
+              width="192"
+              height="192"
+              format="webp"
+            />
+          </ClientOnly>
+          <noscript>
+            <img
+              src="/images/logo/munchly-logo.png"
+              alt="Munchly Logo"
+              class="logo-img"
+              width="192"
+              height="192"
+            />
+          </noscript>
         </NuxtLink>
 
         <!-- Conteneur pour langue et burger -->

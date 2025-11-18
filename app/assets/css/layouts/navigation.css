@@ -6,7 +6,6 @@
 }
 
 .logo-img {
-  height: 230px;
   width: auto;
   object-fit: contain;
 }
@@ -137,9 +136,6 @@ main {
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .logo-img {
-    height: 160px;
-  }
   .nav-container {
     padding: 0.5rem;
   }

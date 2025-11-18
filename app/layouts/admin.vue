@@ -26,11 +26,25 @@ const closeMenu = () => {
       <nav>
         <!-- Logo et éléments toujours visibles -->
         <NuxtLink :to="$localePath('/admin')" class="logo">
-          <img
-            src="/images/logo/munchly-logo.png"
-            alt="Munchly Admin"
-            class="logo-img"
-          />
+          <ClientOnly>
+            <NuxtImg
+              src="/images/logo/munchly-logo.png"
+              alt="Munchly Logo"
+              class="logo-img"
+              width="192"
+              height="192"
+              format="webp"
+            />
+          </ClientOnly>
+          <noscript>
+            <img
+              src="/images/logo/munchly-logo.png"
+              alt="Munchly Logo"
+              class="logo-img"
+              width="192"
+              height="192"
+            />
+          </noscript>
         </NuxtLink>
 
         <!-- Conteneur pour langue et burger -->

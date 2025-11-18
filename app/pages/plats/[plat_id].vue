@@ -97,7 +97,14 @@ const addToCart = () => {
 
     <div v-else-if="plat" class="plat-card">
       <div class="plat-image">
-        <img :src="plat.imageUrl" :alt="plat.nom" />
+        <NuxtImg
+          :src="plat.imageUrl"
+          :alt="plat.nom"
+          class="resto-image"
+          width="192"
+          height="192"
+          format="webp"
+        />
       </div>
       <div class="plat-content">
         <h1>{{ plat.nom }}</h1>

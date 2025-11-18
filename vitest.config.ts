@@ -20,6 +20,12 @@ export default defineConfig({
           include: ["test/unit/**/*.{test,spec}.ts"],
           environment: "node",
         },
+        resolve: {
+          alias: {
+            "~": fileURLToPath(new URL("./app", import.meta.url)),
+            "@": fileURLToPath(new URL("./app", import.meta.url)),
+          },
+        },
       },
       await defineVitestProject({
         test: {

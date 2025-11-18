@@ -97,7 +97,14 @@ await fetchPlats();
     <!-- En-tête du restaurant -->
     <div v-if="restaurant" class="restaurant-header">
       <div class="hero-image">
-        <img :src="restaurant.imageUrl" :alt="restaurant.nom" />
+        <NuxtImg
+          :src="restaurant.imageUrl"
+          :alt="restaurant.nom"
+          class="resto-image"
+          width="192"
+          height="192"
+          format="webp"
+        />
         <div class="overlay"></div>
       </div>
       <div class="restaurant-info">
