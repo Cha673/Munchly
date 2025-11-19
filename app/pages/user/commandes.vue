@@ -92,7 +92,7 @@ const toggleOrderDetails = (orderId: number) => {
 
 <style scoped>
 .commandes-historique {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2.5rem;
   background-color: #f9fafb;

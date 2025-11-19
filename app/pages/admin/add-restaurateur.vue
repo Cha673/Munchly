@@ -67,7 +67,7 @@ const handleAddRestaurateur = async () => {
             id="name"
             v-model="newUser.name"
             type="text"
-            placeholder="{{ t('admin.name_resto') }}"
+            placeholder="t('admin.name_resto')"
             required
           />
         </div>
@@ -78,7 +78,7 @@ const handleAddRestaurateur = async () => {
             id="email"
             v-model="newUser.email"
             type="email"
-            placeholder="{{ t('admin.mail_resto') }}"
+            placeholder="t('admin.mail_resto')"
             required
           />
         </div>

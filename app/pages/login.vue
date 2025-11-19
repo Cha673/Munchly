@@ -7,21 +7,21 @@ const { t } = useI18n();
 const { $localePath } = useNuxtApp();
 
 useHead({
-  title: t("meta.login_title"),
+  title: t("auth.login_title"),
   meta: [
     {
       name: "description",
-      content: t("meta.login_description"),
+      content: t("auth.login_description"),
     },
     { name: "robots", content: "noindex, nofollow" },
   ],
 });
 
 useSeoMeta({
-  title: t("meta.login_title"),
-  ogTitle: t("meta.login_title"),
-  description: t("meta.login_description"),
-  ogDescription: t("meta.login_description"),
+  title: t("auth.login_title"),
+  ogTitle: t("auth.login_title"),
+  description: t("auth.login_description"),
+  ogDescription: t("auth.login_description"),
 });
 
 definePageMeta({

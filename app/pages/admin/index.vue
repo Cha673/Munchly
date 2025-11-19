@@ -114,7 +114,7 @@ const handleAddRestaurateur = () => {
 
 /* Styles supplémentaires spécifiques au dashboard */
 .auth-box.dashboard {
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
 .dashboard {

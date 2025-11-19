@@ -110,5 +110,13 @@
     "prix": 10,
     "imageUrl": "https://test_2",
     "id": 1761567734382
+  },
+  {
+    "restaurantId": 2,
+    "nom": "test_plat",
+    "description": "description",
+    "prix": 10,
+    "imageUrl": "https://bleu",
+    "id": 1763566033700
   }
 ]

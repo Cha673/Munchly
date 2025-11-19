@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import piniaPersistedstate from "pinia-plugin-persistedstate";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
@@ -6,7 +8,13 @@ export default defineNuxtConfig({
     "./app/assets/css/layouts/navigation.css",
     "./app/assets/css/layouts/button_auth.css",
   ],
-  modules: ["@pinia/nuxt", "@nuxtjs/i18n", "@vite-pwa/nuxt", "@nuxt/image"],
+  modules: [
+    "@pinia/nuxt",
+    "@nuxtjs/i18n",
+    "@vite-pwa/nuxt",
+    "@nuxt/image",
+    "@nuxt/test-utils/module",
+  ],
   i18n: {
     locales: [
       {

@@ -106,6 +106,7 @@ const addPlat = async () => {
       <div class="form-group">
         <label>{{ t("dishes.name_dish") }}</label>
         <input
+          type="text"
           v-model="newPlat.nom"
           required
           placeholder="Ex: Pizza Margherita"

@@ -84,9 +84,6 @@ const addToCart = () => {
         navigateTo($localePath("/user/panier"));
       }
     }
-  } else {
-    // Le plat a été ajouté avec succès
-    alert(`${plat.value.nom} ajouté au panier !`);
   }
 };
 </script>

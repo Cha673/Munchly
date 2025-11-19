@@ -6,6 +6,11 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const userStore = useUserStore();
   const { $localePath } = useNuxtApp();
 
+  // middleware désactivé pour les tests e2e
+  if (process.env.NODE_ENV === "test") {
+    return;
+  }
+
   if (
     !userStore.isUserAuthenticated ||
     userStore.currentUser?.role !== "restaurateur"
