@@ -61,7 +61,7 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    provider: "ipx",
+    provider: "vercel",
     quality: 80,
     format: ["webp"],
     screens: {
