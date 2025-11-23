@@ -1,3 +1,5 @@
+![CI](https://github.com/Cha673/Munchly/actions/workflows/ci.yml/badge.svg)
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
