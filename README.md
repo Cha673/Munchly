@@ -1,77 +1,31 @@
-![CI](https://github.com/Cha673/Munchly/actions/workflows/ci.yml/badge.svg)
+# Munchly
 
-# Nuxt Minimal Starter
+[![Nuxt](https://img.shields.io/badge/Developed%20with-Nuxt.js-blue)](https://nuxt.com/)
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+**Lien en ligne :** [https://munchly-snowy.vercel.app/](https://munchly-snowy.vercel.app/)
 
-## Setup
+---
 
-Make sure to install dependencies:
+## Description
 
-```bash
-# npm
-npm install
+Munchly est une **application de commande de nourriture en ligne** de type **Just Eat**, développée avec **Nuxt.js**.  
 
-# pnpm
-pnpm install
+L’application permet aux utilisateurs de :  
+- Parcourir des restaurants et leurs plats
+- Ajouter des plats à un panier  
+- Simuler une commande en ligne  
 
-# yarn
-yarn install
+---
 
-# bun
-bun install
-```
+## Technologies utilisées
 
-## Development Server
+- [Nuxt.js](https://nuxt.com/)  
+- JavaScript / Vue.js  
+- CSS 
+- Déploiement sur [Vercel](https://vercel.com/)
 
-Start the development server on `http://localhost:3000`:
+---
 
-```bash
-# npm
-npm run dev
+## Lien en ligne
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Vous pouvez consulter l’application directement ici : [https://munchly-snowy.vercel.app/](https://munchly-snowy.vercel.app/)
