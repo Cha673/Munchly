@@ -1,0 +1,93 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e5]:
+    - link "Munchly Logo" [ref=e6] [cursor=pointer]:
+      - /url: /restaurateur
+      - img "Munchly Logo" [ref=e7]
+    - generic [ref=e8]:
+      - link "En" [ref=e10] [cursor=pointer]:
+        - /url: /en/restaurateur/plats
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - link "Mon restaurant" [ref=e13] [cursor=pointer]:
+            - /url: /restaurateur/mon-restaurant
+          - link "Plats" [ref=e14] [cursor=pointer]:
+            - /url: /restaurateur/plats
+          - link "Commandes" [ref=e15] [cursor=pointer]:
+            - /url: /restaurateur/commandes
+        - button "Déconnexion" [ref=e17] [cursor=pointer]
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Mes Plats" [level=1] [ref=e21]
+        - link "Ajouter un plat" [ref=e22] [cursor=pointer]:
+          - /url: /restaurateur/add_plat
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - img "Sushi Mix" [ref=e25]
+          - generic [ref=e26]:
+            - heading "Sushi Mix" [level=2] [ref=e27]
+            - paragraph [ref=e28]: 15€
+        - generic [ref=e29]:
+          - img "Tempura Crevettes" [ref=e30]
+          - generic [ref=e31]:
+            - heading "Tempura Crevettes" [level=2] [ref=e32]
+            - paragraph [ref=e33]: 13.5€
+        - generic [ref=e34]:
+          - img "nouveau plat" [ref=e35]
+          - generic [ref=e36]:
+            - heading "nouveau plat" [level=2] [ref=e37]
+            - paragraph [ref=e38]: 12.9€
+        - generic [ref=e39]:
+          - img "test plat2" [ref=e40]
+          - generic [ref=e41]:
+            - heading "test plat2" [level=2] [ref=e42]
+            - paragraph [ref=e43]: 10€
+        - generic [ref=e44]:
+          - img "test_plat" [ref=e45]
+          - generic [ref=e46]:
+            - heading "test_plat" [level=2] [ref=e47]
+            - paragraph [ref=e48]: 10€
+        - generic [ref=e49]:
+          - img "Test pour redirection" [ref=e50]
+          - generic [ref=e51]:
+            - heading "Test pour redirection" [level=2] [ref=e52]
+            - paragraph [ref=e53]: 11€
+        - generic [ref=e54]:
+          - img "nom plat test" [ref=e55]
+          - generic [ref=e56]:
+            - heading "nom plat test" [level=2] [ref=e57]
+            - paragraph [ref=e58]: 12€
+        - generic [ref=e59]:
+          - img "nom plat test" [ref=e60]
+          - generic [ref=e61]:
+            - heading "nom plat test" [level=2] [ref=e62]
+            - paragraph [ref=e63]: 12€
+        - generic [ref=e64]:
+          - img "nom plat test" [ref=e65]
+          - generic [ref=e66]:
+            - heading "nom plat test" [level=2] [ref=e67]
+            - paragraph [ref=e68]: 12€
+        - generic [ref=e69]:
+          - img "nom plat test" [ref=e70]
+          - generic [ref=e71]:
+            - heading "nom plat test" [level=2] [ref=e72]
+            - paragraph [ref=e73]: 12€
+        - generic [ref=e74]:
+          - img "nom plat test" [ref=e75]
+          - generic [ref=e76]:
+            - heading "nom plat test" [level=2] [ref=e77]
+            - paragraph [ref=e78]: 12€
+        - generic [ref=e79]:
+          - img "nom plat test" [ref=e80]
+          - generic [ref=e81]:
+            - heading "nom plat test" [level=2] [ref=e82]
+            - paragraph [ref=e83]: 12€
+        - generic [ref=e84]:
+          - img "nom plat test" [ref=e85]
+          - generic [ref=e86]:
+            - heading "nom plat test" [level=2] [ref=e87]
+            - paragraph [ref=e88]: 12€
+```

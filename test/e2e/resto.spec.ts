@@ -25,11 +25,17 @@ test.describe("Parcours d'un restaurateur", () => {
     await page.fill("input[type=text]", "nom plat test");
     await page.fill("textarea", "description");
     await page.fill("input[type=number]", "12.00");
-    await page.fill("input[type=url]", "https://#");
-    await page.click("button[type=submit]");
+    await page.fill(
+      "input[type=url]",
+      "https://images.pexels.com/photos/8601664/pexels-photo-8601664.jpeg?_gl=1*194cego*_ga*MTAyNzM1MjE2Mi4xNzMzMTQ2Mjk3*_ga_8JE65Q40S6*czE3NjM5MDQ2ODkkbzQkZzEkdDE3NjM5MDQ3MzckajEyJGwwJGgw"
+    );
+    await page.click(".submit-button");
 
     await page.waitForURL("**/restaurateur/plats");
     await page.waitForSelector(".plats-grid .resto-card .resto-info h2 ");
+
+    await page.waitForTimeout(500);
+
     await expect(
       page.locator(
         ".plats-grid .resto-card .resto-info h2:has-text('nom plat test')"
