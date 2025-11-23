@@ -1,6 +1,7 @@
 # Munchly
 
-[![Nuxt](https://img.shields.io/badge/Developed%20with-Nuxt.js-blue)](https://nuxt.com/)
+![CI](https://github.com/Cha673/Munchly/actions/workflows/ci.yml/badge.svg)
+
 
 **Lien en ligne :** [https://munchly-snowy.vercel.app/](https://munchly-snowy.vercel.app/)
 
