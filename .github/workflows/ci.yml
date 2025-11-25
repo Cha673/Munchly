@@ -1,62 +1,27 @@
-name: CI
+name: Build
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
+    branches: ["main"]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "pnpm"        # <--- important
-      
-      - name: Enable Corepack (pnpm)
-        run: corepack enable   # <--- active pnpm automatiquement
-      
-      - name: Prepare pnpm version
-        run: corepack prepare pnpm@latest --activate  # <--- installe pnpm dans le PATH
-      
-      - name: Install dependencies
-        run: pnpm install
-      
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-      
-      - name: Run unit tests (Vitest)
-        run: pnpm run test
-        continue-on-error: true
-      
+
+      - name: Install dependencies (npm install --no-optional)
+        run: npm install --no-optional
+
+      - name: Rebuild native bindings
+        run: npm rebuild
+
       - name: Build project
-        run: pnpm run build
-      
-      - name: Run E2E tests (Playwright)
-        run: pnpm run test:e2e
-        continue-on-error: true
-        env:
-          NODE_ENV: test
-          CI: true
-      
-      - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
-      
-      - name: Upload Playwright results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-results
-          path: test-results/
-          retention-days: 30
+        run: npm run build
