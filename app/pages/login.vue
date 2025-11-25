@@ -83,11 +83,7 @@ const handleLogin = () => {
       <div class="form-group">
         <div class="input-group">
           <label>{{ t("auth.email_label") }}</label>
-          <input
-            v-model="email"
-            type="email"
-            :placeholder="t('auth.email_placeholder')"
-          />
+          <input v-model="email" type="email" placeholder="example@email.com" />
         </div>
 
         <div class="input-group">

@@ -89,7 +89,7 @@ const handleRegister = async () => {
           <input
             v-model="email"
             type="email"
-            :placeholder="t('auth.email_placeholder')"
+            placeholder="'example@email.com'"
           />
         </div>
 
