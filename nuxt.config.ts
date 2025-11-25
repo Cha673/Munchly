@@ -3,6 +3,9 @@ import piniaPersistedstate from "pinia-plugin-persistedstate";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  experimental: {
+    oxcParser: false
+  },
   devtools: { enabled: true },
   css: [
     "./app/assets/css/layouts/navigation.css",
