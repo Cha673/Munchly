@@ -17,23 +17,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "npm"
+          cache: "pnpm"
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
       
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
       
       - name: Run unit tests (Vitest)
-        run: npm run test
+        run: pnpm run test
         continue-on-error: true
       
       - name: Build project
-        run: npm run build
+        run: pnpm run build
       
       - name: Run E2E tests (Playwright)
-        run: npm run test:e2e
+        run: pnpm run test:e2e
         continue-on-error: true
         env:
           NODE_ENV: test
@@ -47,7 +50,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
       
-      - name: Upload Playwright test results
+      - name: Upload Playwright results
         if: always()
         uses: actions/upload-artifact@v4
         with:
