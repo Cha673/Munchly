@@ -1,0 +1,13 @@
+import { Type, Static } from "@sinclair/typebox";
+
+export const UserSchema = Type.Object({
+  email: Type.String({ minLength: 2, format: "email" }),
+  password: Type.String({ minLength: 6 }),
+});
+
+export type UserRequest = Static<typeof UserSchema>;
+
+// Utilisation de Type.Partial pour rendre tous les champs optionnels
+export const UpdateUserSchema = Type.Partial(UserSchema);
+
+export type UpdateUserRequest = Static<typeof UpdateUserSchema>;

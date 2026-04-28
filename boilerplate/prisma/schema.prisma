@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  USER
+  ADMIN
+  RESTAURANT
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  password     String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  role         Role         @default(USER)
+  
+  restaurants  Restaurant[] // Un restaurateur peut gérer plusieurs restaurants
+  orders       Order[]      // Un client peut avoir plusieurs commandes
+}
+
+model Restaurant {
+  id          String    @id @default(cuid())
+  nom         String
+  lieu        String
+  description String    @db.Text
+  imageUrl    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  ownerId     String
+  owner       User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  plats       Plat[]
+  orders      Order[]
+}
+
+model Plat {
+  id           String      @id @default(cuid())
+  nom          String
+  description  String      @db.Text
+  prix         Float
+  imageUrl     String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  restaurantId String
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  orderItems   OrderItem[]
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  total        Float
+  status       OrderStatus @default(PENDING)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  clientId     String
+  client       User        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  restaurantId String
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  items        OrderItem[]
+}
+
+model OrderItem {
+  id           String @id @default(cuid())
+  quantite     Int
+  prixUnitaire Float? // Historise le prix du plat au moment de l'achat
+
+  orderId      String
+  order        Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  platId       String
+  plat         Plat   @relation(fields: [platId], references: [id], onDelete: Cascade)
+}
