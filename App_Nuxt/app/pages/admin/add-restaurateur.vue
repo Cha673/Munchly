@@ -44,9 +44,10 @@ const newUser = ref({
 
 const handleAddRestaurateur = async () => {
   try {
-    userStore.addRestaurateur({
-      ...newUser.value,
-      role: "restaurateur",
+    await userStore.addRestaurateur({
+      name: newUser.value.name,
+      email: newUser.value.email,
+      password: newUser.value.password,
     });
     await navigateTo($localePath("/admin"));
   } catch (error: any) {

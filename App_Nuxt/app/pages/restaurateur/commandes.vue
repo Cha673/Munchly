@@ -44,18 +44,28 @@ const currentUser = computed(() => userStore.currentUser);
 
 const expandedOrderId = ref<number | null>(null);
 
-// Récupérer les commandes du store qui correspondent à ce restaurateur
-const orders = computed(() => {
-  if (!currentUser.value) {
-    return [];
+const orders = ref<any[]>([]);
+const loading = ref(false);
+
+const fetchRestaurantOrders = async () => {
+  loading.value = true;
+  try {
+    const api = useApi();
+    const data: any = await api("/orders/restaurant");
+    orders.value = data || [];
+  } catch (error) {
+    console.error("Erreur lors de la récupération des commandes:", error);
   }
+  loading.value = false;
+};
 
-  const commandesFiltrees = panierStore.commandes.filter((commande) => {
-    return commande.restaurantId === currentUser.value!.id;
-  });
-
-  console.log("Commandes filtrées:", commandesFiltrees);
-  return commandesFiltrees;
+onMounted(() => {
+  if (
+    currentUser.value?.role === "RESTAURANT" ||
+    currentUser.value?.role === "restaurateur"
+  ) {
+    fetchRestaurantOrders();
+  }
 });
 
 // Afficher/masquer les détails d'une commande
@@ -71,14 +81,17 @@ const toggleOrderDetails = (orderId: number) => {
     </div>
 
     <!-- Liste des commandes -->
-    <div class="orders-list">
+    <div v-if="loading" class="loading">
+      {{ t("orders.loading") || "Chargement..." }}
+    </div>
+    <div v-else class="orders-list">
       <OrderItem
         v-for="order in orders"
         :key="order.id"
         :id="order.id"
-        :clientName="order.clientName || ''"
+        :clientName="order.client?.email || `Client ${order.clientId}`"
         :total="order.total"
-        :date="new Date(order.date).toLocaleString()"
+        :date="new Date(order.createdAt || order.date).toLocaleString()"
         @toggle-details="toggleOrderDetails"
       />
 

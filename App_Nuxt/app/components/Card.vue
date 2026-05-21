@@ -4,6 +4,7 @@ defineProps<{
   imageUrl: string;
   nom: string;
   subtitle: string;
+  description?: string;
 }>();
 </script>
 
@@ -19,7 +20,14 @@ defineProps<{
     />
     <div class="resto-info">
       <h2>{{ nom }}</h2>
-      <p>{{ subtitle }}</p>
+      <p class="subtitle">{{ subtitle }}</p>
+      <p class="description" v-if="description">
+        {{
+          description.length > 80
+            ? description.substring(0, 80) + "..."
+            : description
+        }}
+      </p>
     </div>
   </div>
 </template>
@@ -63,9 +71,18 @@ defineProps<{
   margin-bottom: 0.5rem;
 }
 
-.resto-info p {
+.resto-info .subtitle {
+  margin: 0;
+  color: #fbbf24;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.resto-info .description {
   margin: 0;
   color: #6b7280;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 </style>

@@ -3,6 +3,11 @@ import piniaPersistedstate from "pinia-plugin-persistedstate";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: "http://localhost:3000/api",
+    },
+  },
   devtools: { enabled: true },
   css: [
     "./app/assets/css/layouts/navigation.css",
@@ -60,8 +65,10 @@ export default defineNuxtConfig({
       navigateFallback: "/index.html",
     },
   },
+  devServer: {
+    port: 3001,
+  },
   image: {
-    provider: "vercel",
     quality: 80,
     format: ["webp"],
     screens: {

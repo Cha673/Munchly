@@ -43,26 +43,26 @@ const email = ref("");
 const password = ref("");
 const error = ref("");
 
-const handleLogin = () => {
+const handleLogin = async () => {
   try {
     // Réinitialiser l'erreur
     error.value = "";
 
     // Tentative de connexion
-    const user = userStore.login({
+    const user = await userStore.login({
       email: email.value,
       password: password.value,
     });
 
     // Rediriger selon le rôle
     switch (user.role) {
-      case "admin":
+      case "ADMIN":
         navigateTo($localePath("/admin"));
         break;
-      case "restaurateur":
+      case "RESTAURANT":
         navigateTo($localePath("/restaurateur"));
         break;
-      case "user":
+      case "USER":
         navigateTo($localePath("/restaurants"));
         break;
       default:

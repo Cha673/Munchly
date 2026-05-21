@@ -68,4 +68,21 @@ export const usersRoutes = async (app: FastifyInstance) => {
       return reply.send({ message: "Compte supprimé avec succès" });
     },
   );
+
+  // 4. Lister les utilisateurs (ADMIN) (GET /users)
+  app.get(
+    "/",
+    {
+      onRequest: [app.authenticate],
+    },
+    async (request, reply) => {
+      // Vérifier si l'utilisateur est admin
+      if (request.user.role !== "ADMIN") {
+        return reply.status(403).send({ message: "Accès refusé" });
+      }
+
+      const users = await usersService.getAllUsers();
+      return reply.send(users);
+    },
+  );
 };

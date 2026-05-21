@@ -18,6 +18,7 @@ export const UserResponseSchema = Type.Object({
 
 export const TokenResponseSchema = Type.Object({
   token: Type.String(),
+  user: Type.Optional(UserResponseSchema),
 });
 
 export const ErrorResponseSchema = Type.Object({

@@ -25,12 +25,11 @@ useSeoMeta({
 });
 definePageMeta({
   ssr: false,
-  middlewares: "auth",
+
 });
 
 const userStore = useUserStore();
 
-const name = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
@@ -40,31 +39,24 @@ const error = ref("");
 const handleRegister = async () => {
   try {
     // Vérifications de base
-    if (!name.value || !email.value || !password.value) {
+    if (!email.value || !password.value) {
       error.value = "Tous les champs sont obligatoires";
       return;
     }
 
-    // Création du nouvel utilisateur
+    // Configuration du nouvel utilisateur
     const newUser: User = {
-      id: Date.now(),
-      name: name.value,
+      id: 0,
       email: email.value,
       password: password.value,
-      role: "user",
+      role: "user", // Forcé à user car seul un utilisateur normal s'inscrit via cette page
     };
 
-    userStore.register(newUser);
+    await userStore.register(newUser);
     error.value = "";
 
-    // Redirection selon le rôle
-    switch (role.value) {
-      case "user":
-        await navigateTo($localePath("/commandes"));
-        break;
-      default:
-        await navigateTo($localePath("/"));
-    }
+    // Redirection après succès
+    await navigateTo($localePath("/restaurants"));
   } catch (err: any) {
     error.value = err.message;
     password.value = "";
@@ -79,11 +71,6 @@ const handleRegister = async () => {
       <h1>{{ t("auth.create_account") }}</h1>
 
       <div class="form-group">
-        <div class="input-group">
-          <label>{{ t("auth.nom_label") }}</label>
-          <input v-model="name" type="text" placeholder="John Doe" />
-        </div>
-
         <div class="input-group">
           <label>{{ t("auth.email_label") }}</label>
           <input

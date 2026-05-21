@@ -62,18 +62,48 @@ const start = async () => {
     const port = Number(process.env.PORT) || 3000;
     const host = "0.0.0.0";
 
-    await server.register(cors, {});
-    // Todo: Enregistrer Swagger uniquement en développement
-    // Todo: Register Swagger-ui uniquement en développement
+    await server.register(cors, {
+      origin: "*",
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+    });
+    if (process.env.NODE_ENV === "development") {
+      await server.register(swagger, {
+        openapi: {
+          info: {
+            title: "API",
+            description: "API documentation",
+            version: "1.0.0",
+          },
+          components: {
+            securitySchemes: {
+              bearerAuth: {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT",
+              },
+            },
+          },
+        },
+      });
+
+      await server.register(import("@fastify/swagger-ui"), {
+        routePrefix: "/docs",
+        uiConfig: {
+          docExpansion: "full",
+          deepLinking: false,
+        },
+      });
+    }
 
     await registerPlugins(server);
     await registerGraphQL(server);
     await registerRoutes(server);
 
     await server.ready();
-    if (process.env.NODE_ENV === "development") {
-      //server.swagger();
-    }
+    // if (process.env.NODE_ENV === "development") {
+    //   server.swagger();
+    // }
 
     await server.listen({ port, host });
     server.log.info(`Server running on http://${host}:${port}`);

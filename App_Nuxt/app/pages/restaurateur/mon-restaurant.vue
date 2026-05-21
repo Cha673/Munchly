@@ -1,6 +1,6 @@
 <!-- Page de gestion du restaurant pour le restaurateur -->
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, watchEffect } from "vue";
 import { useUserStore } from "~/stores/users/user";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
@@ -32,11 +32,42 @@ useSeoMeta({
 const userStore = useUserStore();
 const currentUser = computed(() => userStore.currentUser);
 
+const restaurantData = ref<any>(null);
+
+const fetchMyRestaurant = async () => {
+  try {
+    const api = useApi();
+    const resto: any = await api("/restaurants/me");
+    if (resto && resto.id) {
+      restaurantData.value = resto;
+    }
+  } catch (err) {
+    console.error("Impossible de récupérer le restaurant", err);
+  }
+};
+
+onMounted(() => {
+  fetchMyRestaurant();
+});
+
 const formData = ref({
-  name: currentUser.value?.name || "",
+  name: "",
   email: currentUser.value?.email || "",
   password: "",
   confirmPassword: "",
+  imageUrl: "",
+  description: "",
+  lieu: "",
+});
+
+// Lorsqu'on reçoit les data du resto, on pré-remplit les refs si non en édition
+watchEffect(() => {
+  if (!isEditing.value && restaurantData.value) {
+    formData.value.name = restaurantData.value.nom || "";
+    formData.value.imageUrl = restaurantData.value.imageUrl || "";
+    formData.value.description = restaurantData.value.description || "";
+    formData.value.lieu = restaurantData.value.lieu || "";
+  }
 });
 
 const error = ref("");
@@ -45,12 +76,6 @@ const isEditing = ref(false);
 
 // Fonction pour commencer l'édition
 const startEditing = () => {
-  formData.value = {
-    name: currentUser.value?.name || "",
-    email: currentUser.value?.email || "",
-    password: "",
-    confirmPassword: "",
-  };
   isEditing.value = true;
 };
 
@@ -85,7 +110,7 @@ const validateForm = () => {
   return true;
 };
 
-// Mettre à jour le profil
+// Mettre à jour le profil/restaurant
 const updateProfile = async () => {
   error.value = "";
   success.value = "";
@@ -93,12 +118,35 @@ const updateProfile = async () => {
   if (!validateForm()) return;
 
   try {
-    await userStore.updateProfile({
-      name: formData.value.name,
-      email: formData.value.email,
-      password: formData.value.password || currentUser.value?.password || "",
-    });
-    success.value = "Profil mis à jour avec succès";
+    // 1. MAJ du User (email/password) si modifié
+    if (
+      formData.value.email !== currentUser.value?.email ||
+      formData.value.password
+    ) {
+      await userStore.updateProfile({
+        name: currentUser.value?.name,
+        email: formData.value.email,
+        password: formData.value.password || currentUser.value?.password || "",
+      });
+    }
+
+    // 2. MAJ du Restaurant (nom, desc, imageUrl)
+    if (restaurantData.value) {
+      const api = useApi();
+      const updatedResto: any = await api("/restaurants/me", {
+        method: "PATCH",
+        body: {
+          nom: formData.value.name,
+          description: formData.value.description,
+          imageUrl:
+            formData.value.imageUrl || "https://placehold.co/400x400/png",
+          lieu: formData.value.lieu || "Adresse à définir",
+        },
+      });
+      restaurantData.value = updatedResto;
+    }
+
+    success.value = "Profil et restaurant mis à jour avec succès";
     isEditing.value = false;
   } catch (err: any) {
     error.value = err.message || "Erreur lors de la mise à jour";
@@ -116,12 +164,38 @@ const updateProfile = async () => {
         <div class="form-group">
           <div class="input-group">
             <label>{{ t("auth.nom_label") }}</label>
-            <div class="info-display">{{ currentUser?.name }}</div>
+            <div class="info-display">{{ restaurantData?.nom }}</div>
           </div>
 
           <div class="input-group">
             <label>{{ t("auth.email_label") }}</label>
             <div class="info-display">{{ currentUser?.email }}</div>
+          </div>
+
+          <div class="input-group" v-if="restaurantData?.description">
+            <label>Description</label>
+            <div class="info-display">{{ restaurantData.description }}</div>
+          </div>
+
+          <div class="input-group" v-if="restaurantData?.lieu">
+            <label>Adresse du restaurant</label>
+            <div class="info-display">{{ restaurantData.lieu }}</div>
+          </div>
+
+          <div class="input-group" v-if="restaurantData?.imageUrl">
+            <label>Image de couverture</label>
+            <div class="info-display">
+              <img
+                :src="restaurantData.imageUrl"
+                alt="Restaurant Image"
+                style="
+                  max-width: 100%;
+                  height: 200px;
+                  object-fit: cover;
+                  border-radius: 8px;
+                "
+              />
+            </div>
           </div>
 
           <button @click="startEditing">{{ t("auth.update_profil") }}</button>
@@ -151,11 +225,38 @@ const updateProfile = async () => {
         </div>
 
         <div class="input-group">
+          <label>URL de l'image de couverture</label>
+          <input
+            v-model="formData.imageUrl"
+            type="url"
+            placeholder="URL de l'image (ex: https://...)"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Adresse du restaurant</label>
+          <input
+            v-model="formData.lieu"
+            type="text"
+            placeholder="Adresse complète"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Description du restaurant</label>
+          <textarea
+            v-model="formData.description"
+            placeholder="Description détaillée de votre restaurant"
+            rows="4"
+          ></textarea>
+        </div>
+
+        <div class="input-group">
           <label>{{ t("auth.update_password") }}</label>
           <input
             v-model="formData.password"
             type="password"
-            placeholder="{{ t('auth.password_placeholder') }}"
+            :placeholder="t('auth.password_placeholder')"
           />
         </div>
 
@@ -164,7 +265,7 @@ const updateProfile = async () => {
           <input
             v-model="formData.confirmPassword"
             type="password"
-            placeholder="{{ t('auth.confirm_password') }}"
+            :placeholder="t('auth.confirm_password')"
           />
         </div>
 

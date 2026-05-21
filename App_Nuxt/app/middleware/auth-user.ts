@@ -8,9 +8,15 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (to.query?.e2e === "true") {
     return;
   }
+
+  // Éviter l'exécution côté serveur car Pinia avec localStorage est vide lors du SSR
+  if (process.server) {
+    return;
+  }
+
   if (
     !userStore.isUserAuthenticated ||
-    userStore.currentUser?.role !== "user"
+    userStore.currentUser?.role !== "USER"
   ) {
     return navigateTo($localePath("/"));
   }

@@ -83,12 +83,12 @@ export const usePanierStore = defineStore("panier", {
     },
 
     // Retirer un plat du panier
-    removePlat(platId: number) {
+    removePlat(platId: string | number) {
       this.items = this.items.filter((item) => item.plat.id !== platId);
     },
 
     // Augmenter la quantité d'un plat
-    incrementQuantite(platId: number) {
+    incrementQuantite(platId: string | number) {
       const item = this.items.find((item) => item.plat.id === platId);
       if (item) {
         item.quantite++;
@@ -96,7 +96,7 @@ export const usePanierStore = defineStore("panier", {
     },
 
     // Diminuer la quantité d'un plat
-    decrementQuantite(platId: number) {
+    decrementQuantite(platId: string | number) {
       const item = this.items.find((item) => item.plat.id === platId);
       if (item) {
         if (item.quantite > 1) {
@@ -124,43 +124,32 @@ export const usePanierStore = defineStore("panier", {
       const restaurantId = this.items[0]?.plat.restaurantId;
       if (!restaurantId) return null;
 
-      // Convertir les items du panier en OrderItems
+      // Convertir les items du panier en format attendu par l'API
       const orderItems = this.items.map((item) => ({
-        platId: item.plat.id,
-        plat: item.plat,
+        platId: String(item.plat.id),
         quantite: item.quantite,
       }));
 
-      const nouvelleCommande = {
-        restaurantId,
-        clientId: userStore.currentUser.id,
-        clientName: userStore.currentUser.name,
-        items: orderItems,
-        total: this.totalPrix,
-        date: new Date().toISOString(),
-      };
-
       try {
-        // Ajouter un ID à la nouvelle commande (basé sur le nombre de commandes existantes)
-        const nouvelId = this.commandes.length + 1;
-
-        // Créer les items avec ID
-        const itemsAvecId = orderItems.map((item, index) => ({
-          ...item,
-          id: nouvelId * 1000 + index, // Crée un ID unique pour chaque item
-        }));
+        const api = useApi();
+        const apiOrder: any = await api("/orders", {
+          method: "POST",
+          body: {
+            restaurantId: String(restaurantId),
+            items: orderItems,
+          },
+        });
 
         const commandeAvecId = {
-          id: nouvelId,
-          items: itemsAvecId,
-          restaurantId,
-          clientId: userStore.currentUser.id,
-          clientName: userStore.currentUser.name,
-          total: this.totalPrix,
-          date: new Date().toISOString(),
+          ...apiOrder,
+          items: this.items.map((item) => ({
+             platId: item.plat.id,
+             plat: item.plat,
+             quantite: item.quantite
+          })),
         };
 
-        // Ajouter la commande à la liste des commandes
+        // Ajouter la commande à la liste locale des commandes
         this.commandes.push(commandeAvecId);
 
         // Sauvegarder dans le localStorage

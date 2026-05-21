@@ -11,9 +11,11 @@ export default defineNuxtRouteMiddleware((to, from) => {
     return;
   }
 
+  if (process.server) return;
+
   if (
     !userStore.isUserAuthenticated ||
-    userStore.currentUser?.role !== "restaurateur"
+    userStore.currentUser?.role !== "RESTAURANT"
   ) {
     return navigateTo($localePath("/"));
   }

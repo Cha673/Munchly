@@ -1,11 +1,10 @@
 // Store Pinia pour les restaurants
 import { defineStore } from "pinia";
 import type { Restaurant } from "~/types/restaurants/restaurants";
-import restaurantsData from "../../../server/api/data/restaurants.json";
 
 export const useRestaurantsStore = defineStore("restaurants", {
   state: () => ({
-    restaurants: restaurantsData as Restaurant[],
+    restaurants: [] as Restaurant[],
     filteredRestaurants: [] as Restaurant[],
   }),
   getters: {
@@ -13,7 +12,8 @@ export const useRestaurantsStore = defineStore("restaurants", {
     getAllRestaurants: (state) => state.restaurants,
     // rechercher un restaurant par son ID
     getRestaurantById: (state) => {
-      return (id: number) => state.restaurants.find((r) => r.id === id);
+      return (id: string | number) =>
+        state.restaurants.find((r) => r.id === id);
     },
     // rechercher des restaurants par filtre
     getFilteredRestaurants: (state) => state.filteredRestaurants,
@@ -21,6 +21,15 @@ export const useRestaurantsStore = defineStore("restaurants", {
     getFeaturedRestaurants: (state) => state.restaurants.slice(0, 4),
   },
   actions: {
+    async loadRestaurants() {
+      const api = useApi();
+      try {
+        const data: any = await api("/restaurants");
+        this.restaurants = data;
+      } catch (error) {
+        console.error("Erreur chargement restaurants:", error);
+      }
+    },
     //rechercher des restaurants
     searchRestaurants(query: string) {
       if (!query.trim()) {
@@ -31,7 +40,7 @@ export const useRestaurantsStore = defineStore("restaurants", {
       this.filteredRestaurants = this.restaurants.filter(
         (resto) =>
           resto.nom.toLowerCase().includes(searchTerm) ||
-          resto.lieu.toLowerCase().includes(searchTerm)
+          resto.lieu.toLowerCase().includes(searchTerm),
       );
     },
   },

@@ -36,7 +36,7 @@ const userStore = useUserStore();
 const currentUser = computed(() => userStore.currentUser);
 
 // Vérifier que l'utilisateur est connecté et est un restaurateur
-if (!currentUser.value || currentUser.value.role !== "restaurateur") {
+if (!currentUser.value || (currentUser.value.role !== "restaurateur" && currentUser.value.role !== "RESTAURANT")) {
   navigateTo($localePath("/login"));
 }
 
@@ -68,11 +68,11 @@ const addPlat = async () => {
 
   loading.value = true;
   error.value = null;
+  const api = useApi();
   try {
-    await $fetch("/api/plats", {
+    await api("/plats", {
       method: "POST",
       body: {
-        restaurantId: currentUser.value.id,
         nom: newPlat.value.nom,
         description: newPlat.value.description,
         prix: parseFloat(newPlat.value.prix),

@@ -63,6 +63,7 @@ const restaurants = computed(() => restaurantsStore.getFeaturedRestaurants);
           :imageUrl="restaurant.imageUrl"
           :nom="restaurant.nom"
           :subtitle="restaurant.lieu"
+          :description="restaurant.description"
         />
       </div>
       <div class="view-all">
@@ -82,7 +83,8 @@ const restaurants = computed(() => restaurantsStore.getFeaturedRestaurants);
 }
 
 .banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
   background-size: cover;
   background-position: center;
@@ -137,14 +139,16 @@ const restaurants = computed(() => restaurantsStore.getFeaturedRestaurants);
   font-size: 1.125rem;
   transition: all 0.2s ease;
   display: inline-block;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .cta-button:hover {
   background-color: #374151;
   transform: translateY(-1px);
-  box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 6px 8px -1px rgba(0, 0, 0, 0.1),
     0 3px 6px -1px rgba(0, 0, 0, 0.06);
 }
 

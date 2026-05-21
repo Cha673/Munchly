@@ -9,7 +9,7 @@ const panierStore = usePanierStore();
 const { t, locale } = useI18n();
 const { $localePath } = useNuxtApp();
 
-const isLoggedIn = computed(() => userStore.currentUser !== null);
+const isLoggedIn = computed(() => userStore.isUserAuthenticated);
 const isMenuOpen = ref(false);
 
 // Ferme le menu quand on clique sur un lien

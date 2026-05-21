@@ -48,4 +48,16 @@ export default class UsersService {
     });
     return { success: true };
   }
+
+  async getAllUsers() {
+    const users = await this.prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        createdAt: true,
+      },
+    });
+    return users;
+  }
 }

@@ -65,7 +65,7 @@ export const authRoutes = async (app: FastifyInstance) => {
     async (request, reply) => {
       const user = await registerRestaurant(request.body);
       const token = app.jwt.sign({ id: user.id });
-      return reply.status(201).send({ token });
+      return reply.status(201).send({ token, user });
     },
   );
 

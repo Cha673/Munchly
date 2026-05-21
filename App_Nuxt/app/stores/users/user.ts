@@ -1,7 +1,6 @@
 // Store Pinia pour la gestion des utilisateurs
 import { defineStore } from "pinia";
 import type { User } from "~/types/utilisateurs/users";
-import usersData from "../../../server/api/data/users.json";
 
 // Récupérer l'état d'authentification du localStorage
 const authStored = process.client ? localStorage.getItem("auth_state") : null;
@@ -9,132 +8,175 @@ const initialAuthState = authStored
   ? JSON.parse(authStored)
   : {
       user: null,
+      token: null,
       isAuthenticated: false,
     };
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    users: usersData as User[],
     user: initialAuthState.user as User | null,
+    token: initialAuthState.token as string | null,
     isAuthenticated: initialAuthState.isAuthenticated as boolean,
+    usersList: [] as User[],
   }),
 
   getters: {
-    // Utilisateur actuellement connecté
     currentUser: (state): User | null => state.user,
-    // Liste des users avec le role "restaurateur"
-    getRestaurateurs: (state) =>
-      state.users.filter((user) => user.role === "restaurateur"),
-    // Ajout d'un getter pour vérifier l'authentification
     isUserAuthenticated: (state): boolean => {
-      return state.isAuthenticated && state.user !== null;
+      // @ts-ignore
+      return (
+        state.isAuthenticated && state.user !== null && state.token != null
+      );
+    },
+    getRestaurateurs: (state): User[] => {
+      return state.usersList.filter(
+        (u) => u.role === "RESTAURANT" || u.role === "restaurateur",
+      );
     },
   },
 
   actions: {
-    // Enregistrer un nouvel utilisateur
-    register(user: User) {
-      const exists = this.users.some((u) => u.email === user.email);
-      if (exists) throw new Error("Cet utilisateur existe déjà");
-      this.users.push(user);
-      this.user = user;
-      this.isAuthenticated = true;
+    async fetchUsers() {
+      const api = useApi();
+      try {
+        const response: any = await api("/users", {
+          method: "GET",
+        });
+        this.usersList = response;
+      } catch (error: any) {
+        console.error("Erreur lors de la récupération des utilisateurs", error);
+      }
+    },
+    async register(user: User) {
+      const api = useApi();
+      try {
+        await api("/auth/register", {
+          method: "POST",
+          body: {
+            email: user.email,
+            password: user.password,
+          },
+        });
 
-      // Sauvegarder dans le localStorage
-      if (process.client) {
-        localStorage.setItem(
-          "auth_state",
-          JSON.stringify({
-            user: this.user,
-            isAuthenticated: this.isAuthenticated,
-          })
+        await this.login({
+          email: user.email,
+          password: user.password,
+        });
+      } catch (error: any) {
+        throw new Error(
+          error.response?._data?.message ||
+            error.response?._data?.detail ||
+            error.message ||
+            "Erreur lors de l'inscription",
         );
       }
     },
 
-    // Connexion d'un utilisateur
-    login(credentials: { email: string; password: string }): User {
-      // Recherche de l'utilisateur
-      const user = this.users.find(
-        (u) =>
-          u.email === credentials.email && u.password === credentials.password
-      );
+    async addRestaurateur(payload: {
+      email: string;
+      password: string;
+      name?: string;
+    }) {
+      const api = useApi();
+      try {
+        const response: any = await api("/auth/register-restaurant", {
+          method: "POST",
+          body: {
+            email: payload.email,
+            password: payload.password,
+          },
+        });
 
-      // Si l'utilisateur n'est pas trouvé, on lance une erreur
-      if (!user) {
-        throw new Error("Email ou mot de passe incorrect");
-      }
+        // Si on a un nom, on créé le restaurant directement avec le user nouvellement créé
+        if (payload.name && response.user?.id) {
+          await api("/restaurants", {
+            method: "POST",
+            body: {
+              nom: payload.name,
+              lieu: "Adresse à définir",
+              description: "Nouveau restaurant",
+              imageUrl: "https://placehold.co/400x400/png",
+              ownerId: response.user.id,
+            },
+          });
+        }
 
-      // Mise à jour du state
-      this.user = user;
-      this.isAuthenticated = true;
-
-      // Sauvegarder dans le localStorage
-      if (process.client) {
-        localStorage.setItem(
-          "auth_state",
-          JSON.stringify({
-            user: this.user,
-            isAuthenticated: this.isAuthenticated,
-          })
+        return response;
+      } catch (error: any) {
+        throw new Error(
+          error.response?._data?.message ||
+            error.response?._data?.detail ||
+            error.message ||
+            "Erreur lors de la création du restaurateur",
         );
       }
-
-      return user;
     },
 
-    // Déconnexion de l'utilisateur
+    async login(credentials: { email: string; password: string }) {
+      const api = useApi();
+
+      try {
+        const response: any = await api("/auth/login", {
+          method: "POST",
+          body: credentials,
+        });
+
+        this.token = response.token;
+        this.isAuthenticated = true;
+
+        if (process.client) {
+          localStorage.setItem(
+            "auth_state",
+            JSON.stringify({
+              user: null, // On met user à null car on ne l'a pas encore, mais le localstorage doit exister
+              token: this.token,
+              isAuthenticated: this.isAuthenticated,
+            }),
+          );
+        }
+
+        // ⚠️ AU LIEU DE FAIRE APPEL A USEAPI, ON FORCE "$fetch" POUR PASSER LE TOKEN A LA MAIN.
+        const config = useRuntimeConfig();
+        const userData: any = await $fetch("/auth/me", {
+          baseURL: config.public.apiBaseUrl,
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+
+        this.user = userData;
+
+        if (process.client) {
+          localStorage.setItem(
+            "auth_state",
+            JSON.stringify({
+              user: this.user,
+              token: this.token,
+              isAuthenticated: this.isAuthenticated,
+            }),
+          );
+        }
+
+        return this.user;
+      } catch (error: any) {
+        throw new Error(
+          error.response?._data?.message ||
+            error.response?._data?.detail ||
+            error.message ||
+            "Email ou mot de passe incorrect",
+        );
+      }
+    },
+
     logout() {
       this.user = null;
+      this.token = null;
       this.isAuthenticated = false;
 
-      // Nettoyer le localStorage
       if (process.client) {
         localStorage.removeItem("auth_state");
       }
-    },
-
-    // Mise à jour du profil utilisateur
-    updateProfile(updatedFields: {
-      name: string;
-      email: string;
-      password: string;
-    }) {
-      if (!this.user) throw new Error("Aucun utilisateur connecté");
-
-      const index = this.users.findIndex((u) => u.id === this.user!.id);
-      if (index === -1) throw new Error("Utilisateur introuvable");
-
-      // Création d'un nouvel objet User strictement typé
-      const updatedUser: User = {
-        id: this.user.id, // inchangé
-        role: this.user.role, // inchangé
-        name: updatedFields.name,
-        email: updatedFields.email,
-        password: updatedFields.password,
-      };
-
-      this.users[index] = updatedUser;
-      this.user = updatedUser;
-    },
-
-    // Suppression d'un utilisateur par ID
-    deleteUser(userId: number) {
-      const index = this.users.findIndex((u) => u.id === userId);
-      if (index === -1) throw new Error("Utilisateur introuvable");
-      this.users.splice(index, 1);
-    },
-
-    // Ajout d'un nouveau restaurateur
-    addRestaurateur(newUser: Omit<User, "id">) {
-      const maxId = Math.max(...this.users.map((u) => u.id));
-      const userWithId: User = {
-        ...newUser,
-        id: maxId + 1,
-        role: "restaurateur",
-      };
-      this.users.push(userWithId);
-      return userWithId;
     },
   },
 });

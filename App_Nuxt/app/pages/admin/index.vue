@@ -40,6 +40,10 @@ useSeoMeta({
 const userStore = useUserStore();
 const restaurateurs = computed(() => userStore.getRestaurateurs);
 
+onMounted(() => {
+  userStore.fetchUsers();
+});
+
 const handleLogout = async () => {
   userStore.logout();
   await navigateTo($localePath("/login"));
@@ -123,7 +127,9 @@ const handleAddRestaurateur = () => {
   padding: 2.5rem;
   width: 100%;
   max-width: 50rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 .dashboard-header {
   display: flex;

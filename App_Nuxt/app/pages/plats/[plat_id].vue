@@ -5,7 +5,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: "user",
-  validate: (route) => !isNaN(parseInt(route.params.plat_id as string)),
+  validate: (route) => !!route.params.plat_id,
   middleware: ["auth-user"],
 });
 
@@ -23,16 +23,20 @@ const { $localePath } = useNuxtApp();
 const route = useRoute();
 const panierStore = usePanierStore();
 
-const platId = Number(route.params.plat_id);
+const platId = route.params.plat_id as string;
 const plat = ref<Plat | null>(null);
 const loading = ref(true);
 
 const fetchPlat = async () => {
   loading.value = true;
-  const { data } = await useFetch<Plat[]>("/api/plats", {
-    params: { id: platId },
-  });
-  plat.value = data.value?.[0] || null;
+  const api = useApi();
+  try {
+    const data: any = await api(`/plats/${platId}`);
+    plat.value = data || null;
+  } catch (err) {
+    console.error(err);
+    plat.value = null;
+  }
   loading.value = false;
 };
 
@@ -76,7 +80,7 @@ const addToCart = () => {
         "Vous avez déjà des plats d'un autre restaurant dans votre panier.\n\n" +
           "Voulez-vous voir votre panier actuel ?\n" +
           "- OK pour voir votre panier\n" +
-          "- Annuler pour rester sur cette page"
+          "- Annuler pour rester sur cette page",
       );
 
       if (confirmer) {
@@ -153,7 +157,8 @@ const addToCart = () => {
   overflow: hidden;
   max-width: 800px;
   margin: 0 auto;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 

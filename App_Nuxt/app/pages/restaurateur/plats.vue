@@ -48,13 +48,13 @@ const error = ref<string | null>(null);
 const fetchPlats = async () => {
   loading.value = true;
   error.value = null;
+  const api = useApi();
   try {
-    const { data } = await useFetch<Plat[]>("/api/plats", {
-      query: {
-        restaurantId: currentUser.value?.id,
-      },
-    });
-    plats.value = data.value || [];
+    const myRestaurant: any = await api("/restaurants/me");
+    if (myRestaurant && myRestaurant.id) {
+      const data: any = await api(`/plats/restaurant/${myRestaurant.id}`);
+      plats.value = data || [];
+    }
   } catch (err) {
     console.error("Erreur lors de la récupération des plats:", err);
     error.value = "Erreur lors du chargement des plats";
@@ -69,13 +69,14 @@ onMounted(() => {
 });
 
 // Supprimer un plat
-const deletePlat = async (platId: number) => {
+const deletePlat = async (platId: string | number) => {
   if (!confirm("Voulez-vous vraiment supprimer ce plat ?")) return;
 
   loading.value = true;
   error.value = null;
+  const api = useApi();
   try {
-    await $fetch(`/api/plats/${platId}`, {
+    await api(`/plats/${platId}`, {
       method: "DELETE",
     });
     await fetchPlats(); // Recharger la liste des plats

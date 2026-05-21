@@ -7,9 +7,9 @@
 definePageMeta({
   layout: "user",
   middleware: ["auth-user"],
-  validate: (route) => !isNaN(parseInt(route.params.restau_id as string)),
+  validate: (route) => !!route.params.restau_id,
 });
-import { ref, computed, watchEffect } from "vue";
+import { ref, computed, watchEffect, onMounted } from "vue";
 import { useRestaurantsStore } from "~/stores/restaurants/restaurants";
 import type { Plat } from "~/types/plats/plats";
 import Card from "~/components/Card.vue";
@@ -19,12 +19,20 @@ const { t } = useI18n();
 const { $localePath } = useNuxtApp();
 
 const route = useRoute();
-const restaurantId = Number(route.params.restau_id);
+const restaurantId = route.params.restau_id as string;
 const restaurantsStore = useRestaurantsStore();
+
+// S'assurer que les restaurants sont chargés
+onMounted(async () => {
+  if (restaurantsStore.getAllRestaurants.length === 0) {
+    await restaurantsStore.loadRestaurants();
+  }
+  await fetchPlats();
+});
 
 // Restaurant courant
 const restaurant = computed(() =>
-  restaurantsStore.getRestaurantById(restaurantId)
+  restaurantsStore.getRestaurantById(restaurantId),
 );
 
 const plats = ref<Plat[]>([]);
@@ -70,13 +78,23 @@ watchEffect(() => {
 // Récupération des plats via l'API
 const fetchPlats = async () => {
   loading.value = true;
-  const { data } = await useFetch<Plat[]>("/api/plats", {
-    params: {
-      restaurantId,
-      search: search.value,
-    },
-  });
-  plats.value = data.value || [];
+  const api = useApi();
+  try {
+    const data: any = await api(`/plats/restaurant/${restaurantId}`);
+    // Filtrage simple côté client car l'API de base getPlatsByRestaurant ne prend pas 'search' en query par défaut
+    if (search.value) {
+      const searchTerm = search.value.toLowerCase();
+      plats.value = data.filter(
+        (p: Plat) =>
+          p.nom.toLowerCase().includes(searchTerm) ||
+          p.description.toLowerCase().includes(searchTerm),
+      );
+    } else {
+      plats.value = data || [];
+    }
+  } catch (e) {
+    console.error(e);
+  }
   loading.value = false;
 };
 
@@ -87,9 +105,6 @@ const searchPlats = async () => {
 
 // Affichage des plats (tous ou filtrés par l’API)
 const displayedPlats = computed(() => plats.value);
-
-// Charger les plats initialement
-await fetchPlats();
 </script>
 
 <template>
@@ -262,7 +277,8 @@ await fetchPlats();
   background: white;
   padding: 0.5rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
