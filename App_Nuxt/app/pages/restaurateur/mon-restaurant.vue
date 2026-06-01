@@ -60,31 +60,25 @@ const formData = ref({
   lieu: "",
 });
 
-// Lorsqu'on reçoit les data du resto, on pré-remplit les refs si non en édition
-watchEffect(() => {
-  if (!isEditing.value && restaurantData.value) {
+const error = ref("");
+const success = ref("");
+
+const fillFormData = () => {
+  if (restaurantData.value) {
     formData.value.name = restaurantData.value.nom || "";
     formData.value.imageUrl = restaurantData.value.imageUrl || "";
     formData.value.description = restaurantData.value.description || "";
     formData.value.lieu = restaurantData.value.lieu || "";
   }
-});
-
-const error = ref("");
-const success = ref("");
-const isEditing = ref(false);
-
-// Fonction pour commencer l'édition
-const startEditing = () => {
-  isEditing.value = true;
 };
 
-// Fonction pour annuler l'édition
-const cancelEditing = () => {
-  isEditing.value = false;
-  error.value = "";
-  success.value = "";
-};
+watch(
+  restaurantData,
+  () => {
+    fillFormData();
+  },
+  { immediate: true },
+);
 
 // Valider le formulaire
 const validateForm = () => {
@@ -147,7 +141,6 @@ const updateProfile = async () => {
     }
 
     success.value = "Profil et restaurant mis à jour avec succès";
-    isEditing.value = false;
   } catch (err: any) {
     error.value = err.message || "Erreur lors de la mise à jour";
   }
@@ -159,51 +152,8 @@ const updateProfile = async () => {
     <div class="auth-box">
       <h1>{{ t("restaurants.profil") }}</h1>
 
-      <!-- Mode lecture -->
-      <div v-if="!isEditing">
-        <div class="form-group">
-          <div class="input-group">
-            <label>{{ t("auth.nom_label") }}</label>
-            <div class="info-display">{{ restaurantData?.nom }}</div>
-          </div>
-
-          <div class="input-group">
-            <label>{{ t("auth.email_label") }}</label>
-            <div class="info-display">{{ currentUser?.email }}</div>
-          </div>
-
-          <div class="input-group" v-if="restaurantData?.description">
-            <label>Description</label>
-            <div class="info-display">{{ restaurantData.description }}</div>
-          </div>
-
-          <div class="input-group" v-if="restaurantData?.lieu">
-            <label>Adresse du restaurant</label>
-            <div class="info-display">{{ restaurantData.lieu }}</div>
-          </div>
-
-          <div class="input-group" v-if="restaurantData?.imageUrl">
-            <label>Image de couverture</label>
-            <div class="info-display">
-              <img
-                :src="restaurantData.imageUrl"
-                alt="Restaurant Image"
-                style="
-                  max-width: 100%;
-                  height: 200px;
-                  object-fit: cover;
-                  border-radius: 8px;
-                "
-              />
-            </div>
-          </div>
-
-          <button @click="startEditing">{{ t("auth.update_profil") }}</button>
-        </div>
-      </div>
-
       <!-- Mode édition -->
-      <div v-else class="form-group">
+      <form class="form-group" @submit.prevent="updateProfile">
         <div class="input-group">
           <label>{{ t("auth.nom_label") }}</label>
           <input
@@ -269,13 +219,8 @@ const updateProfile = async () => {
           />
         </div>
 
-        <button @click.prevent="updateProfile">{{ t("common.save") }}</button>
-        <p class="auth-link">
-          <a href="#" @click.prevent="cancelEditing">{{
-            t("common.cancel")
-          }}</a>
-        </p>
-      </div>
+        <button type="submit">{{ t("common.save") }}</button>
+      </form>
 
       <!-- Messages -->
       <p v-if="error" class="error-message">{{ error }}</p>
@@ -286,14 +231,4 @@ const updateProfile = async () => {
 
 <style>
 @import "@/assets/css/pages/auth.css";
-
-/* Style supplémentaire pour l'affichage en mode lecture */
-.info-display {
-  padding: 0.75rem 1rem;
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  color: #374151;
-}
 </style>

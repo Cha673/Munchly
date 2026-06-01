@@ -2,14 +2,14 @@
      pour les utilisateurs et pour les restaurateurs -->
 <script setup lang="ts">
 defineProps<{
-  id: number;
+  id: string | number;
   clientName: string;
   total: number;
   date: string;
 }>();
 
 const emit = defineEmits<{
-  toggleDetails: [id: number];
+  toggleDetails: [id: string | number];
 }>();
 
 const { t } = useI18n();
@@ -39,7 +39,8 @@ const { t } = useI18n();
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border-left: 4px solid #4b5563;
   transition: all 0.3s ease;
@@ -47,7 +48,8 @@ const { t } = useI18n();
 
 .order-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 6px 8px -2px rgba(0, 0, 0, 0.1),
     0 4px 6px -1px rgba(0, 0, 0, 0.06);
 }
 

@@ -42,7 +42,7 @@ const userStore = useUserStore();
 const panierStore = usePanierStore();
 const currentUser = computed(() => userStore.currentUser);
 
-const expandedOrderId = ref<number | null>(null);
+const expandedOrderId = ref<string | number | null>(null);
 
 const orders = ref<any[]>([]);
 const loading = ref(false);
@@ -69,7 +69,7 @@ onMounted(() => {
 });
 
 // Afficher/masquer les détails d'une commande
-const toggleOrderDetails = (orderId: number) => {
+const toggleOrderDetails = (orderId: string | number) => {
   expandedOrderId.value = expandedOrderId.value === orderId ? null : orderId;
 };
 </script>

@@ -34,7 +34,7 @@ useSeoMeta({
 });
 
 const panierStore = usePanierStore();
-const expandedOrderId = ref<number | null>(null);
+const expandedOrderId = ref<string | number | null>(null);
 
 // Trier les commandes par date décroissante (plus récent au plus ancien)
 const commandesTriees = computed(() => {
@@ -44,7 +44,7 @@ const commandesTriees = computed(() => {
 });
 
 // Afficher/masquer les détails d'une commande
-const toggleOrderDetails = (orderId: number) => {
+const toggleOrderDetails = (orderId: string | number) => {
   expandedOrderId.value = expandedOrderId.value === orderId ? null : orderId;
 };
 </script>

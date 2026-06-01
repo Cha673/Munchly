@@ -36,7 +36,6 @@ useSeoMeta({
 
 const userStore = useUserStore();
 
-const name = ref(userStore.currentUser?.name || "");
 const email = ref(userStore.currentUser?.email || "");
 const password = ref(userStore.currentUser?.password || "");
 const error = ref("");
@@ -44,14 +43,14 @@ const success = ref("");
 
 // Mettre à jour le profil
 const updateProfile = () => {
-  if (!name.value || !email.value) {
-    error.value = "Le nom et l'email sont obligatoires";
+  if (!email.value) {
+    error.value = "L'email est obligatoire";
     return;
   }
 
   try {
     userStore.updateProfile({
-      name: name.value,
+      name: userStore.currentUser?.name || "",
       email: email.value,
       password: password.value,
     });
@@ -70,17 +69,6 @@ const updateProfile = () => {
       <h1>{{ t("users.update_profil") }}</h1>
 
       <div class="form-group">
-        <div class="input-group">
-          <label>{{ t("auth.nom_label") }}</label>
-          <input
-            v-model="name"
-            type="text"
-            placeholder="
-            t('auth.nom_label')
-          "
-          />
-        </div>
-
         <div class="input-group">
           <label>{{ t("auth.email_label") }}</label>
           <input

@@ -102,7 +102,7 @@ const handleAddRestaurateur = () => {
             v-for="user in restaurateurs"
             :key="user.id"
             :id="user.id"
-            :nom="user.name"
+            :nom="user.name || user.email"
             :email="user.email"
             :role="user.role"
             @delete="handleDeleteUser"
