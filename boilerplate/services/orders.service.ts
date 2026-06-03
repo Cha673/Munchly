@@ -1,4 +1,4 @@
-import type { PrismaClient } from "../generated/prisma/client.js";
+import type { PrismaClient, OrderStatus } from "../generated/prisma/client.js"; // <-- Importation du type natif de Prisma
 import {
   ForbiddenError,
   NotFoundError,
@@ -116,7 +116,7 @@ export default class OrdersService {
     });
   };
 
-  // 5. Changer le statut de la commande (RESTAURANT) - Version alignée avec ton enum BDD
+  // 5. Changer le statut de la commande (RESTAURANT) - Version 100% compatible CI/CD et BDD
   updateOrderStatus = async (
     orderId: string,
     ownerId: string,
@@ -125,15 +125,14 @@ export default class OrdersService {
     // a. Vérifier l'ownership (Sécurité) et récupérer l'état actuel de la commande
     const order = await this.getOrderById(orderId, ownerId, "RESTAURANT");
 
-    // b. Normalisation en MAJUSCULES pour éviter les erreurs de comparaison
+    // b. Normalisation en MAJUSCULES pour la cohérence des chaînes de caractères
     const currentStatus = order.status.toUpperCase();
-    const targetStatus =
-      newStatus.toUpperCase() as UpdateOrderStatusRequest["status"];
+    const targetStatus = newStatus.toUpperCase();
 
-    // c. Machine à états réajustée : Supprime "PREPARING" pour correspondre à ton enum Prisma actuel
+    // c. Machine à états : On garde l'enchaînement direct sans "PREPARING" pour coller à ta BDD
     const validTransitions: Record<string, string> = {
       PENDING: "CONFIRMED",
-      CONFIRMED: "SHIPPED", // Passage direct de la confirmation à l'expédition
+      CONFIRMED: "SHIPPED",
       SHIPPED: "DELIVERED",
     };
 
@@ -144,10 +143,10 @@ export default class OrdersService {
       );
     }
 
-    // e. Si tout est valide, mise à jour de la commande en base de données via Prisma
+    // e. Mise à jour de la commande en forçant le type natif "as OrderStatus" reconnu par Prisma
     return await this.prisma.order.update({
       where: { id: orderId },
-      data: { status: targetStatus },
+      data: { status: targetStatus as OrderStatus },
     });
   };
 
