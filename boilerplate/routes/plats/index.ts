@@ -11,7 +11,6 @@ export const platsRoutes = async (app: FastifyInstance) => {
   const platsService = new PlatsService(app.prisma);
 
   // 1. Créer un plat (RESTAURANT)
-  // Résout implicitement le restaurant ciblé grâce au ownerId du JWT
   app.post<{ Body: CreatePlatRequest }>(
     "/",
     {
@@ -28,17 +27,16 @@ export const platsRoutes = async (app: FastifyInstance) => {
   app.get<{ Params: { restaurantId: string } }>(
     "/restaurant/:restaurantId",
     async (request, reply) => {
-      return await platsService.getPlatsByRestaurant(request.params.restaurantId);
+      return await platsService.getPlatsByRestaurant(
+        request.params.restaurantId,
+      );
     },
   );
 
   // 3. Détails d'un plat (Public)
-  app.get<{ Params: { id: string } }>(
-    "/:id",
-    async (request, reply) => {
-      return await platsService.getPlatById(request.params.id);
-    },
-  );
+  app.get<{ Params: { id: string } }>("/:id", async (request, reply) => {
+    return await platsService.getPlatById(request.params.id);
+  });
 
   // 4. Modifier un plat (RESTAURANT : propriétaire seulement)
   app.patch<{ Params: { id: string }; Body: UpdatePlatRequest }>(
@@ -63,7 +61,10 @@ export const platsRoutes = async (app: FastifyInstance) => {
       preValidation: [app.authenticate, app.authorize(["RESTAURANT"])],
     },
     async (request, reply) => {
-      const result = await platsService.deletePlat(request.params.id, request.user.id);
+      const result = await platsService.deletePlat(
+        request.params.id,
+        request.user.id,
+      );
       return reply.status(200).send(result);
     },
   );

@@ -31,7 +31,7 @@ export default class AuthService {
     });
 
     if (existingUser) {
-      throw new ConflictError("User already exists");
+      throw new ConflictError("error.user_exists");
     }
 
     const hashedPassword = await hash(input.password, 10);
@@ -57,7 +57,7 @@ export default class AuthService {
     });
 
     if (existingUser) {
-      throw new ConflictError("User already exists");
+      throw new ConflictError("error.user_exists");
     }
 
     const hashedPassword = await hash(input.password, 10);
@@ -85,7 +85,7 @@ export default class AuthService {
 
     //2. si l'utilisateur existe déjà, throw une erreur de conflit
     if (existingUser) {
-      throw new ConflictError("User already exists");
+      throw new ConflictError("error.user_exists");
     }
 
     //3. hasher le mot de passe avec la fonction hash (nombre de rounds recommandé : 10)
@@ -112,12 +112,12 @@ export default class AuthService {
     });
 
     if (!user) {
-      throw new UnauthorizedError("Invalid credentials");
+      throw new UnauthorizedError("error.invalid_credentials");
     }
 
     const isPasswordValid = await compare(input.password, user.password);
     if (!isPasswordValid) {
-      throw new UnauthorizedError("Invalid credentials");
+      throw new UnauthorizedError("error.invalid_credentials");
     }
 
     return {

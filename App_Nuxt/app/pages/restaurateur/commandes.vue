@@ -1,10 +1,5 @@
-<!-- page d'un restaurateur pour voir l'ensemble des ocmmandes faites pour des 
- plats de son restauran
- Fonctionnalités : 
- - listing des commandes
- - affichage des détails des commandes -->
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useUserStore } from "~/stores/users/user";
 import { usePanierStore } from "~/stores/panier/panier";
 import OrderItem from "~/components/OrderItem.vue";
@@ -43,7 +38,6 @@ const panierStore = usePanierStore();
 const currentUser = computed(() => userStore.currentUser);
 
 const expandedOrderId = ref<string | number | null>(null);
-
 const orders = ref<any[]>([]);
 const loading = ref(false);
 
@@ -59,6 +53,39 @@ const fetchRestaurantOrders = async () => {
   loading.value = false;
 };
 
+const advanceStatus = async (order: any) => {
+  const statusTransitions: Record<string, string> = {
+    PENDING: "CONFIRMED",
+    CONFIRMED: "SHIPPED", // Aligné avec le service backend modifié
+    SHIPPED: "DELIVERED",
+  };
+
+  // 1. On cherche la commande directement dans la liste fraîche de l'écran
+  const freshOrder = orders.value.find((o) => o.id === order.id);
+
+  // 2. Si on la trouve, on prend son vrai statut actuel, sinon on prend l'ancien
+  const currentStatus = freshOrder ? freshOrder.status : order.status;
+
+  // 3. On calcule le statut suivant basé sur le VRAI statut
+  const nextStatus = statusTransitions[currentStatus];
+  if (!nextStatus) return;
+
+  try {
+    const api = useApi();
+    // Appel PATCH vers Fastify
+    await api(`/orders/${order.id}/status`, {
+      method: "PATCH",
+      body: { status: nextStatus },
+    });
+
+    // 4. On rafraîchit l'écran
+    await fetchRestaurantOrders();
+  } catch (error) {
+    console.error("Erreur lors du changement de statut:", error);
+    alert("Impossible de changer le statut (Erreur de transition)");
+  }
+};
+
 onMounted(() => {
   if (
     currentUser.value?.role === "RESTAURANT" ||
@@ -68,7 +95,6 @@ onMounted(() => {
   }
 });
 
-// Afficher/masquer les détails d'une commande
 const toggleOrderDetails = (orderId: string | number) => {
   expandedOrderId.value = expandedOrderId.value === orderId ? null : orderId;
 };
@@ -80,10 +106,10 @@ const toggleOrderDetails = (orderId: string | number) => {
       <h1>{{ t("orders.my_orders") }}</h1>
     </div>
 
-    <!-- Liste des commandes -->
     <div v-if="loading" class="loading">
       {{ t("orders.loading") || "Chargement..." }}
     </div>
+
     <div v-else class="orders-list">
       <OrderItem
         v-for="order in orders"
@@ -95,9 +121,70 @@ const toggleOrderDetails = (orderId: string | number) => {
         @toggle-details="toggleOrderDetails"
       />
 
-      <!-- Détails de la commande -->
       <div v-if="expandedOrderId" class="order-details">
         <h3>{{ t("orders.order_details") }} #{{ expandedOrderId }}</h3>
+
+        <div v-if="orders.find((o) => o.id === expandedOrderId)">
+          <p
+            style="
+              text-align: center;
+              font-weight: bold;
+              margin-bottom: 1.5rem;
+              font-size: 1.1rem;
+            "
+          >
+            Statut actuel :
+            <span
+              style="
+                color: #4f46e5;
+                background: #e0e7ff;
+                padding: 0.25rem 0.75rem;
+                border-radius: 9999px;
+              "
+              >{{ orders.find((o) => o.id === expandedOrderId)?.status }}</span
+            >
+          </p>
+
+          <div
+            style="text-align: center; margin-bottom: 2rem"
+            v-if="
+              orders.find((o) => o.id === expandedOrderId)?.status !==
+              'DELIVERED'
+            "
+          >
+            <button
+              @click="
+                advanceStatus(orders.find((o) => o.id === expandedOrderId))
+              "
+              style="
+                background-color: #10b981;
+                color: white;
+                padding: 0.75rem 1.5rem;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background 0.2s;
+              "
+              onmouseover="this.style.backgroundColor = '#059669'"
+              onmouseout="this.style.backgroundColor = '#10b981'"
+            >
+              {{
+                orders.find((o) => o.id === expandedOrderId)?.status ===
+                "PENDING"
+                  ? "Accepter la commande (CONFIRMED)"
+                  : orders.find((o) => o.id === expandedOrderId)?.status ===
+                      "CONFIRMED"
+                    ? "Lancer la préparation (PREPARING)"
+                    : orders.find((o) => o.id === expandedOrderId)?.status ===
+                        "PREPARING"
+                      ? "Expédier la commande (SHIPPED)"
+                      : "Marquer comme Livrée (DELIVERED)"
+              }}
+            </button>
+          </div>
+        </div>
+
         <div class="items-grid">
           <CartItem
             v-for="item in orders.find((o) => o.id === expandedOrderId)
@@ -147,15 +234,6 @@ const toggleOrderDetails = (orderId: string | number) => {
   height: 3px;
   background-color: #4b5563;
   border-radius: 2px;
-}
-
-.error-message {
-  background-color: #fef2f2;
-  color: #ef4444;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  border: 1px solid #fee2e2;
 }
 
 .loading {
@@ -223,10 +301,6 @@ const toggleOrderDetails = (orderId: string | number) => {
 
   .order-details {
     padding: 1.5rem;
-  }
-
-  .items-grid {
-    grid-template-columns: 1fr;
   }
 }
 </style>

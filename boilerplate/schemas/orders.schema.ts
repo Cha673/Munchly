@@ -7,7 +7,7 @@ export const CreateOrderSchema = Type.Object({
       platId: Type.String(),
       quantite: Type.Integer({ minimum: 1 }),
     }),
-    { minItems: 1 }
+    { minItems: 1 },
   ),
 });
 
@@ -15,6 +15,7 @@ export const UpdateOrderStatusSchema = Type.Object({
   status: Type.Union([
     Type.Literal("PENDING"),
     Type.Literal("CONFIRMED"),
+    Type.Literal("PREPARING"),
     Type.Literal("SHIPPED"),
     Type.Literal("DELIVERED"),
   ]),

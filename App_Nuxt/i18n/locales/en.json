@@ -17,7 +17,11 @@
   "update_informations": "Update information",
   "website_name": "Munchly",
   "popular_resto": "Popular restaurants",
-
+  "error": {
+    "invalid_credentials": "Invalid credentials.",
+    "rate_limit": "Too many connection attempts, please try again later.",
+    "user_exists": "User already exists with this email."
+  },
   "auth": {
     "nom_label": "Name",
     "email_label": "Email",

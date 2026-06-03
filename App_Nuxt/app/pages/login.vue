@@ -69,7 +69,9 @@ const handleLogin = async () => {
         navigateTo($localePath("/"));
     }
   } catch (err: any) {
-    error.value = err.message;
+    // Si le backend renvoie un clé (commençant par error.), on la traduit, 
+    // sinon on essaie de traduire la clé complète ou on l'affiche telle quelle
+    error.value = err.message?.startsWith('error.') ? t(err.message) : err.message;
     password.value = "";
   }
 };

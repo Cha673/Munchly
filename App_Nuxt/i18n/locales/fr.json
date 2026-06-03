@@ -18,6 +18,12 @@
   "website_name": "Munchly",
   "popular_resto": "Restaurants populaires",
 
+  "error": {
+    "invalid_credentials": "Email ou mot de passe incorrect.",
+    "rate_limit": "Trop de tentatives de connexion, veuillez patienter.",
+    "user_exists": "Un utilisateur avec cet email existe déjà."
+  },
+
   "auth": {
     "nom_label": "Nom",
     "email_label": "Email",

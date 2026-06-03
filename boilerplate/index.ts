@@ -33,13 +33,23 @@ server.setErrorHandler((error, request, reply) => {
   }
 
   // Erreurs de validation Fastify
-  const validationError = error as FastifyError;
-  if (validationError.code === "FST_ERR_VALIDATION") {
+  const fastifyError = error as FastifyError;
+  if (fastifyError.code === "FST_ERR_VALIDATION") {
     return reply.status(400).send({
       type: "urn:app:error:validation",
       title: "Validation Error",
       status: 400,
-      detail: validationError.message,
+      detail: fastifyError.message,
+      instance: request.url,
+    });
+  }
+
+  if (fastifyError.statusCode === 429) {
+    return reply.status(429).send({
+      type: "urn:app:error:rate-limit",
+      title: "Too Many Requests",
+      status: 429,
+      detail: "error.rate_limit",
       instance: request.url,
     });
   }

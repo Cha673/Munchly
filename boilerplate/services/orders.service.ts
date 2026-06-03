@@ -1,5 +1,9 @@
 import type { PrismaClient } from "../generated/prisma/client.js";
-import { ForbiddenError, NotFoundError, ConflictError } from "../common/exceptions.js";
+import {
+  ForbiddenError,
+  NotFoundError,
+  ConflictError,
+} from "../common/exceptions.js";
 import type {
   CreateOrderRequest,
   UpdateOrderStatusRequest,
@@ -26,10 +30,12 @@ export default class OrdersService {
 
     // b. Vérifier que tous les plats appartiennent bien au restaurant spécifié
     const invalidPlats = platsDB.filter(
-      (plat) => plat.restaurantId !== input.restaurantId
+      (plat) => plat.restaurantId !== input.restaurantId,
     );
     if (invalidPlats.length > 0) {
-      throw new ConflictError("Tous les plats doivent provenir du même restaurant");
+      throw new ConflictError(
+        "Tous les plats doivent provenir du même restaurant",
+      );
     }
 
     // c. Calculer le total
@@ -73,7 +79,9 @@ export default class OrdersService {
       throw new ForbiddenError("Cette commande ne vous appartient pas");
     }
     if (role === "RESTAURANT" && order.restaurant.ownerId !== userId) {
-      throw new ForbiddenError("Cette commande n'est pas pour votre restaurant");
+      throw new ForbiddenError(
+        "Cette commande n'est pas pour votre restaurant",
+      );
     }
 
     return order;
@@ -100,23 +108,45 @@ export default class OrdersService {
 
     return await this.prisma.order.findMany({
       where: { restaurantId: restaurant.id },
-      include: { items: { include: { plat: true } }, client: { select: { id: true, email: true } } },
+      include: {
+        items: { include: { plat: true } },
+        client: { select: { id: true, email: true } },
+      },
       orderBy: { createdAt: "desc" },
     });
   };
 
-  // 5. Changer le statut de la commande (RESTAURANT)
+  // 5. Changer le statut de la commande (RESTAURANT) - Version alignée avec ton enum BDD
   updateOrderStatus = async (
     orderId: string,
     ownerId: string,
-    newStatus: UpdateOrderStatusRequest["status"]
+    newStatus: UpdateOrderStatusRequest["status"],
   ) => {
-    // Vérifier l'ownership via getOrderById (réutilisation de la sécurité !)
-    await this.getOrderById(orderId, ownerId, "RESTAURANT");
+    // a. Vérifier l'ownership (Sécurité) et récupérer l'état actuel de la commande
+    const order = await this.getOrderById(orderId, ownerId, "RESTAURANT");
 
+    // b. Normalisation en MAJUSCULES pour éviter les erreurs de comparaison
+    const currentStatus = order.status.toUpperCase();
+    const targetStatus = newStatus.toUpperCase();
+
+    // c. Machine à états réajustée : Supprime "PREPARING" pour correspondre à ton enum Prisma actuel
+    const validTransitions: Record<string, string> = {
+      PENDING: "CONFIRMED",
+      CONFIRMED: "SHIPPED", // Passage direct de la confirmation à l'expédition
+      SHIPPED: "DELIVERED",
+    };
+
+    // d. Rejeter la requête si la transition demandée n'est pas l'étape logique suivante
+    if (validTransitions[currentStatus] !== targetStatus) {
+      throw new ConflictError(
+        `Transition invalide. Impossible de passer directement de ${currentStatus} à ${targetStatus}.`,
+      );
+    }
+
+    // e. Si tout est valide, mise à jour de la commande en base de données via Prisma
     return await this.prisma.order.update({
       where: { id: orderId },
-      data: { status: newStatus },
+      data: { status: targetStatus },
     });
   };
 
@@ -125,10 +155,12 @@ export default class OrdersService {
     const order = await this.getOrderById(orderId, clientId, "USER");
 
     if (order.status !== "PENDING") {
-      throw new ConflictError("Impossible d'annuler une commande déjà en cours de préparation/livraison");
+      throw new ConflictError(
+        "Impossible d'annuler une commande déjà en cours de préparation/livraison",
+      );
     }
 
-    // Suppression de la commande (ou on pourrait avoir un statut CANCELLED, mais supprimons directement)
+    // Suppression de la commande
     await this.prisma.order.delete({
       where: { id: orderId },
     });
