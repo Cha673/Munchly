@@ -127,7 +127,8 @@ export default class OrdersService {
 
     // b. Normalisation en MAJUSCULES pour éviter les erreurs de comparaison
     const currentStatus = order.status.toUpperCase();
-    const targetStatus = newStatus.toUpperCase();
+    const targetStatus =
+      newStatus.toUpperCase() as UpdateOrderStatusRequest["status"];
 
     // c. Machine à états réajustée : Supprime "PREPARING" pour correspondre à ton enum Prisma actuel
     const validTransitions: Record<string, string> = {
