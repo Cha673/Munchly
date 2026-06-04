@@ -36,7 +36,7 @@ describe("Auth Service - Unit Tests", () => {
       prisma.user.create.mockResolvedValue({
         id: "user-123",
         email: input.email,
-        password: expect.any(String), // N'importe quel string (le hash)
+        password: expect.any(String),
         role: "USER",
       });
 

@@ -135,7 +135,7 @@ export const useUserStore = defineStore("user", {
           );
         }
 
-        // ⚠️ AU LIEU DE FAIRE APPEL A USEAPI, ON FORCE "$fetch" POUR PASSER LE TOKEN A LA MAIN.
+        // AU LIEU DE FAIRE APPEL A USEAPI, ON FORCE "$fetch" POUR PASSER LE TOKEN A LA MAIN.
         const config = useRuntimeConfig();
         const userData: any = await $fetch("/auth/me", {
           baseURL: config.public.apiBaseUrl,

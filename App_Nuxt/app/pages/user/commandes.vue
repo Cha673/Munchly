@@ -1,6 +1,3 @@
-<!-- Page de listing des commandes d'un utilisateur
- Fonctionnalités : 
- - listing des commandes passés par le compte utilisateur  -->
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { usePanierStore } from "~/stores/panier/panier";
@@ -36,14 +33,12 @@ useSeoMeta({
 const panierStore = usePanierStore();
 const expandedOrderId = ref<string | number | null>(null);
 
-// Trier les commandes par date décroissante (plus récent au plus ancien)
 const commandesTriees = computed(() => {
   return [...panierStore.commandes].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 });
 
-// Afficher/masquer les détails d'une commande
 const toggleOrderDetails = (orderId: string | number) => {
   expandedOrderId.value = expandedOrderId.value === orderId ? null : orderId;
 };
@@ -53,7 +48,6 @@ const toggleOrderDetails = (orderId: string | number) => {
   <div class="commandes-historique">
     <h1>{{ t("users.historique_commandes") }}</h1>
 
-    <!-- Si aucune commande -->
     <div v-if="!panierStore.commandes.length" class="no-commandes">
       <p>{{ t("users.no_command") }}</p>
       <NuxtLink :to="$localePath('/restaurants')" class="btn">
@@ -61,7 +55,6 @@ const toggleOrderDetails = (orderId: string | number) => {
       </NuxtLink>
     </div>
 
-    <!-- Liste des commandes -->
     <div v-else class="commandes-list">
       <OrderItem
         v-for="commande in commandesTriees"
@@ -73,8 +66,22 @@ const toggleOrderDetails = (orderId: string | number) => {
         @toggle-details="toggleOrderDetails"
       />
 
-      <!-- Détails de la commande -->
       <div v-if="expandedOrderId" class="order-details">
+        <div
+          class="status-container"
+          v-if="commandesTriees.find((c) => c.id === expandedOrderId)"
+        >
+          <p class="status-text">
+            Statut du suivi :
+            <span class="status-badge">
+              {{
+                commandesTriees.find((c) => c.id === expandedOrderId)?.status ||
+                "PENDING"
+              }}
+            </span>
+          </p>
+        </div>
+
         <div class="items-grid">
           <CartItem
             v-for="item in commandesTriees.find((c) => c.id === expandedOrderId)
@@ -91,6 +98,30 @@ const toggleOrderDetails = (orderId: string | number) => {
 </template>
 
 <style scoped>
+/* AJOUT : Styles pour le badge de statut */
+.status-container {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.status-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.status-badge {
+  color: #4f46e5;
+  background: #e0e7ff;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Tes styles d'origine intacts */
 .commandes-historique {
   max-width: 1200px;
   margin: 0 auto;
@@ -105,6 +136,7 @@ h1 {
   font-weight: 600;
   margin-bottom: 3rem;
   position: relative;
+  text-align: center;
 }
 
 h1::after {
@@ -162,16 +194,7 @@ h1::after {
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   max-width: 800px;
-}
-
-.order-details h3 {
-  font-size: 1.5rem;
-  color: #374151;
-  font-weight: 600;
-  margin: 0 0 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid #e5e7eb;
-  text-align: center;
+  margin: 0 auto;
 }
 
 .items-grid {
@@ -198,10 +221,6 @@ h1::after {
 
   .order-details {
     padding: 1.5rem;
-  }
-
-  .items-grid {
-    grid-template-columns: 1fr;
   }
 }
 </style>

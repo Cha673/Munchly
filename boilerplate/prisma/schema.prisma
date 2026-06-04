@@ -34,8 +34,8 @@ model User {
   updatedAt    DateTime     @updatedAt
   role         Role         @default(USER)
   
-  restaurants  Restaurant[] // Un restaurateur peut gérer plusieurs restaurants
-  orders       Order[]      // Un client peut avoir plusieurs commandes
+  restaurants  Restaurant[]
+  orders       Order[]      
 }
 
 model Restaurant {

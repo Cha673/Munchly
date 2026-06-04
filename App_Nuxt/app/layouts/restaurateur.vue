@@ -34,7 +34,6 @@ const config = useRuntimeConfig();
 onMounted(() => {
   if (userStore.token) {
     // Note: par défaut l'API écoute sur localhost:3000.
-    // Adaptez si vous utilisez un port dynamique avec config.public.apiBase
     const wsUrl = "ws://localhost:3000/ws/restaurant";
     socket = new WebSocket(wsUrl);
 
@@ -188,7 +187,9 @@ const closeMenu = () => {
           <h4>{{ toastState.title }}</h4>
           <p>{{ toastState.message }}</p>
         </div>
-        <button class="toast-close" @click="toastState.show = false">&times;</button>
+        <button class="toast-close" @click="toastState.show = false">
+          &times;
+        </button>
       </div>
     </Transition>
   </div>
@@ -204,7 +205,7 @@ const closeMenu = () => {
   right: 24px;
   padding: 16px 20px;
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: flex-start;
   gap: 12px;

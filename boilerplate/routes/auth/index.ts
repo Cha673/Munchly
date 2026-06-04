@@ -83,10 +83,7 @@ export const authRoutes = async (app: FastifyInstance) => {
       config: {
         rateLimit: {
           max: 5,
-          timeWindow: "15 minutes", // 5 erreurs autorisées sur une période glissante de 15 minutes, bloque le reste de la période
-          // Pour utiliser un lockout progressif, vous pourriez décommenter ceci (double le délai d'attente à chaque échec) :
-          // timeWindow: "1 minute",
-          // exponentialBackoff: true,
+          timeWindow: "15 minutes",
         },
       },
     },
